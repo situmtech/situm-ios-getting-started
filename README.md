@@ -66,7 +66,7 @@ end
 
 To finish, we need you to configure some settings:
 
-* Open your project settings and go to the Build Settings tab. Search for the options Other Linker Flags and add the following item to the list: -lstdc++. Search for the setting Enable Bitcode and chage its value to NO (if not already done).
+* Open your project settings and go to the Build Settings tab. Search for the setting Enable Bitcode and chage its value to NO (if not already done).
 
 * Go to the Build Phases settings tab. Add libz.tbd and libc++.tbd on Link Binary With Libraries. 
 
