@@ -39,17 +39,13 @@ First of all, you must configure Situm SDK in your iOS project. This has been al
 
 * Drag the file SitumSDK.framework to your project (normally this should be included in a SitumSDK folder, inside your Vendor folder). Make sure to check the option "Copy items if needed". In recent versions of Xcode this automatically links your app with the framework as you can check on the Build phase tab, Link Binary with Libraries section. Otherwise, add a link to the framework. You can download the latest version of our SDK from our developers page on [Situm developers iOS](http://developers.situm.es/pages/ios).
 
-In order to work Situm SDK needs some dependencies installed in your app. The easiest way to install them is through CocoaPods.
+In order to work this Sample Application needs some dependencies installed in your app. The easiest way to install them is through CocoaPods.
 
 * Create a file on the root of your project called Podfile and insert the following contents on it:
 
 ```
 source 'https://github.com/CocoaPods/Specs.git'
 target 'GettingStarted' do # Change your target name here
-        # Required by Situm SDK
-        platform :ios, '8.0'
-        pod 'RestKit', '~> 0.27.2'
-        pod 'CocoaAsyncSocket'
 
         # Required by app
         pod 'GoogleMaps'
