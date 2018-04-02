@@ -63,5 +63,19 @@
  */
 - (instancetype)initWithRoute:(SITRoute *)route;
 
+/**
+ Set a threshold within which the next indication will be returned
+ 
+ @param distanceToChangeIndicationThreshold distance to change indication threshold
+ */
+-(void)setDistanceToChangeIndicationThreshold:(NSInteger)distanceToChangeIndicationThreshold;
+
+/**
+ Set a threshold within which the next change floor indication will be returned
+ 
+ @param distanceToChangeFloorThreshold distance to change floor threshold
+ */
+-(void)setDistanceToChangeFloorThreshold:(NSInteger)distanceToChangeFloorThreshold;
+
 @end
 #endif
