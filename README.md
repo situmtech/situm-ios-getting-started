@@ -92,7 +92,15 @@ This is the recommended option and the one we have implemented in this project. 
                   forEmail:@"SET YOUR EMAIL HERE"];
 ```
 
-Remember to add the following dependency in the same file: 
+##### Using your user and password
+
+This is the other available option to provide your credentials, with your username and password. As in the previous case, write the following sentence on the -application:didFinishLaunchingWithOptions: method.
+
+```objective-c
+[SITServices provideUser:@"SET YOUR USER HERE" 
+                  password:@"SET YOUR PASSWORD HERE"];
+```
+In both cases, remember to add the following dependency in the same file: 
 
 ```objective-c
 #import <SitumSDK/SitumSDK.h>
