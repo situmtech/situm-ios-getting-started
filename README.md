@@ -71,7 +71,7 @@ To finish, we need you to configure some settings:
 There is a last step needed if we want to work with the indoor location system: requesting permissions to access location of the user. 
 
 * Go to the Info tab of the Settings of your app. Add one of the following keys:
-NSLocationAlwaysUsageDescription or NSLocationWhenInUseUsageDescription. The value of this key can be anything you want but as an example just type "Location is required to find out where you are".
+NSLocationAlwaysUsageDescription (in XCode, "Privacy - Location Always Usage Description") or NSLocationWhenInUseUsageDescription (in XCode, "Privacy - Location When In Use Usage Description"). The value of this key can be anything you want but as an example just type "Location is required to find out where you are".
 
 And that's all. From now on, you should be able to use Situm SDK in your app by importing its components with the line:
 
@@ -110,7 +110,7 @@ Remember to add the following dependency in the same file:
 #import <GoogleMaps/GoogleMaps.h>
 ```
 
-###<a name="example1-display-location-and-realtime"></a> Step 3: Display information on a map, show user location and realtime updates
+### <a name="example1-display-location-and-realtime"></a> Step 3: Display information on a map, show user location and realtime updates
 
 At this point, you should be able to use all the tools on the SDK. In this example you'll see how to retrieve information about your buildings, how to retrieve all the information about one buildings (the first one) and how to display the map of the first floor on Google Maps. Additionaly if location is configured - see how can you do this on [Try us](https://situm.es/en/try-us) page - you'll be able to see your location. If more than one user is being positioned on the same building you'll see the location of different devices in realtime.
 
