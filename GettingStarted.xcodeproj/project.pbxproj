@@ -16,12 +16,12 @@
 		201F5EAE1F73FC410098473F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 201F5EAC1F73FC410098473F /* LaunchScreen.storyboard */; };
 		201F5EB91F73FC410098473F /* GettingStartedTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 201F5EB81F73FC410098473F /* GettingStartedTests.m */; };
 		201F5EC41F73FC410098473F /* GettingStartedUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 201F5EC31F73FC410098473F /* GettingStartedUITests.m */; };
-		201F5ED41F73FF3C0098473F /* SitumSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 201F5ED31F73FF3C0098473F /* SitumSDK.framework */; };
 		201F5ED61F73FF470098473F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 201F5ED51F73FF470098473F /* CoreLocation.framework */; };
 		201F5ED81F73FF4D0098473F /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 201F5ED71F73FF4D0098473F /* CoreMotion.framework */; };
 		201F5EDA1F73FF520098473F /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 201F5ED91F73FF520098473F /* libc++.tbd */; };
 		201F5EDC1F73FF580098473F /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 201F5EDB1F73FF580098473F /* libz.tbd */; };
 		201F5EE31F7406310098473F /* SGSLocationAndRealtimeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 201F5EE21F7406310098473F /* SGSLocationAndRealtimeVC.m */; };
+		3A3C13E020E2908800749E30 /* SitumSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A3C13DF20E2908800749E30 /* SitumSDK.framework */; };
 		D3D2BFFD9BECAC9B36D75C90 /* libPods-GettingStarted.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 44680DE75A3F0B330950A5FA /* libPods-GettingStarted.a */; };
 /* End PBXBuildFile section */
 
@@ -61,13 +61,13 @@
 		201F5EBF1F73FC410098473F /* GettingStartedUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GettingStartedUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		201F5EC31F73FC410098473F /* GettingStartedUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GettingStartedUITests.m; sourceTree = "<group>"; };
 		201F5EC51F73FC410098473F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		201F5ED31F73FF3C0098473F /* SitumSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SitumSDK.framework; sourceTree = "<group>"; };
 		201F5ED51F73FF470098473F /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		201F5ED71F73FF4D0098473F /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		201F5ED91F73FF520098473F /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		201F5EDB1F73FF580098473F /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		201F5EE11F7406310098473F /* SGSLocationAndRealtimeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SGSLocationAndRealtimeVC.h; path = src/Samples/LocationAndRealTime/SGSLocationAndRealtimeVC.h; sourceTree = "<group>"; };
 		201F5EE21F7406310098473F /* SGSLocationAndRealtimeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SGSLocationAndRealtimeVC.m; path = src/Samples/LocationAndRealTime/SGSLocationAndRealtimeVC.m; sourceTree = "<group>"; };
+		3A3C13DF20E2908800749E30 /* SitumSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SitumSDK.framework; sourceTree = "<group>"; };
 		44680DE75A3F0B330950A5FA /* libPods-GettingStarted.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GettingStarted.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CED326AC971786994C8DAEE1 /* Pods-GettingStarted.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GettingStarted.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GettingStarted/Pods-GettingStarted.debug.xcconfig"; sourceTree = "<group>"; };
 		E46D25059989F650A1F429D9 /* Pods-GettingStarted.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GettingStarted.release.xcconfig"; path = "Pods/Target Support Files/Pods-GettingStarted/Pods-GettingStarted.release.xcconfig"; sourceTree = "<group>"; };
@@ -78,11 +78,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A3C13E020E2908800749E30 /* SitumSDK.framework in Frameworks */,
 				201F5EDC1F73FF580098473F /* libz.tbd in Frameworks */,
 				201F5EDA1F73FF520098473F /* libc++.tbd in Frameworks */,
 				201F5ED81F73FF4D0098473F /* CoreMotion.framework in Frameworks */,
 				201F5ED61F73FF470098473F /* CoreLocation.framework in Frameworks */,
-				201F5ED41F73FF3C0098473F /* SitumSDK.framework in Frameworks */,
 				D3D2BFFD9BECAC9B36D75C90 /* libPods-GettingStarted.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -181,7 +181,7 @@
 		201F5ED21F73FF2B0098473F /* SitumSDK */ = {
 			isa = PBXGroup;
 			children = (
-				201F5ED31F73FF3C0098473F /* SitumSDK.framework */,
+				3A3C13DF20E2908800749E30 /* SitumSDK.framework */,
 			);
 			name = SitumSDK;
 			sourceTree = "<group>";
