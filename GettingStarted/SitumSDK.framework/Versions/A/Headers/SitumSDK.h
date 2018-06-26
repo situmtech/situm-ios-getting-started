@@ -89,6 +89,7 @@
 #import "SITRealTimeData.h"
 #import "SITRealTimeRequest.h"
 #import "SITRealTimeError.h"
+#import "SITRealtimeUploadManager.h"
 
 #import "SITBounds.h"
 
