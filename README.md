@@ -15,6 +15,8 @@ Situm iOS SDK Code Samples app
 
 [More information](#moreinfo)
 
+[Support information](#supportinfo)
+
 ### Introduction
 
 This is a sample iOS Application built with Situm SDK for iOS. Situm SDK is a set of utilitites that allow any developer to build location based apps using Situm's indoor positioning system. Among many other capabilities, apps developed with Situm SDK will be able to:
@@ -130,4 +132,6 @@ In this example you'll see how to request directions from one point to a differe
 
 Go to the developers section of the dashboard and download the full documentation of the SDK, including the documentation with all the available functionalities.
 
-For any other question, contact us in https://situm.es/contact.
+## <a name="supportinfo"></a> Support information
+
+For any question or bug report, please send an email to [support@situm.es](mailto:support@situm.es)
