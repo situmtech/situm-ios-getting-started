@@ -13,6 +13,10 @@ Situm iOS SDK Code Samples app
 
 [Step 4: Show directions from a point to a destination](#example2-directions)
 
+#### [Samples](#samples)
+
+1. [Get buildings' information](#communicationmanager)
+
 [More information](#moreinfo)
 
 [Support information](#supportinfo)
@@ -124,9 +128,34 @@ Remember to add the following dependency in the same file:
 
 At this point, you should be able to use all the tools on the SDK. In this example you'll see how to retrieve information about your buildings, how to retrieve all the information about one buildings (the first one) and how to display the map of the first floor on Google Maps. Additionaly if location is configured - see how can you do this on [Try us](https://situm.es/en/try-us) page - you'll be able to see your location. If more than one user is being positioned on the same building you'll see the location of different devices in realtime.
 
-### <a name="example2-directions"> Step 4: Show directions from a point to a destination
+### <a name="example2-directions"></a> Step 4: Show directions from a point to a destination
 
 In this example you'll see how to request directions from one point to a different point and display the route. You could also see a list of human readable indications (not implemented) that will let your users navigate within the route. In order to compute directions in one building you'll need to configure navigation areas on our dashboard [Walking areas configuration](https://dashboard.situm.es/buildings/) by going to the Paths tab.
+
+## Samples <a name="samples"></a>
+## <a name="communicationmanager"></a> Get buildings' information
+
+Now that you have correctly configured your iOS project, you can start writing your application's code. 
+
+In order to access the buildings' info, first of all you need to get an instance of the `SITCommunicationManager` with `[SITCommunicationManager sharedManager]`.
+This object allows you to fetch your buildings' data (list of buildings, floorplans, points of interest, etc.):
+
+For instance, in the next snippet we fetch all the buildings associated with our user's account and print them:
+
+```objc
+
+[[SITCommunicationManager sharedManager] fetchBuildingsWithOptions:nil success:^(NSDictionary *mapping) {
+        NSArray<SITBuilding*>* buildings = [mapping valueForKey:@"results"];
+        NSLog(@"%@", buildings);
+         for (SITBuilding *building in buildings) {
+            NSLog(@"%@", building.name);
+        }
+        
+        
+    } failure:^(NSError *error) {
+        NSLog(@"error fetching buildings: %@", error);
+    }];
+```
 
 ## <a name="moreinfo"></a> More information
 
