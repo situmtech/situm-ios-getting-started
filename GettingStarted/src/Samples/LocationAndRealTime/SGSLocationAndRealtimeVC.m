@@ -334,7 +334,7 @@ static NSString *ResultsKey = @"results";
                 userMarker = [[GMSMarker alloc]init];
                 userMarker.snippet = location.deviceId;
                 userMarker.map = self.mapView;
-                
+                userMarker.icon = [UIImage imageNamed:@"location"];
                 [self.usersLocations setObject:userMarker
                                         forKey:location.deviceId];
             }
