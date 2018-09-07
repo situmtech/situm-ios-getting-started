@@ -1,5 +1,5 @@
 //
-//  SITRealtimeClient.h
+//  SITRealTimeManager.h
 //  SitumSDK
 //
 //  Created by A Barros on 7/6/17.

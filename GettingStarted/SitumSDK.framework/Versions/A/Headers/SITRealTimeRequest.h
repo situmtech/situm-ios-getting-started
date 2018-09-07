@@ -10,7 +10,7 @@
 
 
 /**
- A data object that contains parameters for the real time service (SITRealtimeClient) 
+ A data object that contains parameters for the real time service (SITRealTimeManager) 
  */
 @interface SITRealTimeRequest : NSObject
 
