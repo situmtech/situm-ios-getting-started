@@ -25,8 +25,9 @@ This is a sample Objective-C application built using the Situm SDK. With this sa
 3. [Start the positioning](#positioning)
 4. [Show a building in Google Maps](#drawbuilding)
 5. [Show the current position in Google Maps](#drawposition)
-6. [Compute a route](#directions)
-7. [Get realtime updates](#realtime)
+6. [Show POIs in Google Maps](#drawpois)
+7. [Compute a route](#directions)
+8. [Get realtime updates](#realtime)
 
 
 [More information](#moreinfo)
@@ -323,6 +324,19 @@ GMSMarker *userLocationMarker = [self userLocationMarkerInMapView:self.mapView];
     }
 ```
 You can check the complete sample in the [SGSLocationAndRealTimeVC](https://github.com/situmtech/situm-ios-code-samples/blob/master/GettingStarted/src/Samples/LocationAndRealTime/SGSLocationAndRealtimeVC.m) file.
+
+### <a name="drawpois"></a> Show POIs (Points of Interest) in Google Maps
+
+This functionality allows to show the list of `SITPoi`s of a `SITBuilding` over Google Maps. Instead, you can also use another GIS provider, such as OpenStreetMaps, Carto, ESRI, Mapbox, etc.
+
+First of all, we need to retrieve the list of `SITPoi`s of our `SITBuilding` using the `SITCommunicationManager`. 
+
+```objc
+for (SITPOI *indoorPoi in listOfPois) {
+    GMSMarker *poiMarker = [GMSMarker markerWithPosition:indoorPoi.position.coordinate];
+    poiMarker.map = welf.mapView;            
+}
+```
 
 ### <a name="directions"></a> Compute a route
 
