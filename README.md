@@ -16,14 +16,17 @@ This is a sample Objective-C application built using the Situm SDK. With this sa
 
 1. [Configure our SDK in your iOS project (Manual instalation)](#configureproject)
 2. [Set API Key](#apikey)
+3. [Setup Google Maps](#mapsapikey)
 
 #### [Samples](#samples)
 
 1. [Fetch buildings](#fetchBuildings)
 2. [Fetch information from a particular building](#fetchBuildingInfo)
 3. [Start the positioning](#positioning)
-4. [Compute a route](#directions)
-5. [Get realtime updates](#realtime)
+4. [Show a building in Google Maps](#drawbuilding)
+5. [Compute a route](#directions)
+6. [Get realtime updates](#realtime)
+
 
 [More information](#moreinfo)
 
@@ -236,6 +239,48 @@ Finally, you can start the positioning with:
 [[SITLocationManager sharedInstance] requestLocationUpdates:request];
 ```
 and start receiving location updates.
+
+### <a name="drawbuilding"></a> Show a building in Google Maps
+
+Another interesting functionality is to show the floorplan of a building on top of your favorite GIS provider. In this example, we will show you how to do it by using Google Maps, but you might use any other of your choosing, such as OpenStreetMaps, Carto, ESRI, Mapbox, etc.
+
+As a required step, you will need to complete the steps in the [Setup Google Maps](#mapsapikey) section. Once this is done, you should
+ obtain the floors of the target `SITBuilding`.
+
+ ```objc
+
+#import <GoogleMaps/GoogleMaps.h>
+@property (weak, nonatomic) IBOutlet GMSMapView *mapView;
+@property (nonatomic, strong) GMSGroundOverlay *floorMapOverlay;
+
+...
+
+GMSCameraPosition *cameraPosition = [GMSCameraPosition cameraWithTarget:self.buildingInfo.building.center
+                                                                       zoom:19];
+    
+    [self.mapView animateToCameraPosition:cameraPosition];
+
+    SITFloor *selectedFloor = self.buildingInfo.floors[0];
+    self.selectedFloor = selectedFloor;
+    
+    __weak typeof(self) welf = self;
+    SITImageFetchHandler fetchingMapFloorHandler = ^(NSData *imageData) {
+
+        SITBounds bounds = [welf.buildingInfo.building bounds];
+        
+        GMSCoordinateBounds *coordinateBounds = [[GMSCoordinateBounds alloc]initWithCoordinate:bounds.southWest
+                coordinate:bounds.northEast];
+        GMSGroundOverlay *mapOverlay = [GMSGroundOverlay groundOverlayWithBounds:coordinateBounds
+                           icon:[UIImage imageWithData:imageData]];
+        
+        mapOverlay.bearing = [welf.buildingInfo.building.rotation degrees];
+        
+        mapOverlay.map = welf.mapView;
+        welf.floorMapOverlay = mapOverlay;
+    }
+
+````
+You can check the complete sample in the [SGSLocationAndRealTimeVC](https://github.com/situmtech/situm-ios-code-samples/blob/master/GettingStarted/src/Samples/LocationAndRealTime/SGSLocationAndRealtimeVC.m) file.
 
 
 ### <a name="directions"></a> Compute a route
