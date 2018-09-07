@@ -4,7 +4,7 @@ Situm iOS SDK Code Samples app
 This is a sample Objective-C application built using the Situm SDK. With this sample app, you will be able to:
 
 1. Display information on a map, show user location and real-time updates
-    * In this example you'll see how to retrieve information about your buildings, how to retrieve all the information about one buildings (the first one) and how to display the map of the first floor on Google Maps. Additionaly if the building is calibrated you'll be able to see your location. If more than one user is being positioned on the same building you'll see the location of different devices in realtime.
+    * In this example you'll see how to retrieve information about your buildings, how to retrieve all the information about one specific building and how to display a floorplan on Google Maps. Additionaly if the building is calibrated you'll be able to see your location. If more than one user is positioning on the same building you'll see the location of different devices in realtime.
 2. Show directions from a point to a destination
     * In this example you'll see how to request directions from one point to a different point and display the route. You could also see a list of human readable indications (not implemented) that will let your users navigate within the route. In order to compute directions in one building you'll need to configure navigation areas on our dashboard [Walking areas configuration](https://dashboard.situm.es/buildings/) by going to the Paths tab.
 
@@ -126,7 +126,7 @@ In both cases, remember to add the following dependency in the same file:
 
 ### <a name="mapsapikey"></a> Step 3: Setup Google Maps
 
-You may need to configure an API KEY for use Google Maps on your app. Please follow steps provided on [Google Maps for iOS](https://developers.google.com/maps/documentation/ios-sdk/get-api-key?hl=en) to generate an API Key. When you've successfully generated a key add it to the project by writing the following sentence on the `application:didFinishLaunchingWithOptions:` method (`AppDelegate.m`):
+You may need to configure an API KEY in order to be able to use Google Maps on your app. Please follow steps provided on [Google Maps for iOS](https://developers.google.com/maps/documentation/ios-sdk/get-api-key?hl=en) to generate an API Key. When you've successfully generated a key add it to the project by writing the following sentence on the `application:didFinishLaunchingWithOptions:` method (`AppDelegate.m`):
 
 ```objc
 [GMSServices provideAPIKey:@"INCLUDE A GOOGLE MAP KEY FOR IOS"];
@@ -146,7 +146,7 @@ Now that you have correctly configured your iOS project, you can start writing y
 In order to access the buildings' info, first of all you need to get an instance of the `SITCommunicationManager` with `[SITCommunicationManager sharedManager]`.
 This object allows you to fetch your buildings' data (list of buildings, floorplans, points of interest, etc.):
 
-For instance, in the next snippet we fetch all the buildings associated with our user's account and print them:
+In the next snippet we will fetch all the buildings associated with our user's account and print them:
 
 ```objc
 
@@ -163,12 +163,9 @@ For instance, in the next snippet we fetch all the buildings associated with our
     }];
 ```
 
-Here we are obtaining the shared instance of the communication manager and using it to query the server and obtaining the configured buildings. The storage of this information should be done in the success handler.
-
-
 ### <a name="fetchBuildingInfo"></a> Fetch information from a particular building
 
-Once you've retrieved the list with your configured buildings, your next step should probably be getting the data about an specific building. This will allow you to draw the building blueprints in the map and start using the positioning functionalities. This info download can be made with an SDK call like this:
+Once you've retrieved the list with your configured buildings, your next step should probably be getting the data about an specific building. This will allow you to draw the building blueprints in the map and start using the positioning functionalities. 
 
 ```objc
 SITBuilding *selectedBuilding = buildings[0];
@@ -182,8 +179,6 @@ SITBuilding *selectedBuilding = buildings[0];
                     	}];
 
 ```
-
-This process is really similar to the previous one, the only additional data you need to provide is the identifier of the building that you want to use.
 
 ### <a name="positioning"></a> Start the positioning
 
@@ -300,6 +295,11 @@ First of all, you will need to perform all the steps required to start receiving
 Then, in the delegate method `didUpdateLocation`, you can insert the code required to draw the circle that represents the position of the device.
 
 ```objc
+#import <GoogleMaps/GoogleMaps.h>
+@property (weak, nonatomic) IBOutlet GMSMapView *mapView;
+
+...
+
 GMSMarker *userLocationMarker = [self userLocationMarkerInMapView:self.mapView];
     
     if ([self.selectedFloor.identifier isEqualToString:location.position.floorIdentifier]) {
@@ -335,6 +335,11 @@ This functionality allows to show the list of `SITPoi`s of a `SITBuilding` over 
 First of all, we need to retrieve the list of `SITPoi`s of our `SITBuilding` using the `SITCommunicationManager`. 
 
 ```objc
+#import <GoogleMaps/GoogleMaps.h>
+@property (weak, nonatomic) IBOutlet GMSMapView *mapView;
+
+...
+
 for (SITPOI *indoorPoi in listOfPois) {
     GMSMarker *poiMarker = [GMSMarker markerWithPosition:indoorPoi.position.coordinate];
     poiMarker.map = welf.mapView;            
@@ -346,25 +351,28 @@ for (SITPOI *indoorPoi in listOfPois) {
 ```objc
 [SITDirectionsManager sharedInstance].delegate = self;
 
-SITDirectionsRequest *request = [[SITDirectionsRequest alloc] initWithRequestID:0 
-												location:myLocation 
-												destination:selectedPoi.position 
-												options:nil];
+SITDirectionsRequest *request = [[SITDirectionsRequest alloc] initWithRequestID:0
+                                                                       location:myLocation 
+												                    destination:selectedPoi.position 
+												                        options:nil];
 [[SITDirectionsManager sharedInstance] requestDirections:request];
 ```
 
-Where we are using the `SITDirectionsManager` to send the request indicating the user's position, and the desired destination. We also select the delegate to receive the result of the request, said processing can be made with the following code:
+We also need to implement the following delegate methods:
 
 ```objc
+
+@interface SGSRouteAndDirectionsVC () <SITDirectionsDelegate>
+
 - (void)directionsManager:(id<SITDirectionsInterface>)manager
-									didProcessRequest:(SITDirectionsRequest*)request
-									withResponse:(SITRoute*)route {
+        didProcessRequest:(SITDirectionsRequest*)request
+             withResponse:(SITRoute*)route {
 	// Handle route information
 }
 
-- (void)directionsManager:(id<SITDirectionsInterface>)manager 
-									didFailProcessingRequest:(SITDirectionsRequest*)request 
-									withError:(NSError*)error {
+- (void)directionsManager:(id<SITDirectionsInterface>)manager
+ didFailProcessingRequest:(SITDirectionsRequest*)request 
+                withError:(NSError*)error {
     // Handle request error
 }
 ```
@@ -420,7 +428,7 @@ In this code we create a realtime request to be sent, with the identifier of the
 
 ```objc
 - (void) realTimeManager: (id<SITRealTimeInterface>) realTimeManager
-        didUpdateUserLocations:(SITRealTimeData *)realTimeData {
+  didUpdateUserLocations:(SITRealTimeData *)realTimeData {
     			// Handle the realtime updates
 }
 
@@ -435,7 +443,9 @@ In this code we create a realtime request to be sent, with the identifier of the
 In order to know all the `SITEvent` you have in your `SITBuilding`, the first thing you have to do is to fetch your buildings and select the one you want to check. This SDK allows you to know the exact position of the `SITEvent` and to know where the message in your smartphone will be shown. In the following example we will show you how to fetch the events and how to list them in order to know the details for each one.
 
 ```objc
-[[SITCommunicationManager sharedManager] fetchEventsFromBuilding:selectedBuilding withCompletion:^SITHandler(NSArray<SITEvent *> *result, NSError *error) {
+[[SITCommunicationManager sharedManager] fetchEventsFromBuilding:selectedBuilding
+                                                 withCompletion:^SITHandler(NSArray<SITEvent *> *result,
+                                                 NSError *error) {
     if (result) {
         //process events
     }
