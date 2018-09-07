@@ -27,6 +27,7 @@ This is a sample Objective-C application built using the Situm SDK. With this sa
 5. [Show the current position in Google Maps](#drawposition)
 6. [Show POIs in Google Maps](#drawpois)
 7. [Compute a route](#directions)
+8. [Show routes between POIs in Google Maps](#drawroute)
 8. [Get realtime updates](#realtime)
 
 
@@ -365,6 +366,41 @@ Where we are using the `SITDirectionsManager` to send the request indicating the
     // Handle request error
 }
 ```
+
+You can check the complete sample in the [SGSRouteAndDirectionsVC](https://github.com/situmtech/situm-ios-code-samples/blob/master/GettingStarted/src/Samples/LocationAndRealTime/SGSRouteAndDirectionsVC.m) file.
+
+### <a name="drawroute"></a> Show routes between POIs in Google Maps
+This funcionality will allow you to draw a route between two points inside a `SITBuilding`. As in the previous examples, you can also use another GIS provider, such as OpenStreetMaps, Carto, ESRI, Mapbox, etc.
+
+In this example, we will show a route between two `SITPoi`s of a `SITBuilding`. Therefore, in the first place you will need to get a `SITBuilding` and its `SITPoi`s using the `SITCommunicationManager`. Please refer to the 
+[Show POIs over Google Maps](#drawpois) example in order to retrieve this information.
+
+After obtaining the basic information, you can request a route between two of the retrieved `SITPoi`s to the `SITDirectionsManager`. At this point, you will be able to draw a Google Maps polyline to represent the route.
+
+```objc
+@property (weak, nonatomic) IBOutlet GMSMapView *mapView;
+@property (nonatomic, strong) GMSMutablePath *routePath;
+@property (nonatomic, strong) GMSPolyline *polyline;
+
+...
+
+GMSMutablePath *routePath = [GMSMutablePath path];
+
+
+for (SITRouteStep *step in self.route.routeSteps) { 
+    [routePath addCoordinate:step.from.coordinate];
+}
+
+GMSPolyline *polyline = [GMSPolyline polylineWithPath:routePath];
+polyline.strokeWidth = 3;
+polyline.map = self.mapView;
+
+self.routePath = routePath;
+
+self.polyline = polyline;
+```
+
+You can check the complete sample in the [SGSRouteAndDirectionsVC](https://github.com/situmtech/situm-ios-code-samples/blob/master/GettingStarted/src/Samples/LocationAndRealTime/SGSRouteAndDirectionsVC.m) file.
 
 ### <a name="realtime"></a> Get realtime updates
 
