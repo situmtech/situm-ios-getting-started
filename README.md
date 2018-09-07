@@ -20,9 +20,12 @@ This is a sample Objective-C application built using the Situm SDK. With this sa
 
 #### [Samples](#samples)
 
-1. [Get buildings' information](#fetchBuildings)
+1. [Fetch buildings](#fetchBuildings)
+2. [Fetch information from a particular building](#fetchBuildingInfo)
+3. [Start the positioning](#positioning)
 
 [More information](#moreinfo)
+
 
 ## <a name="introduction"></a> Introduction
 
@@ -124,7 +127,7 @@ Remember to add the following dependency in the same file:
 ```
 
 ## Samples <a name="samples"></a>
-## <a name="fetchBuildings"></a> Fetch buildings
+### <a name="fetchBuildings"></a> Fetch buildings
 
 Now that you have correctly configured your iOS project, you can start writing your application's code. 
 
@@ -151,7 +154,7 @@ For instance, in the next snippet we fetch all the buildings associated with our
 Here we are obtaining the shared instance of the communication manager and using it to query the server and obtaining the configured buildings. The storage of this information should be done in the success handler.
 
 
-## <a name="fetchBuildingInfo"></a> Fetch information from a particular building
+### <a name="fetchBuildingInfo"></a> Fetch information from a particular building
 
 Once you've retrieved the list with your configured buildings, your next step should probably be getting the data about an specific building. This will allow you to draw the building blueprints in the map and start using the positioning functionalities. This info download can be made with an SDK call like this:
 
@@ -170,7 +173,70 @@ SITBuilding *selectedBuilding = buildings[0];
 
 This process is really similar to the previous one, the only additional data you need to provide is the identifier of the building that you want to use.
 
-## <a name="moreinfo"></a> More information
+### <a name="positioning"></a> Start the positioning
+
+In order to start the indoor positioning within a building, we will need to obtain this building first. In order to do that, please refer to the previous section: [Get buildings' information](#communicationmanager).
+
+In your class, make sure to conform to the protocol SITLocationDelegate
+
+```objc
+[[SITLocationManager sharedInstance] setDelegate: self];
+
+
+SITBuilding *building = ...;
+
+
+    SITLocationRequest *request = [[SITLocationRequest alloc initWithPriority:kSITHighAccuracy
+            provider:kSITInPhoneProvider
+      updateInterval:1
+          buildingID:self.buildingInfo.building.identifier
+      operationQueue:nil
+    useDeadReckoning:YES
+             options:nil];
+```
+
+Implement SITLocationDelegate methods where you’ll receive location updates, error notifications and state changes.
+
+```objc
+
+@interface MyViewController () <SITLocationDelegate>
+
+...
+
+- (void)locationManager:(id<SITLocationInterface>)locationManager 
+         didUpdateState:(SITLocationState)state;
+
+- (void)locationManager:(id<SITLocationInterface>)locationManager 
+       didFailWithError:(NSError *)error;
+
+- (void)locationManager:(id<SITLocationInterface>)locationManager
+      didUpdateLocation:(SITLocation *)location;
+
+
+[SITLocationManager sharedInstance].delegate = self;
+```
+
+In `didUpdateLocation` your application will receive the location updates. This `SITLocation` object contains
+the building identifier, level identifier, cartesian coordinates, geographic coordinates, orientation,
+accuracy, among other location information of the smartphone where the app is running.
+
+In `didUpdateState` the app will receive changes in the status of the system:  `kSITLocationStopped`, `kSITLocationCalculating`, `kSITLocationUserNotInBuilding` or `kSITLocationStarted`.  Please refer to our
+[appledoc](http://developers.situm.es/sdk_documentation/ios/documentation/html/Constants/SITLocationState.html) for a full explanation of 
+these states.
+
+In `didFailWithError` you will receive updates only if an error has occurred. In this case, the positioning will stop. 
+
+In order to be able to calculate where a user is, it is mandatory to declare `NSLocationAlwaysUsageDescription` or `NSLocationWhenInUseUsageDescription`. The value of this key can be anything you want but as an example just type "Location is required to find out where you are".
+
+Finally, you can start the positioning with:
+
+```objc
+[[SITLocationManager sharedInstance] requestLocationUpdates:request];
+```
+and start receiving location updates.
+
+
+### <a name="directions"></a> Compute a route
 
 ```objective-c
 [SITDirectionsManager sharedInstance].delegate = self;
@@ -198,42 +264,7 @@ Where we are using the `SITDirectionsManager` to send the request indicating the
 }
 ```
 
-#### Show user location
-
-Now that you have all the info about the building where you want to try the positioning, it's time to obtain information about the location of the app user. For this step, you'll need to do two things. First you need to send a request to initiate the indoor positioning. Second, you need to implement some delegate logic to receive an process the position updates. this can be done with the following calls:
-
-```objective-c
-[[SITLocationManager sharedInstance] setDelegate: self];
-
-SITBuilding *building = ...;
-SITLocationRequest *request = [[SITLocationRequest alloc]initWithPriority:kSITHighAccuracy
-                                                         provider:kSITHybridProvider
-                                                   updateInterval:1
-                                                       buildingID:building.identifier
-                                                   operationQueue:nil
-                                                          options:nil];
-[[SITLocationManager sharedInstance] requestLocationUpdates:request];
-```
-After this, you should start receiving updates about the user's position. In order to use that information you'll need to implement the following methods:
-
-```objective-c
-- (void)locationManager:(nonnull id<SITLocationInterface>)locationManager
-      didUpdateLocation:(nonnull SITLocation*)location {
-    // Handle location update
-}
-
-- (void)locationManager:(nonnull id<SITLocationInterface>)locationManager
-       didFailWithError:(nonnull NSError*)error {
-    // Handle error
-}
-
-- (void)locationManager:(nonnull id<SITLocationInterface>)locationManager
-         didUpdateState:(SITLocationState)state {
-    // Handle location manager state
-}
-```
-
-#### Get realtime updates
+### Get realtime updates
 
 Another interesting functionality you can find in the SDK is the realtime updates of all the users in a building. With this you can show in your app not only the user's position, but also inform about where are others located. In order to obtain this information, you need to include some steps fairly similar to the previous section about positioning. Again, you'll need to implement and send a request to start receiving the real time updates, and also prepare a delegate to  process the realtime updates. This can be done in the following manner:
 
@@ -259,12 +290,7 @@ In this code we create a realtime request to be sent, with the identifier of the
 }
 ```
 
-## <a name="example2-directions"></a> Step 4: Show directions from a point to a destination
-
-In this example you'll see how to request directions from one point to a different point and display the route. You could also see a list of human readable indications (not implemented) that will let your users navigate within the route. In order to compute directions in one building you'll need to configure navigation areas on our dashboard [Walking areas configuration](https://dashboard.situm.es/buildings/) by going to the Paths tab.
-
-To achieve this, you need to implement several steps, but the essential one would be requesting the route and implementing the needed logic to receive and process the response. This can be made with the following call:
-### <a name="example2-directions"></a> Step 4: Show directions from a point to a destination
+### <a name="example2-directions"></a> Show directions from a point to a destination
 
 In this example you'll see how to request directions from one point to a different point and display the route. You could also see a list of human readable indications (not implemented) that will let your users navigate within the route. In order to compute directions in one building you'll need to configure navigation areas on our dashboard [Walking areas configuration](https://dashboard.situm.es/buildings/) by going to the Paths tab.
 
