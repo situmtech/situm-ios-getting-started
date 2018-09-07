@@ -28,7 +28,8 @@ This is a sample Objective-C application built using the Situm SDK. With this sa
 6. [Show POIs in Google Maps](#drawpois)
 7. [Compute a route](#directions)
 8. [Show routes between POIs in Google Maps](#drawroute)
-8. [Get realtime updates](#realtime)
+9. [Get realtime updates](#realtime)
+10. [List Building Events](#buildingevents)
 
 
 [More information](#moreinfo)
@@ -427,6 +428,23 @@ In this code we create a realtime request to be sent, with the identifier of the
     			// Handle properly the error
 }
 ```
+
+### <a name="buildingevents"></a> List Building Events
+
+In order to know all the `SITEvent` you have in your `SITBuilding`, the first thing you have to do is to fetch your buildings and select the one you want to check. This SDK allows you to know the exact position of the `SITEvent` and to know where the message in your smartphone will be shown. In the following example we will show you how to fetch the events and how to list them in order to know the details for each one.
+
+```objc
+[[SITCommunicationManager sharedManager] fetchEventsFromBuilding:selectedBuilding withCompletion:^SITHandler(NSArray<SITEvent *> *result, NSError *error) {
+    if (result) {
+        //process events
+    }
+    if (error) {
+        //handle error
+    }
+    return false;
+}];
+```
+
 
 ## <a name="moreinfo"></a> More information
 
