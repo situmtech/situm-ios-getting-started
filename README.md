@@ -24,8 +24,9 @@ This is a sample Objective-C application built using the Situm SDK. With this sa
 2. [Fetch information from a particular building](#fetchBuildingInfo)
 3. [Start the positioning](#positioning)
 4. [Show a building in Google Maps](#drawbuilding)
-5. [Compute a route](#directions)
-6. [Get realtime updates](#realtime)
+5. [Show the current position in Google Maps](#drawposition)
+6. [Compute a route](#directions)
+7. [Get realtime updates](#realtime)
 
 
 [More information](#moreinfo)
@@ -286,6 +287,42 @@ GMSCameraPosition *cameraPosition = [GMSCameraPosition cameraWithTarget:self.bui
 ````
 You can check the complete sample in the [SGSLocationAndRealTimeVC](https://github.com/situmtech/situm-ios-code-samples/blob/master/GettingStarted/src/Samples/LocationAndRealTime/SGSLocationAndRealtimeVC.m) file.
 
+### <a name="drawposition"></a> Show the current position in Google Maps
+
+This functionality will allow you to represent the current position of your device using Google Maps. Instead, you can also use another GIS provider, such as OpenStreetMaps, Carto, ESRI, Mapbox, etc.
+
+First of all, you will need to perform all the steps required to start receiving location updates, as shown in the [Start the positioning](#positioning) section.
+
+Then, in the delegate method `didUpdateLocation`, you can insert the code required to draw the circle that represents the position of the device.
+
+```objc
+GMSMarker *userLocationMarker = [self userLocationMarkerInMapView:self.mapView];
+    
+    if ([self.selectedFloor.identifier isEqualToString:location.position.floorIdentifier]) {
+        userLocationMarker.position = location.position.coordinate;
+        userLocationMarker.map = self.mapView;
+        
+        if (location.quality == kSITHigh) {
+            userLocationMarker.icon = [UIImage imageNamed:@"location-pointer"];
+            userLocationMarker.rotation = [location.bearing degrees];
+            
+            GMSCameraPosition *newCameraPosition = [[GMSCameraPosition alloc
+                initWithTarget:location.position.coordinate
+                          zoom:self.mapView.camera.zoom
+                       bearing:[location.bearing degrees]
+                  viewingAngle:0];
+            
+            [self.mapView animateToCameraPosition:newCameraPosition];
+        } else {
+            userLocationMarker.icon = [UIImage imageNamed:@"location"];
+        }
+        
+    } else {
+        userLocationMarker.map = nil;
+        NSLog(@"Found user on a different floor than selected");
+    }
+```
+You can check the complete sample in the [SGSLocationAndRealTimeVC](https://github.com/situmtech/situm-ios-code-samples/blob/master/GettingStarted/src/Samples/LocationAndRealTime/SGSLocationAndRealtimeVC.m) file.
 
 ### <a name="directions"></a> Compute a route
 
