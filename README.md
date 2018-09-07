@@ -12,13 +12,10 @@ This is a sample Objective-C application built using the Situm SDK. With this sa
 
 [Introduction](#introduction)
 
-[Step 1: Configure our SDK in your iOS project (Manual instalation)](#configureproject)
+[Setup](#setup)
 
-[Step 2: Set API Key](#apikey)
-
-[Step 3: Display information on a map, show user location and realtime updates](#example1-display-location-and-realtime)
-
-[Step 4: Show directions from a point to a destination](#example2-directions)
+1. [Configure our SDK in your iOS project (Manual instalation)](#configureproject)
+2. [Set API Key](#apikey)
 
 #### [Samples](#samples)
 
@@ -44,7 +41,9 @@ In this tutorial, we will guide you step by step to set up your first iOS applic
 
 Perfect! Now you are ready to develop your first indoor positioning application.
 
-## <a name="configureproject"></a> Step 1: Configure our SDK in your iOS project (Manual installation)
+## <a name="setup"></a> Setup
+
+### <a name="configureproject"></a> Step 1: Configure our SDK in your iOS project (Manual installation)
 
 First of all, you must configure Situm SDK in your iOS project. This has been already done for you in the sample application, but nonetheless we will walk you through the process.
 
@@ -90,7 +89,7 @@ And that's all. From now on, you should be able to use Situm SDK in your app by 
 #import <SitumSDK/SitumSDK.h>
 ```
 
-## <a name="apikey"></a> Step 2: Set API Key
+### <a name="apikey"></a> Step 2: Set API Key
 
 Now that you have correctly configured your iOS project, you can start writting your application's code. All you need to do is introduce your credentials. You can do that your appDelegate.m file. There are two ways of doing this:
 
