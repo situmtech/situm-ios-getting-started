@@ -29,7 +29,7 @@ This is a sample Objective-C application built using the Situm SDK. With this sa
 
 ## <a name="introduction"></a> Introduction
 
-This is a sample iOS Application built with Situm SDK for iOS. Situm SDK is a set of utilitites that allow any developer to build location based apps using Situm's indoor positioning system. Among many other capabilities, apps developed with Situm SDK will be able to:
+Situm SDK is a set of utilitites that allow any developer to build location based apps using Situm's indoor positioning system. Among many other capabilities, apps developed with Situm SDK will be able to:
 
 1. Obtain information related to buildings where Situm's positioning system is already configured: floorplans, points of interest, geotriggered events, etc.
 2. Retrieve the location of the smartphone inside these buildings (position, orientation, and floor where the smartphone is).
