@@ -13,6 +13,10 @@ Situm iOS SDK Code Samples app
 
 [Step 4: Show directions from a point to a destination](#example2-directions)
 
+#### [Samples](#samples)
+
+1. [Get buildings' information](#fetchBuildings)
+
 [More information](#moreinfo)
 
 ## <a name="introduction"></a> Introduction
@@ -114,27 +118,35 @@ Remember to add the following dependency in the same file:
 #import <GoogleMaps/GoogleMaps.h>
 ```
 
-## <a name="example1-display-location-and-realtime"></a> Step 3: Display information on a map, show user location and realtime updates
+## Samples <a name="samples"></a>
+## <a name="fetchBuildings"></a> Fetch buildings
 
-At this point, you should be able to use all the tools on the SDK. In this example you'll see how to retrieve information about your buildings, how to retrieve all the information about one buildings (the first one) and how to display the map of the first floor on Google Maps. Additionaly if location is configured - see how can you do this on [Try us](https://situm.es/en/try-us) page - you'll be able to see your location. If more than one user is being positioned on the same building you'll see the location of different devices in realtime.
+Now that you have correctly configured your iOS project, you can start writing your application's code. 
 
-#### Display information
+In order to access the buildings' info, first of all you need to get an instance of the `SITCommunicationManager` with `[SITCommunicationManager sharedManager]`.
+This object allows you to fetch your buildings' data (list of buildings, floorplans, points of interest, etc.):
 
-The first thing you need is a complete list of the buildings you have configured in the [dashboard] (https://dashboard.situm.es/). This information is obtained with an SDK call similar to this:
+For instance, in the next snippet we fetch all the buildings associated with our user's account and print them:
 
-```objective-c
-[[SITCommunicationManager sharedManager] fetchBuildingsWithOptions:nil
-                                  success:^(NSDictionary *mapping) {
-                                    NSArray *buildings = [mapping valueForKey:@"results"];
+```objc
 
-                                  }
-                                  failure:^(NSError *error) {
-                                    // Handle error accordingly
-                                }];
-
+[[SITCommunicationManager sharedManager] fetchBuildingsWithOptions:nil success:^(NSDictionary *mapping) {
+        NSArray<SITBuilding*>* buildings = [mapping valueForKey:@"results"];
+        NSLog(@"%@", buildings);
+         for (SITBuilding *building in buildings) {
+            NSLog(@"%@", building.name);
+        }
+        
+        
+    } failure:^(NSError *error) {
+        NSLog(@"error fetching buildings: %@", error);
+    }];
 ```
 
-Where we are obtaining the shared instance of the communication manager and using it to query the server and obtaining the configured buildings. The storage of this information should be done in the success handler.
+Here we are obtaining the shared instance of the communication manager and using it to query the server and obtaining the configured buildings. The storage of this information should be done in the success handler.
+
+
+## <a name="fetchBuildingInfo"></a> Fetch information from a particular building
 
 Once you've retrieved the list with your configured buildings, your next step should probably be getting the data about an specific building. This will allow you to draw the building blueprints in the map and start using the positioning functionalities. This info download can be made with an SDK call like this:
 
@@ -152,6 +164,34 @@ SITBuilding *selectedBuilding = buildings[0];
 ```
 
 This process is really similar to the previous one, the only additional data you need to provide is the identifier of the building that you want to use.
+
+## <a name="moreinfo"></a> More information
+
+```objective-c
+[SITDirectionsManager sharedInstance].delegate = self;
+
+SITDirectionsRequest *request = [[SITDirectionsRequest alloc] initWithRequestID:0 
+												location:myLocation 
+												destination:selectedPoi.position 
+												options:nil];
+[[SITDirectionsManager sharedInstance] requestDirections:request];
+```
+
+Where we are using the `SITDirectionsManager` to send the request indicating the user's position, and the desired destination. We also select the delegate to receive the result of the request, said processing can be made with the following code:
+
+```objective-c
+- (void)directionsManager:(id<SITDirectionsInterface>)manager
+									didProcessRequest:(SITDirectionsRequest*)request
+									withResponse:(SITRoute*)route {
+	// Handle route information
+}
+
+- (void)directionsManager:(id<SITDirectionsInterface>)manager 
+									didFailProcessingRequest:(SITDirectionsRequest*)request 
+									withError:(NSError*)error {
+    // Handle request error
+}
+```
 
 #### Show user location
 
@@ -219,34 +259,13 @@ In this code we create a realtime request to be sent, with the identifier of the
 In this example you'll see how to request directions from one point to a different point and display the route. You could also see a list of human readable indications (not implemented) that will let your users navigate within the route. In order to compute directions in one building you'll need to configure navigation areas on our dashboard [Walking areas configuration](https://dashboard.situm.es/buildings/) by going to the Paths tab.
 
 To achieve this, you need to implement several steps, but the essential one would be requesting the route and implementing the needed logic to receive and process the response. This can be made with the following call:
+### <a name="example2-directions"></a> Step 4: Show directions from a point to a destination
 
-```objective-c
-[SITDirectionsManager sharedInstance].delegate = self;
-
-SITDirectionsRequest *request = [[SITDirectionsRequest alloc] initWithRequestID:0 
-												location:myLocation 
-												destination:selectedPoi.position 
-												options:nil];
-[[SITDirectionsManager sharedInstance] requestDirections:request];
-```
-
-Where we are using the `SITDirectionsManager` to send the request indicating the user's position, and the desired destination. We also select the delegate to receive the result of the request, said processing can be made with the following code:
-
-```objective-c
-- (void)directionsManager:(id<SITDirectionsInterface>)manager
-									didProcessRequest:(SITDirectionsRequest*)request
-									withResponse:(SITRoute*)route {
-	// Handle route information
-}
-
-- (void)directionsManager:(id<SITDirectionsInterface>)manager 
-									didFailProcessingRequest:(SITDirectionsRequest*)request 
-									withError:(NSError*)error {
-    // Handle request error
-}
-```
-
+In this example you'll see how to request directions from one point to a different point and display the route. You could also see a list of human readable indications (not implemented) that will let your users navigate within the route. In order to compute directions in one building you'll need to configure navigation areas on our dashboard [Walking areas configuration](https://dashboard.situm.es/buildings/) by going to the Paths tab.
 
 ## <a name="moreinfo"></a> More information
 
 Go to the [developers section of the web](http://developers.situm.es/pages/ios/) and download the full documentation of the SDK, including the documentation with all the available functionalities. For any other question, [contact us](https://situm.es/contact).
+## <a name="supportinfo"></a> Support information
+
+For any question or bug report, please send an email to [support@situm.es](mailto:support@situm.es)
