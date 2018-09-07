@@ -119,7 +119,9 @@ In both cases, remember to add the following dependency in the same file:
 #import <SitumSDK/SitumSDK.h>
 ```
 
-You may need to configure an API KEY for use Google Maps on your app. Please follow steps provided on [Google Maps for iOS](https://developers.google.com/maps/documentation/ios-sdk/get-api-key?hl=en) to generate an API Key. When you've successfully generated a key add it to the project by writing the following sentence on the -application:didFinishLaunchingWithOptions: method (appDelegate.m):
+### <a name="mapsapikey"></a> Step 3: Setup Google Maps
+
+You may need to configure an API KEY for use Google Maps on your app. Please follow steps provided on [Google Maps for iOS](https://developers.google.com/maps/documentation/ios-sdk/get-api-key?hl=en) to generate an API Key. When you've successfully generated a key add it to the project by writing the following sentence on the `application:didFinishLaunchingWithOptions:` method (`AppDelegate.m`):
 
 ```objc
 [GMSServices provideAPIKey:@"INCLUDE A GOOGLE MAP KEY FOR IOS"];
