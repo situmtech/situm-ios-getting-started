@@ -4,7 +4,9 @@ Situm iOS SDK Code Samples app
 This is a sample Objective-C application built using the Situm SDK. With this sample app, you will be able to:
 
 1. Display information on a map, show user location and real-time updates
+    * In this example you'll see how to retrieve information about your buildings, how to retrieve all the information about one buildings (the first one) and how to display the map of the first floor on Google Maps. Additionaly if the building is calibrated you'll be able to see your location. If more than one user is being positioned on the same building you'll see the location of different devices in realtime.
 2. Show directions from a point to a destination
+    * In this example you'll see how to request directions from one point to a different point and display the route. You could also see a list of human readable indications (not implemented) that will let your users navigate within the route. In order to compute directions in one building you'll need to configure navigation areas on our dashboard [Walking areas configuration](https://dashboard.situm.es/buildings/) by going to the Paths tab.
 
 ## Table of contents
 
@@ -23,9 +25,10 @@ This is a sample Objective-C application built using the Situm SDK. With this sa
 1. [Fetch buildings](#fetchBuildings)
 2. [Fetch information from a particular building](#fetchBuildingInfo)
 3. [Start the positioning](#positioning)
+4. [Compute a route](#directions)
+5. [Get realtime updates](#realtime)
 
 [More information](#moreinfo)
-
 
 ## <a name="introduction"></a> Introduction
 
@@ -264,11 +267,11 @@ Where we are using the `SITDirectionsManager` to send the request indicating the
 }
 ```
 
-### Get realtime updates
+### <a name="realtime"></a> Get realtime updates
 
 Another interesting functionality you can find in the SDK is the realtime updates of all the users in a building. With this you can show in your app not only the user's position, but also inform about where are others located. In order to obtain this information, you need to include some steps fairly similar to the previous section about positioning. Again, you'll need to implement and send a request to start receiving the real time updates, and also prepare a delegate to  process the realtime updates. This can be done in the following manner:
 
-```objective-c
+```objc
 SITRealTimeRequest *request = [[SITRealTimeRequest alloc]init];
 request.buildingIdentifier = building.identifier;
 request.updateInterval = 5;   
@@ -278,7 +281,7 @@ request.updateInterval = 5;
 
 In this code we create a realtime request to be sent, with the identifier of the desired building and a refresh rate in seconds (this value is limited between 3 and 20 seconds). After this, the only thing left to do is receiving and processing the realtime updates sent from the server. The required methods are the following:
 
-```objective-c
+```objc
 - (void) realTimeManager: (id<SITRealTimeInterface>) realTimeManager
         didUpdateUserLocations:(SITRealTimeData *)realTimeData {
     			// Handle the realtime updates
@@ -289,10 +292,6 @@ In this code we create a realtime request to be sent, with the identifier of the
     			// Handle properly the error
 }
 ```
-
-### <a name="example2-directions"></a> Show directions from a point to a destination
-
-In this example you'll see how to request directions from one point to a different point and display the route. You could also see a list of human readable indications (not implemented) that will let your users navigate within the route. In order to compute directions in one building you'll need to configure navigation areas on our dashboard [Walking areas configuration](https://dashboard.situm.es/buildings/) by going to the Paths tab.
 
 ## <a name="moreinfo"></a> More information
 
