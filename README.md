@@ -30,6 +30,7 @@ This is a sample Objective-C application built using the Situm SDK. With this sa
 8. [Show routes between POIs in Google Maps](#drawroute)
 9. [Get realtime updates](#realtime)
 10. [List Building Events](#buildingevents)
+11. [Calculate if the user is inside en event](#positionevents)
 
 
 [More information](#moreinfo)
@@ -444,7 +445,40 @@ In order to know all the `SITEvent` you have in your `SITBuilding`, the first th
     return false;
 }];
 ```
+### <a name="positionevents"></a> Calculate if the user is inside en event
 
+In order to determine if the user is inside the trigger area of a `SITEvent`, you should intersect every new location with the `trigger` area of every event in the building. 
+This can be done by following the next example (Please note that minimun iOS SDK version is 2.12.0):
+
+```objc
+- (void)locationManager:(id<SITLocationInterface>)locationManager
+      didUpdateLocation:(SITLocation *)location
+{
+    
+    SITEvent *event = [self getEventForLocation: location];
+    
+    if (event != nil) {
+        NSLog(@"%@", [NSString stringWithFormat:@"User inside event: %@", event.name]);
+    }
+}
+
+- (SITEvent*) getEventForLocation: (SITLocation*) location {
+    for (SITEvent *event in self.buildingInfo.events) {
+        if ([self isLocation: location insideEvent: event]) {
+            return event;
+        }
+    }
+    return nil;
+}
+
+- (BOOL) isLocation: (SITLocation*) location
+        insideEvent: (SITEvent*) event {
+    if (! [location.position.floorIdentifier isEqualToString:event.trigger.center.floorIdentifier]) {
+        return false;
+    }
+    return [location.position distanceToPoint:event.trigger.center] < [event.trigger.radius floatValue];
+}
+```
 
 ## <a name="moreinfo"></a> More information
 
