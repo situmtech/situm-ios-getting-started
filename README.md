@@ -258,7 +258,7 @@ As a required step, you will need to complete the steps in the [Setup Google Map
 ...
 
 GMSCameraPosition *cameraPosition = [GMSCameraPosition cameraWithTarget:self.buildingInfo.building.center
-                                                                       zoom:19];
+                                                                   zoom:19];
     
     [self.mapView animateToCameraPosition:cameraPosition];
 
@@ -270,10 +270,12 @@ GMSCameraPosition *cameraPosition = [GMSCameraPosition cameraWithTarget:self.bui
 
         SITBounds bounds = [welf.buildingInfo.building bounds];
         
-        GMSCoordinateBounds *coordinateBounds = [[GMSCoordinateBounds alloc]initWithCoordinate:bounds.southWest
-                coordinate:bounds.northEast];
+        GMSCoordinateBounds *coordinateBounds = [[GMSCoordinateBounds alloc]
+            initWithCoordinate:bounds.southWest
+                    coordinate:bounds.northEast];
         GMSGroundOverlay *mapOverlay = [GMSGroundOverlay groundOverlayWithBounds:coordinateBounds
-                           icon:[UIImage imageWithData:imageData]];
+                                                                            icon:[UIImage 
+                                                                   imageWithData:imageData]];
         
         mapOverlay.bearing = [welf.buildingInfo.building.rotation degrees];
         
