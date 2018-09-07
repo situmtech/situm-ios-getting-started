@@ -86,7 +86,7 @@ NSLocationAlwaysUsageDescription (in XCode, "Privacy - Location Always Usage Des
 
 And that's all. From now on, you should be able to use Situm SDK in your app by importing its components with the line:
 
-```objective-c
+```objc
 #import <SitumSDK/SitumSDK.h>
 ```
 
@@ -98,7 +98,7 @@ Now that you have correctly configured your iOS project, you can start writting 
 
 This is the recommended option and the one we have implemented in this project. Write the following sentence on the -application:didFinishLaunchingWithOptions: method.
 
-```objective-c
+```objc
 [SITServices provideAPIKey:@"SET YOUR API KEY HERE" 
                   forEmail:@"SET YOUR EMAIL HERE"];
 ```
@@ -107,25 +107,25 @@ This is the recommended option and the one we have implemented in this project. 
 
 This is the other available option to provide your credentials, with your username and password. As in the previous case, write the following sentence on the -application:didFinishLaunchingWithOptions: method.
 
-```objective-c
+```objc
 [SITServices provideUser:@"SET YOUR USER HERE" 
                   password:@"SET YOUR PASSWORD HERE"];
 ```
 In both cases, remember to add the following dependency in the same file: 
 
-```objective-c
+```objc
 #import <SitumSDK/SitumSDK.h>
 ```
 
 You may need to configure an API KEY for use Google Maps on your app. Please follow steps provided on [Google Maps for iOS](https://developers.google.com/maps/documentation/ios-sdk/get-api-key?hl=en) to generate an API Key. When you've successfully generated a key add it to the project by writing the following sentence on the -application:didFinishLaunchingWithOptions: method (appDelegate.m):
 
-```objective-c
+```objc
 [GMSServices provideAPIKey:@"INCLUDE A GOOGLE MAP KEY FOR IOS"];
 ```
 
 Remember to add the following dependency in the same file: 
 
-```objective-c
+```objc
 #import <GoogleMaps/GoogleMaps.h>
 ```
 
@@ -161,7 +161,7 @@ Here we are obtaining the shared instance of the communication manager and using
 
 Once you've retrieved the list with your configured buildings, your next step should probably be getting the data about an specific building. This will allow you to draw the building blueprints in the map and start using the positioning functionalities. This info download can be made with an SDK call like this:
 
-```objective-c
+```objc
 SITBuilding *selectedBuilding = buildings[0];
 [[SITCommunicationManager sharedManager] fetchBuildingInfo:selectedBuilding.identifier
                     withOptions:nil
@@ -241,7 +241,7 @@ and start receiving location updates.
 
 ### <a name="directions"></a> Compute a route
 
-```objective-c
+```objc
 [SITDirectionsManager sharedInstance].delegate = self;
 
 SITDirectionsRequest *request = [[SITDirectionsRequest alloc] initWithRequestID:0 
@@ -253,7 +253,7 @@ SITDirectionsRequest *request = [[SITDirectionsRequest alloc] initWithRequestID:
 
 Where we are using the `SITDirectionsManager` to send the request indicating the user's position, and the desired destination. We also select the delegate to receive the result of the request, said processing can be made with the following code:
 
-```objective-c
+```objc
 - (void)directionsManager:(id<SITDirectionsInterface>)manager
 									didProcessRequest:(SITDirectionsRequest*)request
 									withResponse:(SITRoute*)route {
