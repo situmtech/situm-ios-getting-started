@@ -23,6 +23,7 @@
 		201F5EE31F7406310098473F /* SGSLocationAndRealtimeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 201F5EE21F7406310098473F /* SGSLocationAndRealtimeVC.m */; };
 		3A3C13E020E2908800749E30 /* SitumSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A3C13DF20E2908800749E30 /* SitumSDK.framework */; };
 		95E438802147A23200E27862 /* SGSUserInsideEventVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 95E4387F2147A23200E27862 /* SGSUserInsideEventVC.m */; };
+		95E4388A2147AA6D00E27862 /* SGSBuildingsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95E438892147AA6D00E27862 /* SGSBuildingsListViewController.m */; };
 		D3D2BFFD9BECAC9B36D75C90 /* libPods-GettingStarted.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 44680DE75A3F0B330950A5FA /* libPods-GettingStarted.a */; };
 /* End PBXBuildFile section */
 
@@ -72,6 +73,8 @@
 		44680DE75A3F0B330950A5FA /* libPods-GettingStarted.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GettingStarted.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		95E4387E2147A23200E27862 /* SGSUserInsideEventVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGSUserInsideEventVC.h; sourceTree = "<group>"; };
 		95E4387F2147A23200E27862 /* SGSUserInsideEventVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SGSUserInsideEventVC.m; sourceTree = "<group>"; };
+		95E438882147AA6D00E27862 /* SGSBuildingsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGSBuildingsListViewController.h; sourceTree = "<group>"; };
+		95E438892147AA6D00E27862 /* SGSBuildingsListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGSBuildingsListViewController.m; sourceTree = "<group>"; };
 		CED326AC971786994C8DAEE1 /* Pods-GettingStarted.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GettingStarted.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GettingStarted/Pods-GettingStarted.debug.xcconfig"; sourceTree = "<group>"; };
 		E46D25059989F650A1F429D9 /* Pods-GettingStarted.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GettingStarted.release.xcconfig"; path = "Pods/Target Support Files/Pods-GettingStarted/Pods-GettingStarted.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -200,6 +203,7 @@
 		201F5EDE1F7405D30098473F /* Samples */ = {
 			isa = PBXGroup;
 			children = (
+				95E438812147A87900E27862 /* Common */,
 				95E4387D2147A11600E27862 /* UserInsideEvent */,
 				201F5EE01F7405F50098473F /* RouteAndDirections */,
 				201F5EDF1F7405ED0098473F /* LocationAndRealTime */,
@@ -253,6 +257,15 @@
 				95E4387F2147A23200E27862 /* SGSUserInsideEventVC.m */,
 			);
 			path = UserInsideEvent;
+			sourceTree = "<group>";
+		};
+		95E438812147A87900E27862 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				95E438882147AA6D00E27862 /* SGSBuildingsListViewController.h */,
+				95E438892147AA6D00E27862 /* SGSBuildingsListViewController.m */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -449,6 +462,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95E4388A2147AA6D00E27862 /* SGSBuildingsListViewController.m in Sources */,
 				201F5EA61F73FC410098473F /* ViewController.m in Sources */,
 				201F5EA31F73FC410098473F /* AppDelegate.m in Sources */,
 				201531611F7A3FA800A3143A /* SGSRouteAndDirectionsVC.m in Sources */,
