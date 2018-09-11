@@ -13,6 +13,7 @@
 
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property(nonatomic) BOOL doNotShowAgain;
+@property(nonatomic, strong) UIAlertController *alert;
 
 @end
 
@@ -44,17 +45,11 @@
 - (void)locationManager:(nonnull id<SITLocationInterface>)locationManager didUpdateLocation:(nonnull SITLocation *)location {
     SITEvent *event = [self getEventForLocation: location];
     
-    if (event != nil && !_doNotShowAgain) {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Event" message:[NSString stringWithFormat:@"User inside event: %@", event.name] preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *dismissButton = [UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleDefault handler:nil];
-        [alert addAction:dismissButton];
-        UIAlertAction *doDotShowAgainButton = [UIAlertAction actionWithTitle:@"Do not show again" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-            self.doNotShowAgain = true;
-        }];
-        [alert addAction:dismissButton];
-        [alert addAction:doDotShowAgainButton];
-        [self presentViewController:alert animated:YES completion:nil];
+    if (event != nil) {
         NSLog(@"%@", [NSString stringWithFormat:@"User inside event: %@", event.name]);
+        if (!_doNotShowAgain && ![_alert isBeingPresented]) {
+            [self showAlertWithEvent:event];
+        }
     }
 }
 
@@ -84,6 +79,20 @@
 - (IBAction)didPressBackButton:(id)sender {
     [[SITLocationManager sharedInstance] removeUpdates];
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - Events alert
+
+- (void)showAlertWithEvent:(SITEvent *)event {
+    _alert = [UIAlertController alertControllerWithTitle:@"Event" message:[NSString stringWithFormat:@"User inside event: %@", event.name] preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *dismissButton = [UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleDefault handler:nil];
+    [_alert addAction:dismissButton];
+    UIAlertAction *doDotShowAgainButton = [UIAlertAction actionWithTitle:@"Do not show again" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        self.doNotShowAgain = true;
+    }];
+    [_alert addAction:dismissButton];
+    [_alert addAction:doDotShowAgainButton];
+    [self presentViewController:_alert animated:YES completion:nil];
 }
 
 
