@@ -13,16 +13,25 @@
 
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property(nonatomic) BOOL doNotShowAgain;
+@property (weak, nonatomic) IBOutlet UILabel *infoLabel;
 @property(nonatomic, strong) UIAlertController *alert;
 
 @end
 
 @implementation SGSUserInsideEventVC
 
+- (void)viewDidAppear:(BOOL)animated {
+    if (_selectedBuildingInfo.events == nil || _selectedBuildingInfo.events.count == 0) {
+        [self showNoEventsAlert];
+    } else {
+        [self startPositioning];
+        [self.infoLabel setText:@"Initializing positioning"];
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self startPositioning];
-    [self. activityIndicator startAnimating];
+    [self.activityIndicator startAnimating];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -43,6 +52,7 @@
 }
 
 - (void)locationManager:(nonnull id<SITLocationInterface>)locationManager didUpdateLocation:(nonnull SITLocation *)location {
+    [self.infoLabel setText:@"Calculating if the user is inside an event"];
     SITEvent *event = [self getEventForLocation: location];
     
     if (event != nil) {
@@ -81,17 +91,26 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-#pragma mark - Events alert
+#pragma mark - Alerts
 
 - (void)showAlertWithEvent:(SITEvent *)event {
     _alert = [UIAlertController alertControllerWithTitle:@"Event" message:[NSString stringWithFormat:@"User inside event: %@", event.name] preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *dismissButton = [UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleDefault handler:nil];
-    [_alert addAction:dismissButton];
     UIAlertAction *doDotShowAgainButton = [UIAlertAction actionWithTitle:@"Do not show again" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         self.doNotShowAgain = true;
     }];
     [_alert addAction:dismissButton];
     [_alert addAction:doDotShowAgainButton];
+    [self presentViewController:_alert animated:YES completion:nil];
+}
+
+- (void)showNoEventsAlert {
+    _alert = [UIAlertController alertControllerWithTitle:@"Error" message: @"There are no events, please create them on the Dashboard, or try selecting a different building" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *dismissButton = [UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }];
+    [_alert addAction:dismissButton];
+    
     [self presentViewController:_alert animated:YES completion:nil];
 }
 

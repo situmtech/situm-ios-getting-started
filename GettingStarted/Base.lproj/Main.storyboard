@@ -125,23 +125,34 @@
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="maw-2w-sP6"/>
                                 </constraints>
                             </activityIndicatorView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Initializing positioning" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qKQ-jW-7yc">
+                                <rect key="frame" x="16" y="288" width="343" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Ts2-I3-FbI" firstAttribute="centerX" secondItem="tJV-rj-3AR" secondAttribute="centerX" id="2If-ue-Bee"/>
+                            <constraint firstItem="qKQ-jW-7yc" firstAttribute="centerX" secondItem="tJV-rj-3AR" secondAttribute="centerX" id="6AJ-h6-haj"/>
                             <constraint firstAttribute="trailing" secondItem="NSC-GO-fGk" secondAttribute="trailing" id="E40-VZ-wbs"/>
+                            <constraint firstItem="Ts2-I3-FbI" firstAttribute="top" secondItem="qKQ-jW-7yc" secondAttribute="bottom" constant="-6" id="U3S-EW-Rjz"/>
                             <constraint firstItem="Ts2-I3-FbI" firstAttribute="centerY" secondItem="tJV-rj-3AR" secondAttribute="centerY" id="VdJ-2K-1jj"/>
                             <constraint firstItem="NSC-GO-fGk" firstAttribute="leading" secondItem="tJV-rj-3AR" secondAttribute="leading" id="gj3-Nb-jOy"/>
+                            <constraint firstItem="qKQ-jW-7yc" firstAttribute="trailing" secondItem="tJV-rj-3AR" secondAttribute="trailingMargin" id="mIm-UQ-6dl"/>
                             <constraint firstItem="NSC-GO-fGk" firstAttribute="top" secondItem="3IN-tC-Ni9" secondAttribute="bottom" constant="-20" id="qsP-G4-ryR"/>
+                            <constraint firstItem="qKQ-jW-7yc" firstAttribute="leading" secondItem="tJV-rj-3AR" secondAttribute="leadingMargin" id="znq-rU-HJu"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="activityIndicator" destination="Ts2-I3-FbI" id="3mQ-pl-5mJ"/>
+                        <outlet property="infoLabel" destination="qKQ-jW-7yc" id="jRk-wB-bot"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U86-Fk-GIp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2692" y="157"/>
+            <point key="canvasLocation" x="2692" y="156.97151424287858"/>
         </scene>
         <!--Route And DirectionsVC-->
         <scene sceneID="5BU-0k-Xhu">
