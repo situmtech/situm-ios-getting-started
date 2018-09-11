@@ -56,8 +56,10 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender  {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    SGSUserInsideEventVC *destinationVC = (SGSUserInsideEventVC *)segue.destinationViewController;
-    destinationVC.selectedBuildingInfo = self.selectedBuildingInfo;
+    UIViewController *destinationVC = segue.destinationViewController;
+    if ([destinationVC isMemberOfClass:[SGSUserInsideEventVC class]]) {
+        ((SGSUserInsideEventVC *)destinationVC).selectedBuildingInfo = self.selectedBuildingInfo;
+    }
 }
 
 #pragma mark -

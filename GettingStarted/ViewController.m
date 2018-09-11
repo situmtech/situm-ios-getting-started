@@ -70,8 +70,11 @@ static NSString *UserInsideEventSampleSegue = @"UserInsideEventSampleSegue";
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    SGSBuildingsListViewController *destinationVC = (SGSBuildingsListViewController *)segue.destinationViewController;
-    destinationVC.originSegue = segue.identifier;
+    UIViewController *destinationVC = segue.destinationViewController;
+    
+    if ([destinationVC isMemberOfClass:[SGSBuildingsListViewController class]]) {
+        ((SGSBuildingsListViewController*) destinationVC).originSegue = segue.identifier;
+    }
 }
 
 -(IBAction)prepareForUnwind:(UIStoryboardSegue *)segue {

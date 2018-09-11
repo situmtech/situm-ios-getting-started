@@ -96,7 +96,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User inside event" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nk0-o5-3jC">
-                                        <rect key="frame" x="122" y="22" width="132.5" height="21"/>
+                                        <rect key="frame" x="121" y="22" width="133" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -105,7 +105,7 @@
                                         <rect key="frame" x="14" y="17" width="34" height="30"/>
                                         <state key="normal" title="Back"/>
                                         <connections>
-                                            <segue destination="uvP-OP-NqF" kind="unwind" unwindAction="prepareForUnwind:" id="w4f-YQ-jQ3"/>
+                                            <action selector="didPressBackButton:" destination="ZEw-To-Vz4" eventType="touchUpInside" id="cCS-Cn-Ohv"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -118,17 +118,28 @@
                                     <constraint firstItem="Nk0-o5-3jC" firstAttribute="centerX" secondItem="NSC-GO-fGk" secondAttribute="centerX" id="q5M-h6-45o"/>
                                 </constraints>
                             </view>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Ts2-I3-FbI">
+                                <rect key="frame" x="157" y="303" width="60" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="60" id="chw-eC-LVv"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="maw-2w-sP6"/>
+                                </constraints>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="Ts2-I3-FbI" firstAttribute="centerX" secondItem="tJV-rj-3AR" secondAttribute="centerX" id="2If-ue-Bee"/>
                             <constraint firstAttribute="trailing" secondItem="NSC-GO-fGk" secondAttribute="trailing" id="E40-VZ-wbs"/>
+                            <constraint firstItem="Ts2-I3-FbI" firstAttribute="centerY" secondItem="tJV-rj-3AR" secondAttribute="centerY" id="VdJ-2K-1jj"/>
                             <constraint firstItem="NSC-GO-fGk" firstAttribute="leading" secondItem="tJV-rj-3AR" secondAttribute="leading" id="gj3-Nb-jOy"/>
                             <constraint firstItem="NSC-GO-fGk" firstAttribute="top" secondItem="3IN-tC-Ni9" secondAttribute="bottom" constant="-20" id="qsP-G4-ryR"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="activityIndicator" destination="Ts2-I3-FbI" id="3mQ-pl-5mJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U86-Fk-GIp" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="uvP-OP-NqF" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2692" y="157"/>
         </scene>
