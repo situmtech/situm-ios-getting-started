@@ -7,7 +7,10 @@
 //
 
 #import "ViewController.h"
+#import <SitumSDK/SitumSDK.h>
 
 @interface SGSUserInsideEventVC : ViewController
+
+@property(nonatomic, strong) SITBuildingInfo *selectedBuildingInfo;
 
 @end

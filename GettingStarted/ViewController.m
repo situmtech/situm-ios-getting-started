@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-
+#import "SGSBuildingsListViewController.h"
 static NSString *SampleCellIdentifier = @"SampleCell";
 
 // Samples static strings
@@ -67,6 +67,11 @@ static NSString *UserInsideEventSampleSegue = @"UserInsideEventSampleSegue";
         [self performSegueWithIdentifier:UserInsideEventSampleSegue
                                   sender:self];
     }
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    SGSBuildingsListViewController *destinationVC = (SGSBuildingsListViewController *)segue.destinationViewController;
+    destinationVC.originSegue = segue.identifier;
 }
 
 -(IBAction)prepareForUnwind:(UIStoryboardSegue *)segue {

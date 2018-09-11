@@ -447,7 +447,7 @@
                     </view>
                     <connections>
                         <outlet property="buildingsTableView" destination="Kml-hf-alr" id="OV6-KJ-fls"/>
-                        <segue destination="ZEw-To-Vz4" kind="show" id="hOT-zZ-EgE"/>
+                        <segue destination="ZEw-To-Vz4" kind="show" identifier="UserInsideEvent2SampleSegue" id="hOT-zZ-EgE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vyN-Tj-Cmc" userLabel="First Responder" sceneMemberID="firstResponder"/>

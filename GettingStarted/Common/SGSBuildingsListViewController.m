@@ -9,6 +9,7 @@
 #import "SGSBuildingsListViewController.h"
 
 #import <SitumSDK/SitumSDK.h>
+#import "SGSUserInsideEventVC.h"
 
 @interface SGSBuildingsListViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -17,6 +18,8 @@
 @property (nonatomic, strong) NSArray *buildings; // model
 
 @property (nonatomic, strong) SITBuildingInfo *selectedBuildingInfo;
+
+@property (nonatomic, strong) NSString *segueIdentifier;
 
 @end
 
@@ -34,6 +37,11 @@
     
     self.buildingsTableView.dataSource = self;
     self.buildingsTableView.delegate = self;
+    self.segueIdentifier = nil;
+    
+    if ([self.originSegue isEqualToString:  @"UserInsideEventSampleSegue"]) {
+        self.segueIdentifier = @"UserInsideEvent2SampleSegue";
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -45,13 +53,11 @@
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender  {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    
-    /*SCTPositioningViewController *destinationVC = (SCTPositioningViewController *)segue.destinationViewController;
-    
-    destinationVC.buildingInfo = self.selectedBuildingInfo;*/
+    SGSUserInsideEventVC *destinationVC = (SGSUserInsideEventVC *)segue.destinationViewController;
+    destinationVC.selectedBuildingInfo = self.selectedBuildingInfo;
 }
 
 #pragma mark -
@@ -117,16 +123,6 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
     
     SITBuilding *selectedBuilding = self.buildings[indexPath.row];
     
-    [[SITCommunicationManager sharedManager] fetchEventsFromBuilding:selectedBuilding withOptions:nil withCompletion:^SITHandler(NSArray<SITEvent *> *result, NSError *error) {
-        NSLog(@"There are events");
-        return false;
-    }];
-    
-    [[SITCommunicationManager sharedManager] fetchOutdoorPoisOfBuilding:selectedBuilding.identifier withOptions:nil success:^(NSDictionary *mapping) {
-        NSLog(@"There are Exterior POIs");
-    } failure:^(NSError *error) {
-    }];
-    
     UIAlertView *av = [[UIAlertView alloc]initWithTitle:@"Retrieving information. "
 message:@"Hold on for a moment"
                                                delegate:nil
@@ -144,16 +140,10 @@ message:@"Hold on for a moment"
                                                                                     animated:YES];
                                                            
                                                            self.selectedBuildingInfo = [mapping valueForKey:@"results"];
-                                                           NSArray<SITFloor*>* floors = self.selectedBuildingInfo.floors;
-                                                           SITLocation *location;
-                                                           for (SITFloor *floor in floors) {
-                                                               if ([location.position.floorIdentifier isEqualToString:floor.identifier]) {
-                                                                   NSLog([NSString stringWithFormat:@"User is located in floor: %@", floor.identifier]);
-                                                               }
+                                                           
+                                                           if (self.segueIdentifier != nil) {
+                                                               [welf performSegueWithIdentifier:self.segueIdentifier sender:self];
                                                            }
-                                                           
-                                                           [welf performSegueWithIdentifier:@"FromBuildingListToPositioning" sender:self];
-                                                           
                                                        }
                                                        failure:^(NSError *error) {
                                                            NSLog(@"error fetching information of the building: %@ ", error);
@@ -161,16 +151,6 @@ message:@"Hold on for a moment"
                                                                                     animated:YES];
                                                            
                                                        }];
-    
-    [[SITCommunicationManager sharedManager] fetchEventsFromBuilding:selectedBuilding withCompletion:^SITHandler(NSArray<SITEvent *> *result, NSError *error) {
-        if (result) {
-            //process events
-        }
-        if (error) {
-            //handle error
-        }
-        return false;
-    }];
 }
 
 - (IBAction)unwindFromPositioning:(UIStoryboardSegue *)segue

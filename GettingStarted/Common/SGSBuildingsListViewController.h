@@ -10,4 +10,6 @@
 
 @interface SGSBuildingsListViewController : UIViewController
 
+@property (nonatomic, strong) NSString *originSegue;
+
 @end
