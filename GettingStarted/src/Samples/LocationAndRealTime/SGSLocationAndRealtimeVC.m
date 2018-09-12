@@ -19,6 +19,7 @@ static NSString *ResultsKey = @"results";
 @property (weak, nonatomic) IBOutlet GMSMapView *mapView;
 @property (nonatomic, strong) GMSGroundOverlay *floorMapOverlay;
 @property (nonatomic, strong) GMSMarker *userLocationMarker;
+@property (nonatomic, strong) NSMutableDictionary<NSString*, GMSMarker *> *realTimeMarkers;
 
 @property (nonatomic) BOOL ready;
 @property (nonatomic) BOOL locationEnabled;
@@ -31,13 +32,13 @@ static NSString *ResultsKey = @"results";
 @property (weak, nonatomic) IBOutlet UILabel *errorLabel;
 @property (weak, nonatomic) IBOutlet UIButton *reloadButton;
 
-@property (nonatomic, strong) NSMutableDictionary *usersLocations;
-
 @end
 
 @implementation SGSLocationAndRealtimeVC
 
 @synthesize mapView = _mapView, floorMapOverlay = _floorMapOverlay, ready = _ready, realtimeEnabled = _realtimeEnabled;
+
+# pragma mark - ViewController methods
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -51,7 +52,7 @@ static NSString *ResultsKey = @"results";
     [self.errorLabel setHidden:YES];
     [self.reloadButton setHidden:YES];
 
-    self.usersLocations = [[NSMutableDictionary alloc]init];
+    self.realTimeMarkers = [NSMutableDictionary new];
     
     [self showMap];
 }
@@ -61,15 +62,12 @@ static NSString *ResultsKey = @"results";
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)viewWillDisappear:(BOOL)animated {
+    [self stopPositioning];
+    [self stopRealtime];
 }
-*/
+
+#pragma mark - Google Maps methods
 
 - (void)showMap
 {
@@ -141,17 +139,48 @@ static NSString *ResultsKey = @"results";
     return filteredPOIs;
 }
 
-- (void)updateLocation:(SITLocation *)location {
-    GMSMarker *userLocationMarker = [self userLocationMarkerInMapView:self.mapView];
+#pragma mark - Location methods
+
+- (void)startPositioning {
+    SITLocationRequest *request = [[SITLocationRequest alloc]initWithPriority:kSITHighAccuracy
+                                                                     provider:kSITHybridProvider
+                                                               updateInterval:1
+                                                                   buildingID:self.selectedBuildingInfo.building.identifier
+                                                               operationQueue:nil
+                                                                      options:nil];
+    
+    // Configure here custom beacons if neccessary (through property beaconFilters of request object).
+    
+    [[SITLocationManager sharedInstance] requestLocationUpdates:request];
+    
+    self.locationEnabled = YES;
+}
+
+- (void)stopPositioning {
+    [[SITLocationManager sharedInstance] removeUpdates];
+    _userLocationMarker.map = nil;
+    self.locationEnabled = NO;
+}
+
+- (void)changeLocationStatus {
+    if (self.locationEnabled) {
+        [self stopPositioning];
+    } else {
+        [self startPositioning];
+    }
+}
+
+- (void)showUserMarker:(SITLocation *)location {
+    _userLocationMarker = [self userLocationMarkerInMapView:self.mapView];
     
     // Update location
     if ([self.selectedFloor.identifier isEqualToString:location.position.floorIdentifier]) {
-        userLocationMarker.position = location.position.coordinate;
-        userLocationMarker.map = self.mapView;
+        _userLocationMarker.position = location.position.coordinate;
+        _userLocationMarker.map = self.mapView;
         
         if (location.quality == kSITHigh) {
-            userLocationMarker.icon = [UIImage imageNamed:@"location-pointer"];
-            userLocationMarker.rotation = [location.bearing degrees];
+            _userLocationMarker.icon = [UIImage imageNamed:@"location-pointer"];
+            _userLocationMarker.rotation = [location.bearing degrees];
             
             
             // Animate camera movement
@@ -162,19 +191,13 @@ static NSString *ResultsKey = @"results";
             
             [self.mapView animateToCameraPosition:newCameraPosition];
         } else {
-            userLocationMarker.icon = [UIImage imageNamed:@"location"];
+            _userLocationMarker.icon = [UIImage imageNamed:@"location"];
         }
         
     } else {
-        userLocationMarker.map = nil; //
+        _userLocationMarker.map = nil; //
         NSLog(@"Found user on a different floor than selected");
     }
-    
-    
-    
-    
-    
-    
 }
 
 - (GMSMarker *)userLocationMarkerInMapView:(GMSMapView *)mapView
@@ -199,113 +222,6 @@ static NSString *ResultsKey = @"results";
 }
 
 
-- (void)showError
-{
-    [self.errorLabel setText:@"Error fetching contents"];
-    
-    [self.errorLabel setHidden:NO];
-    [self.reloadButton setHidden:NO];
-}
-
-- (IBAction)reloadButtonPressed:(id)sender {
-    [self.errorLabel setHidden:YES];
-    [self.reloadButton setHidden:YES];
-
-}
-
-- (IBAction)locationButtonPressed:(id)sender {
-    if (!self.ready) {
-        return; // Wait until information is loaded
-    }
-    
-    if (self.locationEnabled) {
-        
-        [[SITLocationManager sharedInstance] removeUpdates];
-        
-        self.locationEnabled = NO;
-    } else {
-    
-        SITLocationRequest *request = [[SITLocationRequest alloc]initWithPriority:kSITHighAccuracy
-                                                                         provider:kSITHybridProvider
-                                                                   updateInterval:1
-                                                                       buildingID:self.selectedBuildingInfo.building.identifier
-                                                                   operationQueue:nil
-                                                                          options:nil];
-        
-        // Configure here custom beacons if neccessary (through property beaconFilters of request object).
-        
-        [[SITLocationManager sharedInstance] requestLocationUpdates:request];
-        
-        self.locationEnabled = YES;
-    }
-}
-
-- (IBAction)realtimeButtonPressed:(id)sender {
-    if (!self.ready) {
-        return; // Wait until information is loaded
-    }
-    
-    if (self.realtimeEnabled) {
-        [[SITRealTimeManager sharedManager] removeRealTimeUpdates];
-        
-        self.realtimeEnabled = NO;
-    } else {
-        SITRealTimeRequest *request = [[SITRealTimeRequest alloc]init];
-        request.buildingIdentifier = self.selectedBuildingInfo.building.identifier;
-        
-        
-        
-        [[SITRealTimeManager sharedManager] requestRealTimeUpdates:request];
-        self.realtimeEnabled = YES;
-    }
-
-}
-
-- (void)displayRealtimeData:(SITRealTimeData *)data
-{
-    // Check there is a selected floor
-    if (!self.selectedFloor) {
-        return;
-    }
-    
-    for (SITLocation *location in data.locations) {
-        // Discarting the location of the device
-        if ([location.deviceId isEqualToString:[SITServices deviceID]]) {
-            continue;
-        }
-        
-        // Filter positions based on floor
-        if ([location.position.floorIdentifier isEqualToString:@"(null)"] ||  [location.position.floorIdentifier isEqualToString:self.selectedFloor.identifier]) { // Display indoor and outdoor locations
-            
-            GMSMarker *userMarker = [self.usersLocations valueForKey:location.deviceId];
-            if (userMarker == nil) {
-                userMarker = [[GMSMarker alloc]init];
-                userMarker.snippet = location.deviceId;
-                userMarker.map = self.mapView;
-                userMarker.icon = [UIImage imageNamed:@"location"];
-                [self.usersLocations setObject:userMarker
-                                        forKey:location.deviceId];
-            }
-            
-            [userMarker setPosition:location.position.coordinate];
-        }
-    }
-}
-
-#pragma mark - RealtimeDelegate Methods
-
-- (void)realTimeManager:(id<SITRealTimeInterface>)realTimeManager
-       didFailWithError:(NSError *)error
-{
-    NSLog(@"error while updating real time data");
-}
-
-- (void)realTimeManager:(id<SITRealTimeInterface>)realTimeManager
- didUpdateUserLocations:(SITRealTimeData *)realTimeData
-{
-    [self displayRealtimeData:realTimeData];
-}
-
 #pragma mark - SITLocationDelegate Methods
 
 - (void)locationManager:(id<SITLocationInterface>)locationManager
@@ -328,9 +244,105 @@ static NSString *ResultsKey = @"results";
       didUpdateLocation:(SITLocation *)location
 {
     NSLog(@"new location update available: :%@", location);
-    [self updateLocation:location];
+    [self showUserMarker:location];
+}
+
+#pragma mark - Realtime methods
+
+- (void)startRealtime {
+    SITRealTimeRequest *request = [[SITRealTimeRequest alloc]init];
+    request.buildingIdentifier = self.selectedBuildingInfo.building.identifier;
+    [[SITRealTimeManager sharedManager] requestRealTimeUpdates:request];
+    self.realtimeEnabled = YES;
+}
+
+- (void)changeRealtimeStatus {
+    if (self.realtimeEnabled) {
+        [self stopRealtime];
+    } else {
+        [self startRealtime];
+    }
+}
+
+- (void)stopRealtime {
+    [[SITRealTimeManager sharedManager] removeRealTimeUpdates];
+    for(id key in _realTimeMarkers) {
+        _realTimeMarkers[key].map = nil;
+    }
+    _realTimeMarkers = [NSMutableDictionary new];
+    self.realtimeEnabled = NO;
+}
+
+- (void)showRealtimeMarkers:(SITRealTimeData *)data
+{
+    // Check there is a selected floor
+    if (!self.selectedFloor) {
+        return;
+    }
     
+    for (SITLocation *location in data.locations) {
+        // Discarting the location of the device
+        if ([location.deviceId isEqualToString:[SITServices deviceID]]) {
+            continue;
+        }
+        
+        // Filter positions based on floor
+        if ([location.position.floorIdentifier isEqualToString:@"(null)"] ||  [location.position.floorIdentifier isEqualToString:self.selectedFloor.identifier]) { // Display indoor and outdoor locations
+
+            GMSMarker *userMarker = [self.realTimeMarkers valueForKey:location.deviceId];
+            if (userMarker == nil) {
+                userMarker = [[GMSMarker alloc]init];
+                userMarker.map = self.mapView;
+                userMarker.snippet = location.deviceId;
+                [self.realTimeMarkers setObject:userMarker
+                                         forKey:location.deviceId];
+            }
+            if (location.quality == kSITHigh) {
+                userMarker.icon = [UIImage imageNamed:@"realtime-pointer"];
+                userMarker.rotation = [location.bearing degrees];
+            } else {
+                userMarker.icon = [UIImage imageNamed:@"realtime"];
+            }
+            [userMarker setPosition:location.position.coordinate];
+        }
+    }
+}
+
+#pragma mark - SITRealTimeDelegate Methods
+
+- (void)realTimeManager:(id<SITRealTimeInterface>)realTimeManager
+       didFailWithError:(NSError *)error
+{
+    NSLog(@"error while updating real time data");
+}
+
+- (void)realTimeManager:(id<SITRealTimeInterface>)realTimeManager
+ didUpdateUserLocations:(SITRealTimeData *)realTimeData
+{
+    [self showRealtimeMarkers:realTimeData];
+}
+
+#pragma mark - Actions
+- (IBAction)reloadButtonPressed:(id)sender {
+    [self.errorLabel setHidden:YES];
+    [self.reloadButton setHidden:YES];
     
+}
+
+- (IBAction)locationButtonPressed:(id)sender {
+    if (!self.ready) {
+        return; // Wait until information is loaded
+    }
+    
+    [self changeLocationStatus];
+}
+
+- (IBAction)realtimeButtonPressed:(id)sender {
+    if (!self.ready) {
+        return; // Wait until information is loaded
+    }
+    
+    [self changeRealtimeStatus];
 }
 
 #pragma mark - Setter Methods
