@@ -26,7 +26,6 @@ static NSString *ResultsKey = @"results";
 @property (weak, nonatomic) IBOutlet UIButton *realtimeActionButton;
 @property (weak, nonatomic) IBOutlet UIButton *locationActionButton;
 
-@property (nonatomic, strong) SITBuildingInfo *buildingInfo;
 @property (nonatomic, strong) SITFloor *selectedFloor;
 
 @property (weak, nonatomic) IBOutlet UILabel *errorLabel;
@@ -38,7 +37,7 @@ static NSString *ResultsKey = @"results";
 
 @implementation SGSLocationAndRealtimeVC
 
-@synthesize mapView = _mapView, floorMapOverlay = _floorMapOverlay, ready = _ready, realtimeEnabled = _realtimeEnabled, buildingInfo = _buildingInfo;
+@synthesize mapView = _mapView, floorMapOverlay = _floorMapOverlay, ready = _ready, realtimeEnabled = _realtimeEnabled;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -48,18 +47,13 @@ static NSString *ResultsKey = @"results";
     [SITRealTimeManager sharedManager].delegate = self;
     
     self.ready = NO;
-    self.locationEnabled = NO;
-    self.realtimeEnabled = NO;
     
     [self.errorLabel setHidden:YES];
     [self.reloadButton setHidden:YES];
-    
-    [self.realtimeActionButton setHidden:YES];
-    [self.locationActionButton setHidden: YES];
 
     self.usersLocations = [[NSMutableDictionary alloc]init];
     
-    [self updateContents];
+    [self showMap];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -80,19 +74,19 @@ static NSString *ResultsKey = @"results";
 - (void)showMap
 {
     // Display image on top of Google Maps
-    if (self.buildingInfo.floors.count == 0) {
-        NSLog(@"The selected building: %@ does not have floors. Correct that on http://dashboard.situm.es", self.buildingInfo.building.name);
+    if (self.selectedBuildingInfo.floors.count == 0) {
+        NSLog(@"The selected building: %@ does not have floors. Correct that on http://dashboard.situm.es", self.selectedBuildingInfo.building.name);
         return;
     }
     
     // Move the map to the coordinates of the building
-    GMSCameraPosition *cameraPosition = [GMSCameraPosition cameraWithTarget:self.buildingInfo.building.center
+    GMSCameraPosition *cameraPosition = [GMSCameraPosition cameraWithTarget:self.selectedBuildingInfo.building.center
                                                                        zoom:19];
     
     [self.mapView animateToCameraPosition:cameraPosition];
 
     // Display map
-    SITFloor *selectedFloor = self.buildingInfo.floors[0];
+    SITFloor *selectedFloor = self.selectedBuildingInfo.floors[0];
     self.selectedFloor = selectedFloor;
     
     __weak typeof(self) welf = self;
@@ -100,22 +94,22 @@ static NSString *ResultsKey = @"results";
         // On image data we have loaded the image contents of the floor
         
         // Display map
-        SITBounds bounds = [welf.buildingInfo.building bounds];
+        SITBounds bounds = [welf.selectedBuildingInfo.building bounds];
         
         GMSCoordinateBounds *coordinateBounds = [[GMSCoordinateBounds alloc]initWithCoordinate:bounds.southWest
                                                                                     coordinate:bounds.northEast];
         GMSGroundOverlay *mapOverlay = [GMSGroundOverlay groundOverlayWithBounds:coordinateBounds
                                                                             icon:[UIImage imageWithData:imageData]];
         
-        mapOverlay.bearing = [welf.buildingInfo.building.rotation degrees];
+        mapOverlay.bearing = [welf.selectedBuildingInfo.building.rotation degrees];
         
         mapOverlay.map = welf.mapView;
         welf.floorMapOverlay = mapOverlay;
         
         // Display POIs (indoors and outdoors)
         NSMutableArray *listOfPois = [welf filterPoisOnLevel:selectedFloor];
-        if (welf.buildingInfo.outdoorPois.count > 0) {
-            [listOfPois addObjectsFromArray:welf.buildingInfo.outdoorPois];
+        if (welf.selectedBuildingInfo.outdoorPois.count > 0) {
+            [listOfPois addObjectsFromArray:welf.selectedBuildingInfo.outdoorPois];
         }
         for (SITPOI *indoorPoi in listOfPois) {
             
@@ -125,7 +119,9 @@ static NSString *ResultsKey = @"results";
             
         }
         
-        welf.ready = YES;
+        self.ready = YES;
+        [self setRealtimeEnabled: NO];
+        [self setLocationEnabled: NO];
     };
     
     [[SITCommunicationManager sharedManager] fetchMapFromFloor:selectedFloor
@@ -136,59 +132,13 @@ static NSString *ResultsKey = @"results";
 {
     NSMutableArray *filteredPOIs = [[NSMutableArray alloc]init];
     
-    for (SITPOI *poi in self.buildingInfo.indoorPois) {
+    for (SITPOI *poi in self.selectedBuildingInfo.indoorPois) {
         if ([poi.position.floorIdentifier isEqualToString:floor.identifier]) {
             [filteredPOIs addObject:poi];
         }
     }
     
     return filteredPOIs;
-}
-
-- (void)updateContents
-{
-    __weak typeof(self) welf = self;
-
-    // Forcing requests to go to the network instead of cache
-    NSDictionary *options = @{
-                             @"forceRequest":@YES,
-                             };
-    
-    SITFailureCompletion fetchResourceFailureHandler = ^(NSError *error) {
-        [welf showError];
-    };
-    
-    SITSuccessHandler fetchBuildingInfoSuccessHandler = ^(NSDictionary *mapping) {
-        welf.buildingInfo = [mapping valueForKey:ResultsKey];
-        
-        [welf showMap];
-    };
-    
-    
-    SITSuccessHandler fetchingBuildingsSuccessHandler = ^(NSDictionary *mapping) {
-        NSArray *buildings = [mapping valueForKey:ResultsKey];
-        
-        if (buildings.count == 0) {
-            NSLog(@"There are no buildings on the account. Please go to dashboard http://dashboard.situm.es and learn more about the first step with Situm technology");
-        } else {
-            SITBuilding *building = buildings[0];
-            NSError *invalidRequest = [[SITCommunicationManager sharedManager] fetchBuildingInfo:building.identifier
-                                                           withOptions:options
-                                                               success:fetchBuildingInfoSuccessHandler
-                                                               failure:fetchResourceFailureHandler];
-            if (invalidRequest) {
-                NSLog(@"Attempt to invoque invalid request. Fix it before continuing");
-            }
-        }
-    };
-    
-    NSError *invalidRequest = [[SITCommunicationManager sharedManager] fetchBuildingsWithOptions:options
-                                                               success:fetchingBuildingsSuccessHandler
-                                                               failure:fetchResourceFailureHandler];
-    
-    if (invalidRequest) {
-        NSLog(@"Attempt to invoque invalid request. Fix it before continuing");
-    }
 }
 
 - (void)updateLocation:(SITLocation *)location {
@@ -260,8 +210,6 @@ static NSString *ResultsKey = @"results";
 - (IBAction)reloadButtonPressed:(id)sender {
     [self.errorLabel setHidden:YES];
     [self.reloadButton setHidden:YES];
-    
-    [self updateContents];
 
 }
 
@@ -280,7 +228,7 @@ static NSString *ResultsKey = @"results";
         SITLocationRequest *request = [[SITLocationRequest alloc]initWithPriority:kSITHighAccuracy
                                                                          provider:kSITHybridProvider
                                                                    updateInterval:1
-                                                                       buildingID:self.buildingInfo.building.identifier
+                                                                       buildingID:self.selectedBuildingInfo.building.identifier
                                                                    operationQueue:nil
                                                                           options:nil];
         
@@ -303,7 +251,7 @@ static NSString *ResultsKey = @"results";
         self.realtimeEnabled = NO;
     } else {
         SITRealTimeRequest *request = [[SITRealTimeRequest alloc]init];
-        request.buildingIdentifier = self.buildingInfo.building.identifier;
+        request.buildingIdentifier = self.selectedBuildingInfo.building.identifier;
         
         
         
