@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-
+#import "SGSBuildingsListViewController.h"
 static NSString *SampleCellIdentifier = @"SampleCell";
 
 // Samples static strings
@@ -15,10 +15,14 @@ static NSString *LocationAndRealTimeOnMapSample = @"Location and real time";
 
 static NSString *RouteAndIndicationsOnMapSample = @"Route on map";
 
+static NSString *UserInsideEventSample = @"Calculate if the user is inside an event";
+
 // Segues static strings
 static NSString *LocationAndRealTimeOnMapSampleSegue = @"LocationAndRealTimeOnTopOfMapSampleSegue";
 
 static NSString *RouteAndIndicationsOnMapSampleSegue = @"RouteAndIndicationsOnMapSampleSegue";
+
+static NSString *UserInsideEventSampleSegue = @"UserInsideEventSampleSegue";
 
 
 
@@ -40,7 +44,8 @@ static NSString *RouteAndIndicationsOnMapSampleSegue = @"RouteAndIndicationsOnMa
     
     self.samples = @[
                      LocationAndRealTimeOnMapSample,
-                     RouteAndIndicationsOnMapSample
+                     RouteAndIndicationsOnMapSample,
+                     UserInsideEventSample
                      ];
 }
 
@@ -58,6 +63,17 @@ static NSString *RouteAndIndicationsOnMapSampleSegue = @"RouteAndIndicationsOnMa
     } else if ([sample isEqualToString:RouteAndIndicationsOnMapSample]) {
         [self performSegueWithIdentifier:RouteAndIndicationsOnMapSampleSegue
                                   sender:self];
+    } else if ([sample isEqualToString:UserInsideEventSample]) {
+        [self performSegueWithIdentifier:UserInsideEventSampleSegue
+                                  sender:self];
+    }
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    UIViewController *destinationVC = segue.destinationViewController;
+    
+    if ([destinationVC isMemberOfClass:[SGSBuildingsListViewController class]]) {
+        ((SGSBuildingsListViewController*) destinationVC).originSegue = segue.identifier;
     }
 }
 

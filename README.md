@@ -7,6 +7,8 @@ This is a sample Objective-C application built using the Situm SDK. With this sa
     * In this example you'll see how to retrieve information about your buildings, how to retrieve all the information about one specific building and how to display a floorplan on Google Maps. Additionaly if the building is calibrated you'll be able to see your location. If more than one user is positioning on the same building you'll see the location of different devices in realtime.
 2. Show directions from a point to a destination
     * In this example you'll see how to request directions from one point to a different point and display the route. You could also see a list of human readable indications (not implemented) that will let your users navigate within the route. In order to compute directions in one building you'll need to configure navigation areas on our dashboard [Walking areas configuration](https://dashboard.situm.es/buildings/) by going to the Paths tab.
+3. Calculate if the user is inside an event
+    * In this example, you will see how to calculate if the user's position is inside the trigger area of an event. In order to do this, first, we are going to fetch the list of buildings and retrieve the detailed information of one of them. Then, we will start the positioning on that building, and intersect every location computed with the list of events. If the user happens to be inside an event, a dialog will be shown. In order to be able to properly execute this example, you will need to create at least one event on our dashboard.
 
 ## Table of contents
 
