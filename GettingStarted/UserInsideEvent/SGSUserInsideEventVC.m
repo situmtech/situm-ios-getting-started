@@ -96,11 +96,11 @@
 - (void)showAlertWithEvent:(SITEvent *)event {
     _alert = [UIAlertController alertControllerWithTitle:@"Event" message:[NSString stringWithFormat:@"User inside event: %@", event.name] preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *dismissButton = [UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleDefault handler:nil];
-    UIAlertAction *doDotShowAgainButton = [UIAlertAction actionWithTitle:@"Do not show again" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *doNotShowAgainButton = [UIAlertAction actionWithTitle:@"Do not show again" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         self.doNotShowAgain = true;
     }];
     [_alert addAction:dismissButton];
-    [_alert addAction:doDotShowAgainButton];
+    [_alert addAction:doNotShowAgainButton];
     [self presentViewController:_alert animated:YES completion:nil];
 }
 
