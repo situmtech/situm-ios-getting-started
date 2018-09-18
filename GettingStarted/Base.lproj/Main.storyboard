@@ -71,9 +71,9 @@
                     </view>
                     <connections>
                         <outlet property="tableView" destination="kd0-gp-wlz" id="nVv-Az-JlZ"/>
-                        <segue destination="g4t-rH-auo" kind="show" identifier="LocationAndRealTimeOnTopOfMapSampleSegue" id="sht-Ta-rqy"/>
-                        <segue destination="RVQ-E6-35z" kind="show" identifier="RouteAndIndicationsOnMapSampleSegue" id="e5G-Xh-98m"/>
                         <segue destination="YM2-p5-07W" kind="show" identifier="UserInsideEventSampleSegue" id="jP1-6I-MMS"/>
+                        <segue destination="YM2-p5-07W" kind="show" identifier="RouteAndIndicationsOnMapSampleSegue" id="PEh-6u-U2M"/>
+                        <segue destination="YM2-p5-07W" kind="show" identifier="LocationAndRealTimeOnTopOfMapSampleSegue" id="wa4-RW-wjx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -152,7 +152,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U86-Fk-GIp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2692" y="156.97151424287858"/>
+            <point key="canvasLocation" x="2015" y="157"/>
         </scene>
         <!--Route And DirectionsVC-->
         <scene sceneID="5BU-0k-Xhu">
@@ -295,7 +295,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xpc-ct-H2C" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="YdW-9E-wfp" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1054" y="528"/>
+            <point key="canvasLocation" x="2014" y="939"/>
         </scene>
         <!--Location And RealtimeVC-->
         <scene sceneID="srC-m2-ZhO">
@@ -401,7 +401,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Brb-8m-Gz7" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="Wtp-xX-PNu" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1053.5999999999999" y="-256.82158920539734"/>
+            <point key="canvasLocation" x="2014" y="-537"/>
         </scene>
         <!--Buildings List View Controller-->
         <scene sceneID="jfy-zQ-ggQ">
@@ -470,12 +470,17 @@
                     <connections>
                         <outlet property="buildingsTableView" destination="Kml-hf-alr" id="OV6-KJ-fls"/>
                         <segue destination="ZEw-To-Vz4" kind="show" identifier="UserInsideEvent2SampleSegue" id="hOT-zZ-EgE"/>
+                        <segue destination="g4t-rH-auo" kind="show" identifier="LocationAndRealTimeOnTopOfMap2SampleSegue" id="U41-uZ-A8m"/>
+                        <segue destination="RVQ-E6-35z" kind="show" id="zoS-Do-qXk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vyN-Tj-Cmc" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="GI4-oU-Frj" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1829.5999999999999" y="156.97151424287858"/>
+            <point key="canvasLocation" x="1145" y="157"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="wa4-RW-wjx"/>
+    </inferredMetricsTieBreakers>
 </document>
