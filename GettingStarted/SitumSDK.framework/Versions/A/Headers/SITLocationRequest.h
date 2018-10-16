@@ -69,11 +69,19 @@ typedef NS_ENUM(int, SITLocationProvider){
  The time interval at which location will be delivered, default is 1 second (coming soon).
  */
 @property (nonatomic, readwrite) NSInteger updateInterval;
+
+
 /**
 * (EXPERIMENTAL) Set if you want to use dead reckoning to get fast position updates using only
 * the inertial sensors, between the server position updates.
  */
 @property (nonatomic, readwrite) BOOL useDeadReckoning;
+
+
+/**
+ * Set if you want to use GPS positioning to improve location.
+ */
+@property (nonatomic, readwrite) BOOL useGps;
 
 
 /**
@@ -97,6 +105,36 @@ typedef NS_ENUM(int, SITLocationProvider){
  Custom UUIDs. The system will scan beacons with those uuids
  */
 @property (nonatomic, strong) NSArray<SITBeaconFilter *> *beaconFilters;
+
+/**
+ Constructor.
+ 
+ @param buildingId Unique identifier of the building in which you want to locate a user.
+ 
+ @return Initialized SITLocationRequest object.
+ */
+- (instancetype) initWithBuildingId: (NSString*) buildingId;
+
+/**
+Setter.
+ 
+ @param useDeadReckoning Boolean value indicating if deadReckoning should be used.
+ */
+- (void) setUseDeadReckoning: (BOOL) useDeadReckoning;
+
+/**
+ Setter.
+ 
+ @param useGps Boolean value indicating if gps positioning should be used.
+ */
+- (void) setUseGps: (BOOL) useGps;
+
+/**
+ Setter.
+ 
+ @param updateInterval Boolean value indicating how often the position should be upload to realtime.
+ */
+- (void) setUpdateInterval: (NSInteger) updateInterval;
 
 /**
  Constructor.
