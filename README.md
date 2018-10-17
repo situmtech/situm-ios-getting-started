@@ -1,6 +1,8 @@
 Situm iOS SDK Code Samples app
 ==============================
 
+**If you are looking for Swift examples, please check [situm-ios-swift-getting-started](https://github.com/situmtech/situm-ios-swift-getting-started) repository.**
+
 This is a sample Objective-C application built using the Situm SDK. With this sample app, you will be able to:
 
 1. Display information on a map, show user location and real-time updates
