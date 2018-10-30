@@ -49,7 +49,7 @@ Situm SDK is a set of utilitites that allow any developer to build location base
 4. Trigger notifications when the user enters a certain area.
 5. See the position of other users in real time.
 
-In this tutorial, we will guide you step by step to set up your first iOS application using Situm SDK. Before starting to write code, we recommend you to set up an account in our [Dashboard] (https://dashboard.situm.es), retrieve your APIKEY and configure your first building. You can find a guide for this process [here] (http://developers.situm.es/pages/rest/authentication.html).
+In this tutorial, we will guide you step by step to set up your first iOS application using Situm SDK. Before starting to write code, we recommend you to set up an account in our [Dashboard](https://dashboard.situm.es), retrieve your API KEY and configure your first building. You can find a guide for this process [here](http://developers.situm.es/pages/rest/authentication.html).
 
 Perfect! Now you are ready to develop your first indoor positioning application.
 
