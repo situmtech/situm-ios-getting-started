@@ -381,7 +381,7 @@ We also need to implement the following delegate methods:
 }
 ```
 
-You can check the complete sample in the [SGSRouteAndDirectionsVC](https://github.com/situmtech/situm-ios-code-samples/blob/master/GettingStarted/src/Samples/LocationAndRealTime/SGSRouteAndDirectionsVC.m) file.
+You can check the complete sample in the [SGSRouteAndDirectionsVC](https://github.com/situmtech/situm-ios-code-samples/blob/master/GettingStarted/src/Samples/RouteAndDirections/SGSRouteAndDirectionsVC.m) file.
 
 ### <a name="drawroute"></a> Show routes between POIs in Google Maps
 This funcionality will allow you to draw a route between two points inside a `SITBuilding`. As in the previous examples, you can also use another GIS provider, such as OpenStreetMaps, Carto, ESRI, Mapbox, etc.
@@ -414,7 +414,7 @@ self.routePath = routePath;
 self.polyline = polyline;
 ```
 
-You can check the complete sample in the [SGSRouteAndDirectionsVC](https://github.com/situmtech/situm-ios-code-samples/blob/master/GettingStarted/src/Samples/LocationAndRealTime/SGSRouteAndDirectionsVC.m) file.
+You can check the complete sample in the [SGSRouteAndDirectionsVC](https://github.com/situmtech/situm-ios-code-samples/blob/master/GettingStarted/src/Samples/RouteAndDirections/SGSRouteAndDirectionsVC.m) file.
 
 ### <a name="realtime"></a> Get realtime updates
 
