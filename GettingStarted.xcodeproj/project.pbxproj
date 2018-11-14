@@ -21,7 +21,7 @@
 		201F5EDA1F73FF520098473F /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 201F5ED91F73FF520098473F /* libc++.tbd */; };
 		201F5EDC1F73FF580098473F /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 201F5EDB1F73FF580098473F /* libz.tbd */; };
 		201F5EE31F7406310098473F /* SGSLocationAndRealtimeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 201F5EE21F7406310098473F /* SGSLocationAndRealtimeVC.m */; };
-		3AB68912218C711900C6CC76 /* SitumSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AB68911218C711900C6CC76 /* SitumSDK.framework */; };
+		3A0855A4219C45AA002B2898 /* SitumSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A0855A3219C45AA002B2898 /* SitumSDK.framework */; };
 		953C83102150D48700037B97 /* SGSUserInsideEventVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 953C830F2150D48700037B97 /* SGSUserInsideEventVC.m */; };
 		95E4388A2147AA6D00E27862 /* SGSBuildingsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95E438892147AA6D00E27862 /* SGSBuildingsListViewController.m */; };
 		D3D2BFFD9BECAC9B36D75C90 /* libPods-GettingStarted.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 44680DE75A3F0B330950A5FA /* libPods-GettingStarted.a */; };
@@ -69,7 +69,7 @@
 		201F5EDB1F73FF580098473F /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		201F5EE11F7406310098473F /* SGSLocationAndRealtimeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SGSLocationAndRealtimeVC.h; path = src/Samples/LocationAndRealTime/SGSLocationAndRealtimeVC.h; sourceTree = "<group>"; };
 		201F5EE21F7406310098473F /* SGSLocationAndRealtimeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SGSLocationAndRealtimeVC.m; path = src/Samples/LocationAndRealTime/SGSLocationAndRealtimeVC.m; sourceTree = "<group>"; };
-		3AB68911218C711900C6CC76 /* SitumSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SitumSDK.framework; sourceTree = "<group>"; };
+		3A0855A3219C45AA002B2898 /* SitumSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SitumSDK.framework; sourceTree = "<group>"; };
 		44680DE75A3F0B330950A5FA /* libPods-GettingStarted.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GettingStarted.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		953C830E2150D48700037B97 /* SGSUserInsideEventVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SGSUserInsideEventVC.h; path = src/Samples/UserInsideEvent/SGSUserInsideEventVC.h; sourceTree = "<group>"; };
 		953C830F2150D48700037B97 /* SGSUserInsideEventVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SGSUserInsideEventVC.m; path = src/Samples/UserInsideEvent/SGSUserInsideEventVC.m; sourceTree = "<group>"; };
@@ -84,7 +84,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3AB68912218C711900C6CC76 /* SitumSDK.framework in Frameworks */,
+				3A0855A4219C45AA002B2898 /* SitumSDK.framework in Frameworks */,
 				201F5EDC1F73FF580098473F /* libz.tbd in Frameworks */,
 				201F5EDA1F73FF520098473F /* libc++.tbd in Frameworks */,
 				201F5ED81F73FF4D0098473F /* CoreMotion.framework in Frameworks */,
@@ -187,7 +187,7 @@
 		201F5ED21F73FF2B0098473F /* SitumSDK */ = {
 			isa = PBXGroup;
 			children = (
-				3AB68911218C711900C6CC76 /* SitumSDK.framework */,
+				3A0855A3219C45AA002B2898 /* SitumSDK.framework */,
 			);
 			name = SitumSDK;
 			sourceTree = "<group>";
@@ -626,6 +626,8 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/GettingStarted",
 				);
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = GettingStarted/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -645,6 +647,8 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/GettingStarted",
 				);
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = GettingStarted/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
