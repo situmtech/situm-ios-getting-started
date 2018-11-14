@@ -1,6 +1,8 @@
 Situm iOS SDK Code Samples app
 ==============================
 
+**If you are looking for Swift examples, please check [situm-ios-swift-getting-started](https://github.com/situmtech/situm-ios-swift-getting-started) repository.**
+
 This is a sample Objective-C application built using the Situm SDK. With this sample app, you will be able to:
 
 1. Display information on a map, show user location and real-time updates
@@ -47,7 +49,7 @@ Situm SDK is a set of utilitites that allow any developer to build location base
 4. Trigger notifications when the user enters a certain area.
 5. See the position of other users in real time.
 
-In this tutorial, we will guide you step by step to set up your first iOS application using Situm SDK. Before starting to write code, we recommend you to set up an account in our [Dashboard] (https://dashboard.situm.es), retrieve your APIKEY and configure your first building. You can find a guide for this process [here] (http://developers.situm.es/pages/rest/authentication.html).
+In this tutorial, we will guide you step by step to set up your first iOS application using Situm SDK. Before starting to write code, we recommend you to set up an account in our [Dashboard](https://dashboard.situm.es), retrieve your API KEY and configure your first building. You can find a guide for this process [here](http://developers.situm.es/pages/rest/authentication.html).
 
 Perfect! Now you are ready to develop your first indoor positioning application.
 
@@ -379,7 +381,7 @@ We also need to implement the following delegate methods:
 }
 ```
 
-You can check the complete sample in the [SGSRouteAndDirectionsVC](https://github.com/situmtech/situm-ios-code-samples/blob/master/GettingStarted/src/Samples/LocationAndRealTime/SGSRouteAndDirectionsVC.m) file.
+You can check the complete sample in the [SGSRouteAndDirectionsVC](https://github.com/situmtech/situm-ios-code-samples/blob/master/GettingStarted/src/Samples/RouteAndDirections/SGSRouteAndDirectionsVC.m) file.
 
 ### <a name="drawroute"></a> Show routes between POIs in Google Maps
 This funcionality will allow you to draw a route between two points inside a `SITBuilding`. As in the previous examples, you can also use another GIS provider, such as OpenStreetMaps, Carto, ESRI, Mapbox, etc.
@@ -412,7 +414,7 @@ self.routePath = routePath;
 self.polyline = polyline;
 ```
 
-You can check the complete sample in the [SGSRouteAndDirectionsVC](https://github.com/situmtech/situm-ios-code-samples/blob/master/GettingStarted/src/Samples/LocationAndRealTime/SGSRouteAndDirectionsVC.m) file.
+You can check the complete sample in the [SGSRouteAndDirectionsVC](https://github.com/situmtech/situm-ios-code-samples/blob/master/GettingStarted/src/Samples/RouteAndDirections/SGSRouteAndDirectionsVC.m) file.
 
 ### <a name="realtime"></a> Get realtime updates
 
