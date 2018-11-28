@@ -1,7 +1,9 @@
-source 'https://github.com/CocoaPods/Specs.git'
 target 'GettingStarted' do
-
-	# Required by app
+use_frameworks!
+  source 'https://github.com/CocoaPods/Specs.git'
+  platform :ios, '9.0'
+  # Required by app
+	pod 'SitumSDK', '2.17.1'
 	pod 'GoogleMaps'
 	pod 'GooglePlaces'
 	
