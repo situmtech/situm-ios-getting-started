@@ -48,7 +48,10 @@ static NSString *ResultsKey = @"results";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     self.ready = NO;
     
     self.points = [[NSMutableArray alloc]init];
@@ -56,15 +59,10 @@ static NSString *ResultsKey = @"results";
     
     // Configure directions manager
     [SITDirectionsManager sharedInstance].delegate = self;
-
     
     // Configure mapView
+    
     self.mapView.delegate = self;
-    
-    
-}
-
-- (void)viewWillAppear:(BOOL)animated {
     [self showMap];
 }
     
@@ -73,16 +71,6 @@ static NSString *ResultsKey = @"results";
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 #pragma mark - Upload contents
 
@@ -133,13 +121,10 @@ static NSString *ResultsKey = @"results";
         NSLog(@"The selected building: %@ does not have floors. Correct that on http://dashboard.situm.es", self.selectedBuildingInfo.building.name);
         return;
     }
-    
     // Move the map to the coordinates of the building
     GMSCameraPosition *cameraPosition = [GMSCameraPosition cameraWithTarget:self.selectedBuildingInfo.building.center
                                                                        zoom:19];
-    
-    [self.mapView animateToCameraPosition:cameraPosition];
-    
+    [self.mapView setCamera:cameraPosition];
     // Display map
     SITFloor *selectedFloor = self.selectedBuildingInfo.floors[0];
     self.selectedFloor = selectedFloor;
@@ -184,10 +169,8 @@ static NSString *ResultsKey = @"results";
     
     // TODO: Validate the points are inside the map
     
-    SITDirectionsRequest *request = [[SITDirectionsRequest alloc]initWithRequestID:0
-                                                                            origin:self.points[0]
-                                                                       destination:self.points[1]
-                                                                           options:nil];
+    SITDirectionsRequest *request = [[SITDirectionsRequest alloc]initWithOrigin:self.points[0]
+                                                                withDestination:self.points[1]];
     
     [[SITDirectionsManager sharedInstance] requestDirections:request];
     
@@ -216,13 +199,7 @@ static NSString *ResultsKey = @"results";
     self.ready = NO; // This indicates the two points on the map are not configured (or even that the previous conditions are not met - not a building)
 }
 
-- (IBAction)reloadContents:(id)sender {
-    [self clearButtonPressed:nil];
-    
-    [self showMap];
-}
-
-#pragma mark - GMSMarpViewDelegate Methods
+#pragma mark - GMSMapViewDelegate Methods
 
 - (void)mapView:(GMSMapView *)mapView
 didTapAtCoordinate:(CLLocationCoordinate2D)coordinate
