@@ -11,7 +11,6 @@
 #import <CoreLocation/CoreLocation.h>
 #import <GoogleMaps/GoogleMaps.h>
 
-#import <SitumSDK/SitumSDK.h>
 
 static NSString *ResultsKey = @"results";
 
@@ -34,8 +33,6 @@ static NSString *ResultsKey = @"results";
 @property (nonatomic, strong) GMSPolyline *polyline;
 @property (nonatomic, strong) NSMutableArray *markers;
 
-
-@property (nonatomic, strong) SITBuildingInfo *buildingInfo;
 @property (nonatomic, strong) SITFloor *selectedFloor;
 
 @property (nonatomic, strong) NSMutableArray *points;
@@ -46,12 +43,15 @@ static NSString *ResultsKey = @"results";
 
 @implementation SGSRouteAndDirectionsVC
 
-@synthesize errorLabel = _errorLabel, reloadButton =_reloadButton, routeInfoView = _routeInfoView, ready = _ready, mapView = _mapView, floorMapOverlay = _floorMapOverlay, routePath = _routePath, polyline = _polyline, markers = _markers, buildingInfo = _buildingInfo, selectedFloor = _selectedFloor, routeInfoLabel = _routeInfoLabel;
+@synthesize errorLabel = _errorLabel, reloadButton =_reloadButton, routeInfoView = _routeInfoView, ready = _ready, mapView = _mapView, floorMapOverlay = _floorMapOverlay, routePath = _routePath, polyline = _polyline, markers = _markers, selectedBuildingInfo = _selectedBuildingInfo, selectedFloor = _selectedFloor, routeInfoLabel = _routeInfoLabel;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     self.ready = NO;
     
     self.points = [[NSMutableArray alloc]init];
@@ -59,76 +59,20 @@ static NSString *ResultsKey = @"results";
     
     // Configure directions manager
     [SITDirectionsManager sharedInstance].delegate = self;
-
     
     // Configure mapView
-    self.mapView.delegate = self;
     
-    [self updateContents];
+    self.mapView.delegate = self;
+    [self showMap];
 }
+    
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 #pragma mark - Upload contents
-
-- (void)updateContents
-{
-    __weak typeof(self) welf = self;
-    
-    // Forcing requests to go to the network instead of cache
-    NSDictionary *options = @{
-                              @"forceRequest":@YES,
-                              };
-    
-    SITFailureCompletion fetchResourceFailureHandler = ^(NSError *error) {
-        [welf showError:@"Error fetching contents"];
-    };
-    
-    SITSuccessHandler fetchBuildingInfoSuccessHandler = ^(NSDictionary *mapping) {
-        welf.buildingInfo = [mapping valueForKey:ResultsKey];
-        
-        [welf showMap];
-    };
-    
-    
-    SITSuccessHandler fetchingBuildingsSuccessHandler = ^(NSDictionary *mapping) {
-        NSArray *buildings = [mapping valueForKey:ResultsKey];
-        
-        if (buildings.count == 0) {
-            NSLog(@"There are no buildings on the account. Please go to dashboard http://dashboard.situm.es and learn more about the first step with Situm technology");
-        } else {
-            SITBuilding *building = buildings[0];
-            NSError *invalidRequest = [[SITCommunicationManager sharedManager] fetchBuildingInfo:building.identifier
-                                                                                     withOptions:options
-                                                                                         success:fetchBuildingInfoSuccessHandler
-                                                                                         failure:fetchResourceFailureHandler];
-            if (invalidRequest) {
-                NSLog(@"Attempt to invoque invalid request. Fix it before continuing");
-            }
-        }
-    };
-    
-    NSError *invalidRequest = [[SITCommunicationManager sharedManager] fetchBuildingsWithOptions:options
-                                                                                         success:fetchingBuildingsSuccessHandler
-                                                                                         failure:fetchResourceFailureHandler];
-    
-    if (invalidRequest) {
-        NSLog(@"Attempt to invoque invalid request. Fix it before continuing");
-    }
-}
 
 - (void)showRoute
 {
@@ -172,20 +116,17 @@ static NSString *ResultsKey = @"results";
 - (void)showMap
 {
     // Display image on top of Google Maps
-    if (self.buildingInfo.floors.count == 0) {
+    if (self.selectedBuildingInfo.floors.count == 0) {
         [self showError:@"No floors content"];
-        NSLog(@"The selected building: %@ does not have floors. Correct that on http://dashboard.situm.es", self.buildingInfo.building.name);
+        NSLog(@"The selected building: %@ does not have floors. Correct that on http://dashboard.situm.es", self.selectedBuildingInfo.building.name);
         return;
     }
-    
     // Move the map to the coordinates of the building
-    GMSCameraPosition *cameraPosition = [GMSCameraPosition cameraWithTarget:self.buildingInfo.building.center
-                                                                       zoom:17];
-    
-    [self.mapView animateToCameraPosition:cameraPosition];
-    
+    GMSCameraPosition *cameraPosition = [GMSCameraPosition cameraWithTarget:self.selectedBuildingInfo.building.center
+                                                                       zoom:19];
+    [self.mapView setCamera:cameraPosition];
     // Display map
-    SITFloor *selectedFloor = self.buildingInfo.floors[0];
+    SITFloor *selectedFloor = self.selectedBuildingInfo.floors[0];
     self.selectedFloor = selectedFloor;
     
     __weak typeof(self) welf = self;
@@ -193,14 +134,14 @@ static NSString *ResultsKey = @"results";
         // On image data we have loaded the image contents of the floor
         
         // Display map
-        SITBounds bounds = [welf.buildingInfo.building bounds];
+        SITBounds bounds = [welf.selectedBuildingInfo.building bounds];
         
         GMSCoordinateBounds *coordinateBounds = [[GMSCoordinateBounds alloc]initWithCoordinate:bounds.southWest
                                                                                     coordinate:bounds.northEast];
         GMSGroundOverlay *mapOverlay = [GMSGroundOverlay groundOverlayWithBounds:coordinateBounds
                                                                             icon:[UIImage imageWithData:imageData]];
         
-        mapOverlay.bearing = [welf.buildingInfo.building.rotation degrees];
+        mapOverlay.bearing = [welf.selectedBuildingInfo.building.rotation degrees];
         
         mapOverlay.map = welf.mapView;
         welf.floorMapOverlay = mapOverlay;
@@ -228,10 +169,8 @@ static NSString *ResultsKey = @"results";
     
     // TODO: Validate the points are inside the map
     
-    SITDirectionsRequest *request = [[SITDirectionsRequest alloc]initWithRequestID:0
-                                                                            origin:self.points[0]
-                                                                       destination:self.points[1]
-                                                                           options:nil];
+    SITDirectionsRequest *request = [[SITDirectionsRequest alloc]initWithOrigin:self.points[0]
+                                                                withDestination:self.points[1]];
     
     [[SITDirectionsManager sharedInstance] requestDirections:request];
     
@@ -260,13 +199,7 @@ static NSString *ResultsKey = @"results";
     self.ready = NO; // This indicates the two points on the map are not configured (or even that the previous conditions are not met - not a building)
 }
 
-- (IBAction)reloadContents:(id)sender {
-    [self clearButtonPressed:nil];
-    
-    [self updateContents];
-}
-
-#pragma mark - GMSMarpViewDelegate Methods
+#pragma mark - GMSMapViewDelegate Methods
 
 - (void)mapView:(GMSMapView *)mapView
 didTapAtCoordinate:(CLLocationCoordinate2D)coordinate
@@ -280,18 +213,18 @@ didTapAtCoordinate:(CLLocationCoordinate2D)coordinate
     NSLog(@"did pressed at coordinate: %@",[NSValue valueWithCGSize:CGSizeMake(coordinate.latitude, coordinate.longitude)]);
     
     // Configure the two dots
-    SITCoordinateConverter *converter = [[SITCoordinateConverter alloc]initWithDimensions:self.buildingInfo.building.dimensions
-                                                                                   center:self.buildingInfo.building.center
-                                                                                 rotation:self.buildingInfo.building.rotation];
+    SITCoordinateConverter *converter = [[SITCoordinateConverter alloc]initWithDimensions:self.selectedBuildingInfo.building.dimensions
+                                                                                   center:self.selectedBuildingInfo.building.center
+                                                                                 rotation:self.selectedBuildingInfo.building.rotation];
     
     
     SITPoint *point = [[SITPoint alloc]initWithCoordinate:coordinate
-                                       buildingIdentifier:self.buildingInfo.building.identifier
+                                       buildingIdentifier:self.selectedBuildingInfo.building.identifier
                                           floorIdentifier:self.selectedFloor.identifier
                                       cartesianCoordinate:[converter toCartesianCoordinate:coordinate]];
     
-    NSLog(@"building properties::: dimensions:: width: %f, height: %f", self.buildingInfo.building.dimensions.width, self.buildingInfo.building.dimensions.height);
-    NSLog(@"building properties::: dimensions:: width: %f, height: %f; rotation: %@", self.buildingInfo.building.dimensions.width, self.buildingInfo.building.dimensions.height, self.buildingInfo.building.rotation);
+    NSLog(@"building properties::: dimensions:: width: %f, height: %f", self.selectedBuildingInfo.building.dimensions.width, self.selectedBuildingInfo.building.dimensions.height);
+    NSLog(@"building properties::: dimensions:: width: %f, height: %f; rotation: %@", self.selectedBuildingInfo.building.dimensions.width, self.selectedBuildingInfo.building.dimensions.height, self.selectedBuildingInfo.building.rotation);
     
     
     NSLog(@"point properties: %@, cartesian coordinate:: x: %f, y: %f, ", point, point.cartesianCoordinate.x, point.cartesianCoordinate.y);

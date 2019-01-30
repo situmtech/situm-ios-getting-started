@@ -11,6 +11,7 @@
 #import <SitumSDK/SitumSDK.h>
 #import "SGSUserInsideEventVC.h"
 #import "SGSLocationAndRealtimeVC.h"
+#import "SGSRouteAndDirectionsVC.h"
 
 @interface SGSBuildingsListViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -44,6 +45,8 @@
         self.segueIdentifier = @"UserInsideEvent2SampleSegue";
     } else if ([self.originSegue isEqualToString:  @"LocationAndRealTimeOnTopOfMapSampleSegue"]) {
         self.segueIdentifier = @"LocationAndRealTimeOnTopOfMap2SampleSegue";
+    } else if ([self.originSegue isEqualToString:@"RouteAndIndicationsOnMapSampleSegue"]) {
+        self.segueIdentifier = @"RouteAndIndicationsOnMap2SampleSegue";
     }
 }
 
@@ -64,6 +67,8 @@
         ((SGSUserInsideEventVC *)destinationVC).selectedBuildingInfo = self.selectedBuildingInfo;
     } else if ([destinationVC isMemberOfClass:[SGSLocationAndRealtimeVC class]]) {
         ((SGSLocationAndRealtimeVC *)destinationVC).selectedBuildingInfo = self.selectedBuildingInfo;
+    } else if ([destinationVC isMemberOfClass:[SGSRouteAndDirectionsVC class]]) {
+        ((SGSRouteAndDirectionsVC *)destinationVC).selectedBuildingInfo = self.selectedBuildingInfo;
     }
 }
 
