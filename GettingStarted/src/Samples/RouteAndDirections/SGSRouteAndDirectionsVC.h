@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <SitumSDK/SitumSDK.h>
 
 @interface SGSRouteAndDirectionsVC : UIViewController
+
+@property(nonatomic, strong) SITBuildingInfo *selectedBuildingInfo;
 
 @end

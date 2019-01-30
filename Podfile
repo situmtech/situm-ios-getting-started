@@ -4,7 +4,7 @@ use_frameworks!
   platform :ios, '9.0'
   # Required by app
 	pod 'SitumSDK', '2.19.0'
-	pod 'GoogleMaps'
-	pod 'GooglePlaces'
+	pod 'GoogleMaps', '3.0.0'
+	pod 'GooglePlaces', '3.0.0'
 	
 end
