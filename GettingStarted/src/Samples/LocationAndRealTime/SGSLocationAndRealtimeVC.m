@@ -173,7 +173,7 @@ static NSString *ResultsKey = @"results";
         _userLocationMarker.position = location.position.coordinate;
         _userLocationMarker.map = self.mapView;
         
-        if (location.quality == kSITHigh) {
+        if (location.quality == kSITHigh && location.bearingQuality == kSITHigh) {
             _userLocationMarker.icon = [UIImage imageNamed:@"location-pointer"];
             _userLocationMarker.rotation = [location.bearing degrees];
             
