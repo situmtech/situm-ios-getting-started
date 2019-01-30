@@ -153,13 +153,7 @@ In your class, make sure to conform to the protocol SITLocationDelegate
 SITBuilding *building = ...;
 
 
-    SITLocationRequest *request = [[SITLocationRequest alloc initWithPriority:kSITHighAccuracy
-            provider:kSITInPhoneProvider
-      updateInterval:1
-          buildingID:self.buildingInfo.building.identifier
-      operationQueue:nil
-    useDeadReckoning:YES
-             options:nil];
+    SITLocationRequest *request = [[[SITLocationRequest alloc]initWithBuildingId:self.buildingInfo.building.identifier];
 ```
 
 Implement SITLocationDelegate methods where you’ll receive location updates, error notifications and state changes.
@@ -311,10 +305,9 @@ for (SITPOI *indoorPoi in listOfPois) {
 ```objc
 [SITDirectionsManager sharedInstance].delegate = self;
 
-SITDirectionsRequest *request = [[SITDirectionsRequest alloc] initWithRequestID:0
-                                                                       location:myLocation 
-												                    destination:selectedPoi.position 
-												                        options:nil];
+SITDirectionsRequest *request = [[SITDirectionsRequest alloc]initWithLocation:myLocation
+                                                                withDestination:selectedPoi.position];
+
 [[SITDirectionsManager sharedInstance] requestDirections:request];
 ```
 
