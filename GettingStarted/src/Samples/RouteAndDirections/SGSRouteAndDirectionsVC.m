@@ -184,10 +184,8 @@ static NSString *ResultsKey = @"results";
     
     // TODO: Validate the points are inside the map
     
-    SITDirectionsRequest *request = [[SITDirectionsRequest alloc]initWithRequestID:0
-                                                                            origin:self.points[0]
-                                                                       destination:self.points[1]
-                                                                           options:nil];
+    SITDirectionsRequest *request = [[SITDirectionsRequest alloc]initWithOrigin:self.points[0]
+                                                                withDestination:self.points[1]];
     
     [[SITDirectionsManager sharedInstance] requestDirections:request];
     

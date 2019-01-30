@@ -142,12 +142,7 @@ static NSString *ResultsKey = @"results";
 #pragma mark - Location methods
 
 - (void)startPositioning {
-    SITLocationRequest *request = [[SITLocationRequest alloc]initWithPriority:kSITHighAccuracy
-                                                                     provider:kSITHybridProvider
-                                                               updateInterval:1
-                                                                   buildingID:self.selectedBuildingInfo.building.identifier
-                                                               operationQueue:nil
-                                                                      options:nil];
+    SITLocationRequest *request = [[SITLocationRequest alloc]initWithBuildingId:self.selectedBuildingInfo.building.identifier];
     
     // Configure here custom beacons if neccessary (through property beaconFilters of request object).
     
