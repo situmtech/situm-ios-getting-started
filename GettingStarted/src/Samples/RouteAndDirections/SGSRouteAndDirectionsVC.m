@@ -48,7 +48,10 @@ static NSString *ResultsKey = @"results";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     self.ready = NO;
     
     self.points = [[NSMutableArray alloc]init];
@@ -56,15 +59,10 @@ static NSString *ResultsKey = @"results";
     
     // Configure directions manager
     [SITDirectionsManager sharedInstance].delegate = self;
-
     
     // Configure mapView
+    
     self.mapView.delegate = self;
-    
-    
-}
-
-- (void)viewWillAppear:(BOOL)animated {
     [self showMap];
 }
     
@@ -123,13 +121,10 @@ static NSString *ResultsKey = @"results";
         NSLog(@"The selected building: %@ does not have floors. Correct that on http://dashboard.situm.es", self.selectedBuildingInfo.building.name);
         return;
     }
-    
     // Move the map to the coordinates of the building
     GMSCameraPosition *cameraPosition = [GMSCameraPosition cameraWithTarget:self.selectedBuildingInfo.building.center
                                                                        zoom:19];
-    
-    [self.mapView animateToCameraPosition:cameraPosition];
-    
+    [self.mapView setCamera:cameraPosition];
     // Display map
     SITFloor *selectedFloor = self.selectedBuildingInfo.floors[0];
     self.selectedFloor = selectedFloor;

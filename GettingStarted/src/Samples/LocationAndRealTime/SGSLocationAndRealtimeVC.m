@@ -46,14 +46,14 @@ static NSString *ResultsKey = @"results";
     
     [SITLocationManager sharedInstance].delegate = self;
     [SITRealTimeManager sharedManager].delegate = self;
-    
     self.ready = NO;
-    
+    self.realTimeMarkers = [NSMutableDictionary new];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [self.errorLabel setHidden:YES];
     [self.reloadButton setHidden:YES];
-
-    self.realTimeMarkers = [NSMutableDictionary new];
-    
     [self showMap];
 }
 
@@ -81,7 +81,7 @@ static NSString *ResultsKey = @"results";
     GMSCameraPosition *cameraPosition = [GMSCameraPosition cameraWithTarget:self.selectedBuildingInfo.building.center
                                                                        zoom:19];
     
-    [self.mapView animateToCameraPosition:cameraPosition];
+    [self.mapView setCamera:cameraPosition];
 
     // Display map
     SITFloor *selectedFloor = self.selectedBuildingInfo.floors[0];
