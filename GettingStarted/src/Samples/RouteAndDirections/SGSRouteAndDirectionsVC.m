@@ -220,7 +220,7 @@ static NSString *ResultsKey = @"results";
     [self showMap];
 }
 
-#pragma mark - GMSMarpViewDelegate Methods
+#pragma mark - GMSMapViewDelegate Methods
 
 - (void)mapView:(GMSMapView *)mapView
 didTapAtCoordinate:(CLLocationCoordinate2D)coordinate
