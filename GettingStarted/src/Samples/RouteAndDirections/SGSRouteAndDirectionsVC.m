@@ -136,7 +136,7 @@ static NSString *ResultsKey = @"results";
     
     // Move the map to the coordinates of the building
     GMSCameraPosition *cameraPosition = [GMSCameraPosition cameraWithTarget:self.selectedBuildingInfo.building.center
-                                                                       zoom:17];
+                                                                       zoom:19];
     
     [self.mapView animateToCameraPosition:cameraPosition];
     
