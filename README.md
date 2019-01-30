@@ -5,7 +5,7 @@ Situm iOS SDK Code Samples app
 
 This is a sample Objective-C application built using the Situm SDK. With this sample app, you will be able to:
 
-1. Display information on a map, show user location and real-time updates
+1. Display information on a map, show and animate user location and real-time updates
     * In this example you'll see how to retrieve information about your buildings, how to retrieve all the information about one specific building and how to display a floorplan on Google Maps. Additionaly if the building is calibrated you'll be able to see your location. If more than one user is positioning on the same building you'll see the location of different devices in realtime.
 2. Show directions from a point to a destination
     * In this example you'll see how to request directions from one point to a different point and display the route. You could also see a list of human readable indications (not implemented) that will let your users navigate within the route. In order to compute directions in one building you'll need to configure navigation areas on our dashboard [Walking areas configuration](https://dashboard.situm.es/buildings/) by going to the Paths tab.
@@ -28,7 +28,7 @@ This is a sample Objective-C application built using the Situm SDK. With this sa
 2. [Fetch information from a particular building](#fetchBuildingInfo)
 3. [Start the positioning](#positioning)
 4. [Show a building in Google Maps](#drawbuilding)
-5. [Show the current position in Google Maps](#drawposition)
+5. [Show and animate the current position in Google Maps](#drawposition)
 6. [Show POIs in Google Maps](#drawpois)
 7. [Compute a route](#directions)
 8. [Show routes between POIs in Google Maps](#drawroute)
@@ -153,7 +153,7 @@ In your class, make sure to conform to the protocol SITLocationDelegate
 SITBuilding *building = ...;
 
 
-    SITLocationRequest *request = [[[SITLocationRequest alloc]initWithBuildingId:self.buildingInfo.building.identifier];
+SITLocationRequest *request = [[[SITLocationRequest alloc]initWithBuildingId:self.buildingInfo.building.identifier];
 ```
 
 Implement SITLocationDelegate methods where you’ll receive location updates, error notifications and state changes.
@@ -240,7 +240,7 @@ GMSCameraPosition *cameraPosition = [GMSCameraPosition cameraWithTarget:self.bui
 ````
 You can check the complete sample in the [SGSLocationAndRealTimeVC](https://github.com/situmtech/situm-ios-code-samples/blob/master/GettingStarted/src/Samples/LocationAndRealTime/SGSLocationAndRealtimeVC.m) file.
 
-### <a name="drawposition"></a> Show the current position in Google Maps
+### <a name="drawposition"></a> Show and animate the current position in Google Maps
 
 This functionality will allow you to represent the current position of your device using Google Maps. Instead, you can also use another GIS provider, such as OpenStreetMaps, Carto, ESRI, Mapbox, etc.
 
