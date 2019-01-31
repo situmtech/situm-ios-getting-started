@@ -260,7 +260,7 @@ GMSMarker *userLocationMarker = [self userLocationMarkerInMapView:self.mapView];
         userLocationMarker.position = location.position.coordinate;
         userLocationMarker.map = self.mapView;
         
-        if (location.quality == kSITHigh) {
+        if (location.quality == kSITHigh && location.bearingQuality == kSITHigh) {
             userLocationMarker.icon = [UIImage imageNamed:@"location-pointer"];
             userLocationMarker.rotation = [location.bearing degrees];
             
