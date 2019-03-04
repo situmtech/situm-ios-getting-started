@@ -55,7 +55,7 @@ Perfect! Now you are ready to develop your first indoor positioning application.
 
 ### <a name="configuration"></a> Step 1: Configuration guide
 
-To learn how to configure our SDK, please visit our [developers page](http://developers.situm.es/pages/ios/quick_start_guide.html).
+To learn how to configure our SDK, please visit our [developers page](http://developers.situm.es/pages/mobile/ios/quick_start_guide.html).
 
 ### <a name="apikey"></a> Step 2: Set API Key
 
@@ -445,7 +445,7 @@ This can be done by following the next example (Please note that minimun iOS SDK
 
 ## <a name="moreinfo"></a> More information
 
-Go to the [developers section of the web](http://developers.situm.es/pages/ios/) and download the full documentation of the SDK, including the documentation with all the available functionalities. For any other question, [contact us](https://situm.es/contact).
+Go to the [developers section of the web](http://developers.situm.es/pages/mobile/ios/index.html) and download the full documentation of the SDK, including the documentation with all the available functionalities. For any other question, [contact us](https://situm.es/contact).
 ## <a name="supportinfo"></a> Support information
 
 For any question or bug report, please send an email to [support@situm.es](mailto:support@situm.es)
