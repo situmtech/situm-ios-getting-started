@@ -20,8 +20,8 @@ static NSString *UserInsideEventSample = @"Calculate if the user is inside an ev
 
 // Request user permission strings
 
-static NSString *PermissionDeniedAlertTitle = @"Location Permissions Needed";
-static NSString *PermissionDeniedAlertBody = @"This app needs location permissions to work properly. Please go to settings and enable them";
+static NSString *PermissionDeniedAlertTitle = @"Location Authorization Needed";
+static NSString *PermissionDeniedAlertBody = @"This app needs location authorization to work properly. Please go to settings and enable it.";
 static NSString *PermissionDeniedOk = @"Ok";
 
 // Segues static strings
@@ -59,17 +59,19 @@ static NSString *UserInsideEventSampleSegue = @"UserInsideEventSampleSegue";
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    [self requestLocationPermission];
+    [self requestLocationAuthorization];
 }
 
--(void)requestLocationPermission{
+-(void)requestLocationAuthorization{
     switch ([CLLocationManager authorizationStatus]) {
         case kCLAuthorizationStatusNotDetermined:{
             [self.locationManager requestWhenInUseAuthorization];
             break;
         }
         case kCLAuthorizationStatusDenied:{
-            //If the user has cancelled location permission to the app self.locationManager requestWhenInUseAuthorization] wouldnt show the alert
+            //If the user has denied location authorization for this app,
+            //[self.locationManager requestWhenInUseAuthorization] wouldnt
+            //request authorization again
             UIAlertController * alert = [UIAlertController
                                          alertControllerWithTitle:PermissionDeniedAlertTitle
                                          message:PermissionDeniedAlertBody
