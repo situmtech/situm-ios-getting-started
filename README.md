@@ -192,7 +192,7 @@ In order to be able to calculate where a user is, it is mandatory to request aut
 In brief, for requesting in use authorization, you will need to add the NSLocationWhenInUseUsageDescription key to your app's Info.plist file and manage the different authorization status.
 
 ```objc
--(void)requestLocationPermission{
+-(void)requestLocationAuthorization{
     switch ([CLLocationManager authorizationStatus]) {
         case kCLAuthorizationStatusNotDetermined:{
             [self.locationManager requestWhenInUseAuthorization];
