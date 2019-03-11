@@ -187,7 +187,40 @@ these states.
 
 In `didFailWithError` you will receive updates only if an error has occurred. In this case, the positioning will stop. 
 
-In order to be able to calculate where a user is, it is mandatory to declare `NSLocationAlwaysUsageDescription` or `NSLocationWhenInUseUsageDescription`. The value of this key can be anything you want but as an example just type "Location is required to find out where you are".
+In order to be able to calculate where a user is, it is mandatory to request authoritation to use location services from the user. If your app only needs to locate the user when the app is in use, you can follow the steps documented by Apple [here](https://developer.apple.com/documentation/corelocation/choosing_the_authorization_level_for_location_services/requesting_when-in-use_authorization?language=objc). Otherwise, if your app needs to locate the user also in background, you can follow the steps documented by Apple [here](https://developer.apple.com/documentation/corelocation/choosing_the_authorization_level_for_location_services/requesting_always_authorization?language=objc)
+
+In brief, for requesting in use authorization, you will need to add the NSLocationWhenInUseUsageDescription key to your app's Info.plist file and manage the different authorization status.
+
+```objc
+-(void)requestLocationPermission{
+    switch ([CLLocationManager authorizationStatus]) {
+        case kCLAuthorizationStatusNotDetermined:{
+            [self.locationManager requestWhenInUseAuthorization];
+            break;
+        }
+        case kCLAuthorizationStatusDenied:{
+            //If the user has denied location authorization for this app,
+            //[self.locationManager requestWhenInUseAuthorization] wouldnt
+            //request authorization again
+            UIAlertController * alert = [UIAlertController
+                                         alertControllerWithTitle:@"Location Authorization Needed"
+                                         message:@"This app needs location authorization to work properly. Please go to settings and enable it"
+                                         preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction* okButton = [UIAlertAction
+                                       actionWithTitle:@"Ok"
+                                       style:UIAlertActionStyleDefault
+                                       handler:^(UIAlertAction * action) {
+                                       }];
+            [alert addAction:okButton];
+            [self presentViewController:alert animated:YES completion:nil];
+        }
+        default:
+            break;
+    }
+}
+```
+
+Besides if you want to detect changes in authorization status, you will have to use the locationManager:didChangeAuthorizationStatus: method of your delegate object, to process these changes.
 
 Finally, you can start the positioning with:
 
