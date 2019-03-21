@@ -187,7 +187,9 @@ these states.
 
 In `didFailWithError` you will receive updates only if an error has occurred. In this case, the positioning will stop. 
 
-In order to be able to calculate where a user is, it is mandatory to declare `NSLocationAlwaysUsageDescription` or `NSLocationWhenInUseUsageDescription`. The value of this key can be anything you want but as an example just type "Location is required to find out where you are".
+In order to be able to calculate where a user is, it is mandatory to request authoritation to use location services from the user. If your app only needs to locate the user when the app is in use, you can follow the steps documented by Apple [here](https://developer.apple.com/documentation/corelocation/choosing_the_authorization_level_for_location_services/requesting_when-in-use_authorization?language=objc). Otherwise, if your app needs to locate the user also in background, you can follow the steps documented by Apple [here](https://developer.apple.com/documentation/corelocation/choosing_the_authorization_level_for_location_services/requesting_always_authorization?language=objc).
+
+In brief, you will need to add the proper keys to your app's Info.plist file and manage the different authorization status. You can check the method `requestLocationAuthorization` [here](https://github.com/situmtech/situm-ios-getting-started/blob/master/GettingStarted/ViewController.m) as an example.
 
 Finally, you can start the positioning with:
 
@@ -392,6 +394,8 @@ In this code we create a realtime request to be sent, with the identifier of the
 ```
 
 ### <a name="buildingevents"></a> List Building Events
+
+You can obtain more information about what an event is [here](http://developers.situm.es/pages/terminology/#event_container).
 
 In order to know all the `SITEvent` you have in your `SITBuilding`, the first thing you have to do is to fetch your buildings and select the one you want to check. This SDK allows you to know the exact position of the `SITEvent` and to know where the message in your smartphone will be shown. In the following example we will show you how to fetch the events and how to list them in order to know the details for each one.
 
