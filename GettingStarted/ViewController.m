@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "SGSBuildingsListViewController.h"
+@import CoreLocation;
 static NSString *SampleCellIdentifier = @"SampleCell";
 
 // Samples static strings
@@ -16,6 +17,12 @@ static NSString *LocationAndRealTimeOnMapSample = @"Location and real time";
 static NSString *RouteAndIndicationsOnMapSample = @"Route on map";
 
 static NSString *UserInsideEventSample = @"Calculate if the user is inside an event";
+
+// Request user permission strings
+
+static NSString *PermissionDeniedAlertTitle = @"Location Authorization Needed";
+static NSString *PermissionDeniedAlertBody = @"This app needs location authorization to work properly. Please go to settings and enable it.";
+static NSString *PermissionDeniedOk = @"Ok";
 
 // Segues static strings
 static NSString *LocationAndRealTimeOnMapSampleSegue = @"LocationAndRealTimeOnTopOfMapSampleSegue";
@@ -31,7 +38,7 @@ static NSString *UserInsideEventSampleSegue = @"UserInsideEventSampleSegue";
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (nonatomic, strong) NSArray *samples;
-
+@property (nonatomic, strong) CLLocationManager *locationManager;
 @end
 
 @implementation ViewController
@@ -47,8 +54,40 @@ static NSString *UserInsideEventSampleSegue = @"UserInsideEventSampleSegue";
                      RouteAndIndicationsOnMapSample,
                      UserInsideEventSample
                      ];
+    self.locationManager = [[CLLocationManager alloc] init];
 }
 
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [self requestLocationAuthorization];
+}
+
+-(void)requestLocationAuthorization{
+    switch ([CLLocationManager authorizationStatus]) {
+        case kCLAuthorizationStatusNotDetermined:{
+            [self.locationManager requestWhenInUseAuthorization];
+            break;
+        }
+        case kCLAuthorizationStatusDenied:{
+            //If the user has denied location authorization for this app,
+            //[self.locationManager requestWhenInUseAuthorization] wouldnt
+            //request authorization again
+            UIAlertController * alert = [UIAlertController
+                                         alertControllerWithTitle:PermissionDeniedAlertTitle
+                                         message:PermissionDeniedAlertBody
+                                         preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction* okButton = [UIAlertAction
+                                       actionWithTitle:PermissionDeniedOk
+                                       style:UIAlertActionStyleDefault
+                                       handler:^(UIAlertAction * action) {
+                                       }];
+            [alert addAction:okButton];
+            [self presentViewController:alert animated:YES completion:nil];
+        }
+        default:
+            break;
+    }
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
