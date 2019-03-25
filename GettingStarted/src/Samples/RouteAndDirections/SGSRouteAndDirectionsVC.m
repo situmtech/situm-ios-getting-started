@@ -29,8 +29,8 @@ static NSString *ResultsKey = @"results";
 
 @property (weak, nonatomic) IBOutlet GMSMapView *mapView;
 @property (nonatomic, strong) GMSGroundOverlay *floorMapOverlay;
-@property (nonatomic, strong) GMSMutablePath *routePath;
-@property (nonatomic, strong) GMSPolyline *polyline;
+@property (nonatomic, strong) NSMutableArray<GMSMutablePath*>* routePath;
+@property (nonatomic, strong) NSMutableArray<GMSPolyline*>* polyline;
 @property (nonatomic, strong) NSMutableArray *markers;
 
 @property (nonatomic, strong) SITFloor *selectedFloor;
@@ -56,6 +56,8 @@ static NSString *ResultsKey = @"results";
     
     self.points = [[NSMutableArray alloc]init];
     self.markers = [[NSMutableArray alloc]init];
+    self.polyline = [NSMutableArray new];
+    self.routePath = [NSMutableArray new];
     
     // Configure directions manager
     [SITDirectionsManager sharedInstance].delegate = self;
@@ -77,21 +79,8 @@ static NSString *ResultsKey = @"results";
 - (void)showRoute
 {
     // Configure UI elements to display the route
-    
-    // Map information
-    GMSMutablePath *routePath = [GMSMutablePath path];
-    
-    for (SITRouteStep *step in self.route.routeSteps) {
-        [routePath addCoordinate:step.from.coordinate];
-    }
-    
-    GMSPolyline *polyline = [GMSPolyline polylineWithPath:routePath];
-    polyline.strokeWidth = 3;
-    polyline.map = self.mapView;
-    
-    self.routePath = routePath;
-    
-    self.polyline = polyline;
+    [self generateAndPrintRoutePathWithRouteSegments: self.route.segments
+                                   withSelectedFloor: self.selectedFloor];
     
     // Route info
     self.routeInfoLabel.text = [NSString stringWithFormat: @"distance: %.0f meters", ceil( self.route.distance) ];
@@ -101,6 +90,24 @@ static NSString *ResultsKey = @"results";
         NSLog(@"%@", [indication humanReadableMessage]);
     }
 
+}
+
+- (void) generateAndPrintRoutePathWithRouteSegments: (nonnull NSArray<SITRouteSegment*>*) segments
+                                  withSelectedFloor: (nonnull SITFloor*) selectedFloor {
+    
+    for(SITRouteSegment* segment in segments) {
+        if([segment.floorIdentifier isEqualToString: selectedFloor.identifier]) {
+            GMSMutablePath *routePath = [GMSMutablePath path];
+            for(SITPoint* point in segment.points) {
+                [routePath addCoordinate: point.coordinate];
+            }
+            [self.routePath addObject: routePath];
+            GMSPolyline *polyline = [GMSPolyline polylineWithPath:routePath];
+            polyline.strokeWidth = 3;
+            [self.polyline addObject: polyline];
+            polyline.map = self.mapView;
+        }
+    }
 }
 
 - (void)showError:(NSString *)error {
@@ -185,8 +192,11 @@ static NSString *ResultsKey = @"results";
         marker.map = nil;
     }
     
-    self.polyline.map = nil;
-    self.routePath = nil;
+    for(GMSPolyline* line in self.polyline) {
+        line.map = nil;
+    }
+    self.polyline = [NSMutableArray new];
+    self.routePath = [NSMutableArray new];
     
     self.markers = [[NSMutableArray alloc]init];
     
