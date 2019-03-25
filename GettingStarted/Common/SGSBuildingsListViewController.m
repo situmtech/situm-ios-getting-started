@@ -134,34 +134,29 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
                              animated:YES];
     
     SITBuilding *selectedBuilding = self.buildings[indexPath.row];
-    
-    UIAlertView *av = [[UIAlertView alloc]initWithTitle:@"Retrieving information. "
-message:@"Hold on for a moment"
-                                               delegate:nil
-                                      cancelButtonTitle:nil
-                                      otherButtonTitles:nil];
-    [av show];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Retrieving information."
+                                                                   message:@"Hold on for a moment"
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    [self presentViewController:alert animated:YES completion:nil];
     
     __weak typeof(self) welf = self;
     
     [[SITCommunicationManager sharedManager] fetchBuildingInfo:selectedBuilding.identifier
                                                    withOptions:nil
                                                        success:^(NSDictionary *mapping) {
+                                                           [alert dismissViewControllerAnimated:YES completion:^{
+                                                               self.selectedBuildingInfo = [mapping valueForKey:@"results"];
+                                                               
+                                                               if (self.segueIdentifier != nil) {
+                                                                   [welf performSegueWithIdentifier:self.segueIdentifier sender:self];
+                                                               }
+                                                           }];
                                                            
-                                                           [av dismissWithClickedButtonIndex:0
-                                                                                    animated:YES];
                                                            
-                                                           self.selectedBuildingInfo = [mapping valueForKey:@"results"];
-                                                           
-                                                           if (self.segueIdentifier != nil) {
-                                                               [welf performSegueWithIdentifier:self.segueIdentifier sender:self];
-                                                           }
                                                        }
                                                        failure:^(NSError *error) {
                                                            NSLog(@"error fetching information of the building: %@ ", error);
-                                                           [av dismissWithClickedButtonIndex:0
-                                                                                    animated:YES];
-                                                           
+                                                           [alert dismissViewControllerAnimated:YES completion:nil];
                                                        }];
 }
 

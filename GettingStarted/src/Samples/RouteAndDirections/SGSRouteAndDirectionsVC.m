@@ -172,8 +172,6 @@ static NSString *ResultsKey = @"results";
         return;
     }
     
-    // TODO: Validate the points are inside the map
-    
     SITDirectionsRequest *request = [[SITDirectionsRequest alloc]initWithOrigin:self.points[0]
                                                                 withDestination:self.points[1]];
     
