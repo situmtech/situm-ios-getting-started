@@ -81,9 +81,7 @@ static NSString *ResultsKey = @"results";
     // Map information
     GMSMutablePath *routePath = [GMSMutablePath path];
     
-    // TODO: Filter route steps based on selected floor
-    for (SITRouteStep *step in self.route.routeSteps) { //
-        
+    for (SITRouteStep *step in self.route.routeSteps) {
         [routePath addCoordinate:step.from.coordinate];
     }
     
@@ -166,8 +164,6 @@ static NSString *ResultsKey = @"results";
         NSLog(@"Configure origin and destination before continuing");
         return;
     }
-    
-    // TODO: Validate the points are inside the map
     
     SITDirectionsRequest *request = [[SITDirectionsRequest alloc]initWithOrigin:self.points[0]
                                                                 withDestination:self.points[1]];

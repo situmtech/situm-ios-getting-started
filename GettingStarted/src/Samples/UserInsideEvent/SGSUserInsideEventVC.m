@@ -41,7 +41,7 @@
 
 - (void) startPositioning {
     [SITLocationManager sharedInstance].delegate = self;
-    SITLocationRequest *request = [[SITLocationRequest alloc] initWithPriority:1 provider:kSITInPhoneProvider updateInterval:1 buildingID:self.selectedBuildingInfo.building.identifier operationQueue:nil options:nil];
+    SITLocationRequest *request = [[SITLocationRequest alloc] initWithBuildingId:self.selectedBuildingInfo.building.identifier];
     [[SITLocationManager sharedInstance] requestLocationUpdates:request];
 }
 
