@@ -42,10 +42,6 @@
 - (void) startPositioning {
     [SITLocationManager sharedInstance].delegate = self;
     SITLocationRequest *request = [[SITLocationRequest alloc] initWithBuildingId:self.selectedBuildingInfo.building.identifier];
-    [request setPriority:kSITBalancedPowerAccuracy];
-    [request setRealtimeUpdateInterval:kSITUpdateIntervalRealtime];
-    [request setUseGps:NO];
-    [request setUseDeadReckoning:NO];
     [[SITLocationManager sharedInstance] requestLocationUpdates:request];
 }
 
