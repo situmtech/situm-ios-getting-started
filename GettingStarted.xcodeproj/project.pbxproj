@@ -21,6 +21,7 @@
 		201F5EDA1F73FF520098473F /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 201F5ED91F73FF520098473F /* libc++.tbd */; };
 		201F5EDC1F73FF580098473F /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 201F5EDB1F73FF580098473F /* libz.tbd */; };
 		201F5EE31F7406310098473F /* SGSLocationAndRealtimeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 201F5EE21F7406310098473F /* SGSLocationAndRealtimeVC.m */; };
+		23340DEC2249C3E1007EBD35 /* SGSExamplesBaseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 23340DEB2249C3E1007EBD35 /* SGSExamplesBaseVC.m */; };
 		29DCDDCF68ACD5908003CCD5 /* Pods_GettingStarted.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 874B54F56611ADE8710D3F2D /* Pods_GettingStarted.framework */; };
 		953C83102150D48700037B97 /* SGSUserInsideEventVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 953C830F2150D48700037B97 /* SGSUserInsideEventVC.m */; };
 		95E4388A2147AA6D00E27862 /* SGSBuildingsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95E438892147AA6D00E27862 /* SGSBuildingsListViewController.m */; };
@@ -68,6 +69,8 @@
 		201F5EDB1F73FF580098473F /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		201F5EE11F7406310098473F /* SGSLocationAndRealtimeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SGSLocationAndRealtimeVC.h; path = src/Samples/LocationAndRealTime/SGSLocationAndRealtimeVC.h; sourceTree = "<group>"; };
 		201F5EE21F7406310098473F /* SGSLocationAndRealtimeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SGSLocationAndRealtimeVC.m; path = src/Samples/LocationAndRealTime/SGSLocationAndRealtimeVC.m; sourceTree = "<group>"; };
+		23340DEA2249C3E1007EBD35 /* SGSExamplesBaseVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGSExamplesBaseVC.h; sourceTree = "<group>"; };
+		23340DEB2249C3E1007EBD35 /* SGSExamplesBaseVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SGSExamplesBaseVC.m; sourceTree = "<group>"; };
 		874B54F56611ADE8710D3F2D /* Pods_GettingStarted.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GettingStarted.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		953C830E2150D48700037B97 /* SGSUserInsideEventVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SGSUserInsideEventVC.h; path = src/Samples/UserInsideEvent/SGSUserInsideEventVC.h; sourceTree = "<group>"; };
 		953C830F2150D48700037B97 /* SGSUserInsideEventVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SGSUserInsideEventVC.m; path = src/Samples/UserInsideEvent/SGSUserInsideEventVC.m; sourceTree = "<group>"; };
@@ -133,7 +136,6 @@
 			isa = PBXGroup;
 			children = (
 				201F5EDD1F7405C60098473F /* src */,
-				201F5ED11F73FF210098473F /* Vendor */,
 				201F5EA11F73FC410098473F /* AppDelegate.h */,
 				201F5EA21F73FC410098473F /* AppDelegate.m */,
 				201F5EA41F73FC410098473F /* ViewController.h */,
@@ -171,21 +173,6 @@
 				201F5EC51F73FC410098473F /* Info.plist */,
 			);
 			path = GettingStartedUITests;
-			sourceTree = "<group>";
-		};
-		201F5ED11F73FF210098473F /* Vendor */ = {
-			isa = PBXGroup;
-			children = (
-				201F5ED21F73FF2B0098473F /* SitumSDK */,
-			);
-			name = Vendor;
-			sourceTree = "<group>";
-		};
-		201F5ED21F73FF2B0098473F /* SitumSDK */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = SitumSDK;
 			sourceTree = "<group>";
 		};
 		201F5EDD1F7405C60098473F /* src */ = {
@@ -260,6 +247,8 @@
 			children = (
 				95E438882147AA6D00E27862 /* SGSBuildingsListViewController.h */,
 				95E438892147AA6D00E27862 /* SGSBuildingsListViewController.m */,
+				23340DEA2249C3E1007EBD35 /* SGSExamplesBaseVC.h */,
+				23340DEB2249C3E1007EBD35 /* SGSExamplesBaseVC.m */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -449,6 +438,7 @@
 				201531611F7A3FA800A3143A /* SGSRouteAndDirectionsVC.m in Sources */,
 				953C83102150D48700037B97 /* SGSUserInsideEventVC.m in Sources */,
 				201F5EE31F7406310098473F /* SGSLocationAndRealtimeVC.m in Sources */,
+				23340DEC2249C3E1007EBD35 /* SGSExamplesBaseVC.m in Sources */,
 				201F5EA01F73FC410098473F /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -610,7 +600,7 @@
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = GettingStarted/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = es.situm.GettingStarted;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -631,7 +621,7 @@
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = GettingStarted/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = es.situm.GettingStarted;
 				PRODUCT_NAME = "$(TARGET_NAME)";
