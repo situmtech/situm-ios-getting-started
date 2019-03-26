@@ -8,8 +8,9 @@
 
 #import "ViewController.h"
 #import <SitumSDK/SitumSDK.h>
+#import "SGSExamplesBaseVC.h"
 
-@interface SGSUserInsideEventVC : ViewController
+@interface SGSUserInsideEventVC : SGSExamplesBaseVC
 
 @property(nonatomic, strong) SITBuildingInfo *selectedBuildingInfo;
 

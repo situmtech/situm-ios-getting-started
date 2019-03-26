@@ -40,7 +40,7 @@
     self.buildingsTableView.dataSource = self;
     self.buildingsTableView.delegate = self;
     self.segueIdentifier = nil;
-    
+    [self customizeNavigationBar];
     if ([self.originSegue isEqualToString:  @"UserInsideEventSampleSegue"]) {
         self.segueIdentifier = @"UserInsideEvent2SampleSegue";
     } else if ([self.originSegue isEqualToString:  @"LocationAndRealTimeOnTopOfMapSampleSegue"]) {
@@ -48,6 +48,11 @@
     } else if ([self.originSegue isEqualToString:@"RouteAndIndicationsOnMapSampleSegue"]) {
         self.segueIdentifier = @"RouteAndIndicationsOnMap2SampleSegue";
     }
+}
+
+-(void)customizeNavigationBar{
+    self.title = @"Select a building";
+    self.navigationItem.backBarButtonItem.title = @"Back";
 }
 
 - (void)didReceiveMemoryWarning {
