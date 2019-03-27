@@ -45,8 +45,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2015315F1F7A3FA800A3143A /* SGSRouteAndDirectionsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SGSRouteAndDirectionsVC.h; path = src/Samples/RouteAndDirections/SGSRouteAndDirectionsVC.h; sourceTree = "<group>"; };
-		201531601F7A3FA800A3143A /* SGSRouteAndDirectionsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SGSRouteAndDirectionsVC.m; path = src/Samples/RouteAndDirections/SGSRouteAndDirectionsVC.m; sourceTree = "<group>"; };
+		2015315F1F7A3FA800A3143A /* SGSRouteAndDirectionsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGSRouteAndDirectionsVC.h; sourceTree = "<group>"; };
+		201531601F7A3FA800A3143A /* SGSRouteAndDirectionsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGSRouteAndDirectionsVC.m; sourceTree = "<group>"; };
 		201F5E9B1F73FC410098473F /* GettingStarted.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GettingStarted.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		201F5E9F1F73FC410098473F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		201F5EA11F73FC410098473F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -67,13 +67,13 @@
 		201F5ED71F73FF4D0098473F /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		201F5ED91F73FF520098473F /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		201F5EDB1F73FF580098473F /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
-		201F5EE11F7406310098473F /* SGSLocationAndRealtimeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SGSLocationAndRealtimeVC.h; path = src/Samples/LocationAndRealTime/SGSLocationAndRealtimeVC.h; sourceTree = "<group>"; };
-		201F5EE21F7406310098473F /* SGSLocationAndRealtimeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SGSLocationAndRealtimeVC.m; path = src/Samples/LocationAndRealTime/SGSLocationAndRealtimeVC.m; sourceTree = "<group>"; };
+		201F5EE11F7406310098473F /* SGSLocationAndRealtimeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SGSLocationAndRealtimeVC.h; path = LocationAndRealTime/SGSLocationAndRealtimeVC.h; sourceTree = "<group>"; };
+		201F5EE21F7406310098473F /* SGSLocationAndRealtimeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SGSLocationAndRealtimeVC.m; path = LocationAndRealTime/SGSLocationAndRealtimeVC.m; sourceTree = "<group>"; };
 		23340DEA2249C3E1007EBD35 /* SGSExamplesBaseVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGSExamplesBaseVC.h; sourceTree = "<group>"; };
 		23340DEB2249C3E1007EBD35 /* SGSExamplesBaseVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SGSExamplesBaseVC.m; sourceTree = "<group>"; };
 		874B54F56611ADE8710D3F2D /* Pods_GettingStarted.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GettingStarted.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		953C830E2150D48700037B97 /* SGSUserInsideEventVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SGSUserInsideEventVC.h; path = src/Samples/UserInsideEvent/SGSUserInsideEventVC.h; sourceTree = "<group>"; };
-		953C830F2150D48700037B97 /* SGSUserInsideEventVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SGSUserInsideEventVC.m; path = src/Samples/UserInsideEvent/SGSUserInsideEventVC.m; sourceTree = "<group>"; };
+		953C830E2150D48700037B97 /* SGSUserInsideEventVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGSUserInsideEventVC.h; sourceTree = "<group>"; };
+		953C830F2150D48700037B97 /* SGSUserInsideEventVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGSUserInsideEventVC.m; sourceTree = "<group>"; };
 		95E438882147AA6D00E27862 /* SGSBuildingsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGSBuildingsListViewController.h; sourceTree = "<group>"; };
 		95E438892147AA6D00E27862 /* SGSBuildingsListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGSBuildingsListViewController.m; sourceTree = "<group>"; };
 		CED326AC971786994C8DAEE1 /* Pods-GettingStarted.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GettingStarted.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GettingStarted/Pods-GettingStarted.debug.xcconfig"; sourceTree = "<group>"; };
@@ -178,20 +178,20 @@
 		201F5EDD1F7405C60098473F /* src */ = {
 			isa = PBXGroup;
 			children = (
+				95E438812147A87900E27862 /* Common */,
 				201F5EDE1F7405D30098473F /* Samples */,
 			);
-			name = src;
+			path = src;
 			sourceTree = "<group>";
 		};
 		201F5EDE1F7405D30098473F /* Samples */ = {
 			isa = PBXGroup;
 			children = (
 				953C830D2150D41500037B97 /* UserInsideEvent */,
-				95E438812147A87900E27862 /* Common */,
 				201F5EE01F7405F50098473F /* RouteAndDirections */,
 				201F5EDF1F7405ED0098473F /* LocationAndRealTime */,
 			);
-			name = Samples;
+			path = Samples;
 			sourceTree = "<group>";
 		};
 		201F5EDF1F7405ED0098473F /* LocationAndRealTime */ = {
@@ -209,7 +209,7 @@
 				2015315F1F7A3FA800A3143A /* SGSRouteAndDirectionsVC.h */,
 				201531601F7A3FA800A3143A /* SGSRouteAndDirectionsVC.m */,
 			);
-			name = RouteAndDirections;
+			path = RouteAndDirections;
 			sourceTree = "<group>";
 		};
 		7987541F4947881B06746D61 /* Pods */ = {
@@ -239,7 +239,7 @@
 				953C830E2150D48700037B97 /* SGSUserInsideEventVC.h */,
 				953C830F2150D48700037B97 /* SGSUserInsideEventVC.m */,
 			);
-			name = UserInsideEvent;
+			path = UserInsideEvent;
 			sourceTree = "<group>";
 		};
 		95E438812147A87900E27862 /* Common */ = {
