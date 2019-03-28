@@ -220,9 +220,59 @@
                     <view key="view" contentMode="scaleToFill" id="pEr-t1-bnB">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JOc-EL-j7t">
+                                <rect key="frame" x="130.5" y="72" width="114" height="30"/>
+                                <state key="normal" title="Start Positioning"/>
+                                <connections>
+                                    <action selector="startPositioningButtonPressed:" destination="xq6-OH-pR1" eventType="touchUpInside" id="leD-af-CBC"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pfb-tb-Kal">
+                                <rect key="frame" x="8" y="110" width="54" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="agp-0m-efM">
+                                <rect key="frame" x="66" y="120.5" width="0.0" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Position:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dqh-V9-9d7">
+                                <rect key="frame" x="8" y="139" width="66" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3cb-iY-iqV">
+                                <rect key="frame" x="78" y="139" width="0.0" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Dqh-V9-9d7" firstAttribute="top" secondItem="Pfb-tb-Kal" secondAttribute="bottom" constant="8" id="1Mg-j8-kfk"/>
+                            <constraint firstItem="agp-0m-efM" firstAttribute="centerY" secondItem="Pfb-tb-Kal" secondAttribute="centerY" id="6qB-8z-dh3"/>
+                            <constraint firstItem="JOc-EL-j7t" firstAttribute="centerX" secondItem="pEr-t1-bnB" secondAttribute="centerX" id="SuX-ji-lFd"/>
+                            <constraint firstItem="Pfb-tb-Kal" firstAttribute="top" secondItem="JOc-EL-j7t" secondAttribute="bottom" constant="8" id="alV-gm-870"/>
+                            <constraint firstItem="Dqh-V9-9d7" firstAttribute="leading" secondItem="f4Y-cS-9pz" secondAttribute="leading" constant="8" id="apd-Lu-5OW"/>
+                            <constraint firstItem="Pfb-tb-Kal" firstAttribute="leading" secondItem="f4Y-cS-9pz" secondAttribute="leading" constant="8" id="mH4-wH-tgc"/>
+                            <constraint firstItem="agp-0m-efM" firstAttribute="leading" secondItem="Pfb-tb-Kal" secondAttribute="trailing" constant="4" id="rkI-gA-1l5"/>
+                            <constraint firstItem="3cb-iY-iqV" firstAttribute="leading" secondItem="Dqh-V9-9d7" secondAttribute="trailing" constant="4" id="uOo-Bb-Iud"/>
+                            <constraint firstItem="3cb-iY-iqV" firstAttribute="top" secondItem="Dqh-V9-9d7" secondAttribute="top" id="xpz-Kc-Yae"/>
+                            <constraint firstItem="JOc-EL-j7t" firstAttribute="top" secondItem="f4Y-cS-9pz" secondAttribute="top" constant="8" id="yfh-u1-M29"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="f4Y-cS-9pz"/>
                     </view>
+                    <connections>
+                        <outlet property="positionLabel" destination="3cb-iY-iqV" id="eij-EI-WS1"/>
+                        <outlet property="startPositioningButton" destination="JOc-EL-j7t" id="QlW-BT-VYy"/>
+                        <outlet property="statusLabel" destination="agp-0m-efM" id="QnQ-ia-evw"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ptk-EO-pdE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
