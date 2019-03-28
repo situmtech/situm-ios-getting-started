@@ -6,13 +6,13 @@
 //  Copyright © 2019 Situm Technologies S.L. All rights reserved.
 //
 
-#import "SGSExamplesBaseVC.h"
+#import "SGSSamplesBaseVC.h"
 
-@interface SGSExamplesBaseVC ()
+@interface SGSSamplesBaseVC ()
 
 @end
 
-@implementation SGSExamplesBaseVC
+@implementation SGSSamplesBaseVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];

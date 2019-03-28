@@ -27,7 +27,7 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    if (_selectedBuildingInfo.events == nil || _selectedBuildingInfo.events.count == 0) {
+    if (self.selectedBuildingInfo.events == nil || self.selectedBuildingInfo.events.count == 0) {
         [self showNoEventsAlert];
     } else {
         [self startPositioning];

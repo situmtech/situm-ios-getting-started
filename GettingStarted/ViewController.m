@@ -12,10 +12,9 @@
 static NSString *SampleCellIdentifier = @"SampleCell";
 
 // Samples static strings
+static NSString *Positioning = @"Positioning";
 static NSString *LocationAndRealTimeOnMapSample = @"Location and real time";
-
 static NSString *RouteAndIndicationsOnMapSample = @"Route on map";
-
 static NSString *UserInsideEventSample = @"Calculate if the user is inside an event";
 
 // Request user permission strings
@@ -47,9 +46,7 @@ static NSString *UserInsideEventSampleSegue = @"UserInsideEventSampleSegue";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
-    
-    self.samples = @[
+    self.samples = @[Positioning,
                      LocationAndRealTimeOnMapSample,
                      RouteAndIndicationsOnMapSample,
                      UserInsideEventSample
@@ -112,7 +109,7 @@ static NSString *UserInsideEventSampleSegue = @"UserInsideEventSampleSegue";
     UIViewController *destinationVC = segue.destinationViewController;
     
     if ([destinationVC isMemberOfClass:[SGSBuildingsListViewController class]]) {
-        ((SGSBuildingsListViewController*) destinationVC).originSegue = segue.identifier;
+        ((SGSBuildingsListViewController*) destinationVC).segueIdentifier = segue.identifier;
     }
 }
 

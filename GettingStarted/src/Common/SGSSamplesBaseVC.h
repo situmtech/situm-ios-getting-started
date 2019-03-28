@@ -7,10 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SGSExamplesBaseVC : UIViewController
+@interface SGSSamplesBaseVC : UIViewController
 -(void)customizeNavigationBarWithTitle:(NSString *)title;
 -(void)exitExample:(UIBarButtonItem *)sender; 
 @end

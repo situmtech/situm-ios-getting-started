@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import <SitumSDK/SitumSDK.h>
-#import "SGSExamplesBaseVC.h"
+#import "SGSSamplesBaseVC.h"
 
-@interface SGSRouteAndDirectionsVC : SGSExamplesBaseVC
+@interface SGSRouteAndDirectionsVC : SGSSamplesBaseVC
 
 @property(nonatomic, strong) SITBuildingInfo *selectedBuildingInfo;
 
