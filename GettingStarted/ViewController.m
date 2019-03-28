@@ -12,7 +12,7 @@
 static NSString *SampleCellIdentifier = @"SampleCell";
 
 // Samples static strings
-static NSString *Positioning = @"Positioning";
+static NSString *PositioningSample = @"Positioning";
 static NSString *LocationAndRealTimeOnMapSample = @"Location and real time";
 static NSString *RouteAndIndicationsOnMapSample = @"Route on map";
 static NSString *UserInsideEventSample = @"Calculate if the user is inside an event";
@@ -30,23 +30,31 @@ static NSString *RouteAndIndicationsOnMapSampleSegue = @"RouteAndIndicationsOnMa
 
 static NSString *UserInsideEventSampleSegue = @"UserInsideEventSampleSegue";
 
+static NSString *PositioningSampleSegue = @"PositioningSampleSegue";
+
 
 
 @interface ViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-
+@property (nonatomic, strong) NSDictionary *rowToSegueMapper;
 @property (nonatomic, strong) NSArray *samples;
 @property (nonatomic, strong) CLLocationManager *locationManager;
 @end
 
 @implementation ViewController
 
-@synthesize samples = _samples;
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.samples = @[Positioning,
+    self.rowToSegueMapper = @{
+                              PositioningSample:PositioningSampleSegue,
+                              LocationAndRealTimeOnMapSample:LocationAndRealTimeOnMapSampleSegue,
+                              RouteAndIndicationsOnMapSample:RouteAndIndicationsOnMapSampleSegue,
+                              UserInsideEventSample:UserInsideEventSampleSegue
+                              };
+    //Keeped instead of using self.rowToSegueMapper.allKeys to maintain samples order
+    self.samples = @[
+                     PositioningSample,
                      LocationAndRealTimeOnMapSample,
                      RouteAndIndicationsOnMapSample,
                      UserInsideEventSample
@@ -93,16 +101,9 @@ static NSString *UserInsideEventSampleSegue = @"UserInsideEventSampleSegue";
 
 - (void)detectedSample:(NSString *)sample
 {
-    if ([sample isEqualToString:LocationAndRealTimeOnMapSample]) {
-        [self performSegueWithIdentifier:LocationAndRealTimeOnMapSampleSegue
-                                  sender:self];
-    } else if ([sample isEqualToString:RouteAndIndicationsOnMapSample]) {
-        [self performSegueWithIdentifier:RouteAndIndicationsOnMapSampleSegue
-                                  sender:self];
-    } else if ([sample isEqualToString:UserInsideEventSample]) {
-        [self performSegueWithIdentifier:UserInsideEventSampleSegue
-                                  sender:self];
-    }
+    NSString *segueName = self.rowToSegueMapper[sample];
+    [self performSegueWithIdentifier:segueName
+                              sender:self];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

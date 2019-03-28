@@ -52,6 +52,7 @@
                         <segue destination="YM2-p5-07W" kind="show" identifier="UserInsideEventSampleSegue" id="jP1-6I-MMS"/>
                         <segue destination="YM2-p5-07W" kind="show" identifier="RouteAndIndicationsOnMapSampleSegue" id="PEh-6u-U2M"/>
                         <segue destination="YM2-p5-07W" kind="show" identifier="LocationAndRealTimeOnTopOfMapSampleSegue" id="wa4-RW-wjx"/>
+                        <segue destination="YM2-p5-07W" kind="show" identifier="PositioningSampleSegue" id="UQc-v7-mK5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -212,6 +213,21 @@
             </objects>
             <point key="canvasLocation" x="2953" y="895"/>
         </scene>
+        <!--PositioningVC-->
+        <scene sceneID="cSp-tB-ma5">
+            <objects>
+                <viewController id="xq6-OH-pR1" customClass="SGSPositioningVC" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="pEr-t1-bnB">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="f4Y-cS-9pz"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ptk-EO-pdE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2971" y="-1170"/>
+        </scene>
         <!--Location And RealtimeVC-->
         <scene sceneID="srC-m2-ZhO">
             <objects>
@@ -320,6 +336,7 @@
                         <segue destination="ZEw-To-Vz4" kind="show" identifier="UserInsideEventSampleSegue" id="hOT-zZ-EgE"/>
                         <segue destination="g4t-rH-auo" kind="show" identifier="LocationAndRealTimeOnTopOfMapSampleSegue" id="U41-uZ-A8m"/>
                         <segue destination="RVQ-E6-35z" kind="show" identifier="RouteAndIndicationsOnMapSampleSegue" id="zoS-Do-qXk"/>
+                        <segue destination="xq6-OH-pR1" kind="show" identifier="PositioningSampleSegue" id="HqW-Q8-m0R"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vyN-Tj-Cmc" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -346,6 +363,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="jP1-6I-MMS"/>
+        <segue reference="UQc-v7-mK5"/>
     </inferredMetricsTieBreakers>
 </document>
