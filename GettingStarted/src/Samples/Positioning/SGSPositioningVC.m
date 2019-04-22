@@ -32,11 +32,11 @@ static NSString *PermissionDeniedOk = @"Ok";
     [super viewDidLoad];
     [self customizeNavigationBarWithTitle:@"Positioning"];
     self.isPositioning = NO;
-    self.locationStatesTranslator = @{@(0):@"Stopped",
-                                  @(1):@"Calculating",
-                                  @(2):@"Not In Building",
-                                  @(3):@"Started",
-                                  @(4):@"Needs Calibration"
+    self.locationStatesTranslator = @{@(kSITLocationStopped):@"Stopped",
+                                  @(kSITLocationCalculating):@"Calculating",
+                                  @(kSITLocationUserNotInBuilding):@"Not In Building",
+                                  @(kSITLocationStarted):@"Started",
+                                  @(kSITLocationCompassNeedsCalibration):@"Needs Calibration"
                                   };
     self.locationManager = [[CLLocationManager alloc] init];
     [SITLocationManager sharedInstance].delegate = self;
@@ -107,8 +107,9 @@ static NSString *PermissionDeniedOk = @"Ok";
 - (void)locationManager:(id<SITLocationInterface>)locationManager
          didUpdateState:(SITLocationState)state
 {
-    self.statusLabel.text = self.locationStatesTranslator[@(state)];
-    NSLog(@"location manager changed to state: %d", state);
+    NSString *stateString = self.locationStatesTranslator[@(state)];
+    self.statusLabel.text = stateString;
+    NSLog(@"location manager changed to state: %@", stateString);
     if (state == kSITLocationUserNotInBuilding) {
         NSLog(@"Unable to find user on building. Please verify this building has been configured (calibrated) correctly");
     }
@@ -124,7 +125,7 @@ static NSString *PermissionDeniedOk = @"Ok";
       didUpdateLocation:(SITLocation *)location
 {
     NSLog(@"New location update available: :%@", location);
-            self.statusLabel.text = @"";
+    self.statusLabel.text = @"";
     self.positionLabel.text = [NSString stringWithFormat:@" building: %@\n floor: %@\n x:%f\n y:%f\n yaw:%@ radians\n accuracy:%f\n", location.position.buildingIdentifier, location.position.floorIdentifier,location.position.cartesianCoordinate.x, location.position.cartesianCoordinate.y,location.bearing, location.accuracy];
 }
 
