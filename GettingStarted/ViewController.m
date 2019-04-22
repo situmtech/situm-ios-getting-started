@@ -58,8 +58,6 @@ static NSString *PositioningSampleSegue = @"PositioningSampleSegue";
     self.samples=@[positioningSegue, locationSegue, routeSegue, eventSegue];
 }
 
-
-
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     [self requestLocationAuthorization];
