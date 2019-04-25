@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SampleSegueData : NSObject
+@interface SGSSampleSegueData : NSObject
 @property (nonatomic,strong, readonly) NSString *sampleName;
 @property (nonatomic,strong, readonly) NSString *segueId;
 -(instancetype)initWithSampleName:(NSString *)sampleName segueId:(NSString *)segueId NS_DESIGNATED_INITIALIZER;

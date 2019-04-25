@@ -6,13 +6,13 @@
 //  Copyright © 2019 Situm Technologies S.L. All rights reserved.
 //
 
-#import "SampleSegueData.h"
-@interface SampleSegueData()
+#import "SGSSampleSegueData.h"
+@interface SGSSampleSegueData()
 @property (nonatomic,strong) NSString *sampleName;
 @property (nonatomic,strong) NSString *segueId;
 @end
 
-@implementation SampleSegueData
+@implementation SGSSampleSegueData
 -(instancetype)initWithSampleName:(NSString *)sampleName segueId:(NSString *)segueId{
     self = [super init];
     if (self) {

@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 #import "SGSBuildingsListViewController.h"
-#import "SampleSegueData.h"
+#import "SGSSampleSegueData.h"
 @import CoreLocation;
 static NSString *SampleCellIdentifier = @"SampleCell";
 
@@ -38,7 +38,7 @@ static NSString *PositioningSampleSegue = @"PositioningSampleSegue";
 @interface ViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (nonatomic, strong) NSArray<SampleSegueData *> *samples;
+@property (nonatomic, strong) NSArray<SGSSampleSegueData *> *samples;
 @property (nonatomic, strong) CLLocationManager *locationManager;
 @end
 
@@ -51,10 +51,10 @@ static NSString *PositioningSampleSegue = @"PositioningSampleSegue";
 }
 
 -(void)initSamples{
-    SampleSegueData *positioningSegue = [[SampleSegueData alloc] initWithSampleName:PositioningSample segueId:PositioningSampleSegue];
-    SampleSegueData *locationSegue = [[SampleSegueData alloc] initWithSampleName:LocationAndRealTimeOnMapSample segueId:LocationAndRealTimeOnMapSampleSegue];
-    SampleSegueData *routeSegue = [[SampleSegueData alloc] initWithSampleName:RouteAndIndicationsOnMapSample segueId:RouteAndIndicationsOnMapSampleSegue];
-    SampleSegueData *eventSegue = [[SampleSegueData alloc] initWithSampleName:UserInsideEventSample segueId:UserInsideEventSampleSegue];
+    SGSSampleSegueData *positioningSegue = [[SGSSampleSegueData alloc] initWithSampleName:PositioningSample segueId:PositioningSampleSegue];
+    SGSSampleSegueData *locationSegue = [[SGSSampleSegueData alloc] initWithSampleName:LocationAndRealTimeOnMapSample segueId:LocationAndRealTimeOnMapSampleSegue];
+    SGSSampleSegueData *routeSegue = [[SGSSampleSegueData alloc] initWithSampleName:RouteAndIndicationsOnMapSample segueId:RouteAndIndicationsOnMapSampleSegue];
+    SGSSampleSegueData *eventSegue = [[SGSSampleSegueData alloc] initWithSampleName:UserInsideEventSample segueId:UserInsideEventSampleSegue];
     self.samples=@[positioningSegue, locationSegue, routeSegue, eventSegue];
 }
 
@@ -95,7 +95,7 @@ static NSString *PositioningSampleSegue = @"PositioningSampleSegue";
     // Dispose of any resources that can be recreated.
 }
 
-- (void)detectedSample:(SampleSegueData *)sampleSegueData
+- (void)detectedSample:(SGSSampleSegueData *)sampleSegueData
 {
     NSString *segueId = sampleSegueData.segueId;
     [self performSegueWithIdentifier:segueId
@@ -146,7 +146,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     // Perform segue
-    SampleSegueData *sampleSegueData = self.samples[indexPath.row];
+    SGSSampleSegueData *sampleSegueData = self.samples[indexPath.row];
     [self detectedSample:sampleSegueData];
     
 }
