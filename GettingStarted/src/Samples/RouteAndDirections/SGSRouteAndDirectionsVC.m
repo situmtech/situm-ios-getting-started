@@ -47,6 +47,7 @@ static NSString *ResultsKey = @"results";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self customizeNavigationBarWithTitle:@"Route and directions"];
     // Do any additional setup after loading the view.
 }
 
