@@ -21,8 +21,6 @@
 
 @property (nonatomic, strong) SITBuildingInfo *selectedBuildingInfo;
 
-@property (nonatomic, strong) NSString *segueIdentifier;
-
 @end
 
 @implementation SGSBuildingsListViewController
@@ -34,20 +32,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
     [self retrieveData];
-    
     self.buildingsTableView.dataSource = self;
     self.buildingsTableView.delegate = self;
-    self.segueIdentifier = nil;
-    
-    if ([self.originSegue isEqualToString:  @"UserInsideEventSampleSegue"]) {
-        self.segueIdentifier = @"UserInsideEvent2SampleSegue";
-    } else if ([self.originSegue isEqualToString:  @"LocationAndRealTimeOnTopOfMapSampleSegue"]) {
-        self.segueIdentifier = @"LocationAndRealTimeOnTopOfMap2SampleSegue";
-    } else if ([self.originSegue isEqualToString:@"RouteAndIndicationsOnMapSampleSegue"]) {
-        self.segueIdentifier = @"RouteAndIndicationsOnMap2SampleSegue";
-    }
+    [self customizeNavigationBar];
+}
+
+-(void)customizeNavigationBar{
+    self.title = @"Select a building";
+    self.navigationItem.backBarButtonItem.title = @"Back";
 }
 
 - (void)didReceiveMemoryWarning {
@@ -62,13 +55,9 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender  {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    UIViewController *destinationVC = segue.destinationViewController;
-    if ([destinationVC isMemberOfClass:[SGSUserInsideEventVC class]]) {
-        ((SGSUserInsideEventVC *)destinationVC).selectedBuildingInfo = self.selectedBuildingInfo;
-    } else if ([destinationVC isMemberOfClass:[SGSLocationAndRealtimeVC class]]) {
-        ((SGSLocationAndRealtimeVC *)destinationVC).selectedBuildingInfo = self.selectedBuildingInfo;
-    } else if ([destinationVC isMemberOfClass:[SGSRouteAndDirectionsVC class]]) {
-        ((SGSRouteAndDirectionsVC *)destinationVC).selectedBuildingInfo = self.selectedBuildingInfo;
+    id destinationVC = segue.destinationViewController;
+    if ([destinationVC respondsToSelector:@selector(setSelectedBuildingInfo:)]){
+        [destinationVC setSelectedBuildingInfo:self.selectedBuildingInfo];
     }
 }
 

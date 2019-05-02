@@ -20,18 +20,19 @@
 
 @implementation SGSUserInsideEventVC
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self customizeNavigationBarWithTitle:@"User inside event"];
+    [self.activityIndicator startAnimating];
+}
+
 - (void)viewDidAppear:(BOOL)animated {
-    if (_selectedBuildingInfo.events == nil || _selectedBuildingInfo.events.count == 0) {
+    if (self.selectedBuildingInfo.events == nil || self.selectedBuildingInfo.events.count == 0) {
         [self showNoEventsAlert];
     } else {
         [self startPositioning];
         [self.infoLabel setText:@"Initializing positioning"];
     }
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    [self.activityIndicator startAnimating];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -86,11 +87,6 @@
     return [location.position distanceToPoint:event.trigger.center] < [event.trigger.radius floatValue];
 }
 
-- (IBAction)didPressBackButton:(id)sender {
-    [[SITLocationManager sharedInstance] removeUpdates];
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
 #pragma mark - Alerts
 
 - (void)showAlertWithEvent:(SITEvent *)event {
@@ -114,5 +110,10 @@
     [self presentViewController:_alert animated:YES completion:nil];
 }
 
+#pragma mark - Exit example
+-(void)exitExample:(UIBarButtonItem *)sender{
+    [[SITLocationManager sharedInstance] removeUpdates];
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 @end

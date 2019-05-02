@@ -43,7 +43,7 @@ static NSString *ResultsKey = @"results";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+    [self customizeNavigationBarWithTitle:@"Location and real time"];
     [SITLocationManager sharedInstance].delegate = self;
     [SITRealTimeManager sharedManager].delegate = self;
     self.ready = NO;

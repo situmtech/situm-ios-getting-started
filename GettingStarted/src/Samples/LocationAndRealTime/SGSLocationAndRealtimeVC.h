@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import <SitumSDK/SitumSDK.h>
+#import "SGSSamplesBaseVC.h"
 
-@interface SGSLocationAndRealtimeVC : UIViewController
+@interface SGSLocationAndRealtimeVC : SGSSamplesBaseVC
 
 @property(nonatomic, strong) SITBuildingInfo *selectedBuildingInfo;
 
