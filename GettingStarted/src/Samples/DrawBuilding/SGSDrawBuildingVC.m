@@ -40,7 +40,7 @@ static NSString *NoFloorsInBuildingOk = @"Ok";
 
 #pragma mark - Draw Building in Map
 - (IBAction)drawBuilding:(id)sender {
-    //Check the building has any floor to show
+    //Check if the building has any floor to show
     if (self.selectedBuildingInfo.floors.count == 0) {
         [self showNoFloorsInBuildingAlert];
         return;
