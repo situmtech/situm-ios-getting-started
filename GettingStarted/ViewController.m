@@ -14,25 +14,24 @@ static NSString *SampleCellIdentifier = @"SampleCell";
 
 // Samples static strings
 static NSString *PositioningSample = @"Positioning";
+static NSString *DrawBuildingSample = @"Draw Building";
 static NSString *LocationAndRealTimeOnMapSample = @"Location and real time";
 static NSString *RouteAndIndicationsOnMapSample = @"Route on map";
 static NSString *UserInsideEventSample = @"Calculate if the user is inside an event";
+
+// Segues static strings
+static NSString *PositioningSampleSegue = @"PositioningSampleSegue";
+static NSString *DrawBuildingSampleSegue = @"DrawBuildingSampleSegue";
+static NSString *LocationAndRealTimeOnMapSampleSegue = @"LocationAndRealTimeOnTopOfMapSampleSegue";
+static NSString *RouteAndIndicationsOnMapSampleSegue = @"RouteAndIndicationsOnMapSampleSegue";
+static NSString *UserInsideEventSampleSegue = @"UserInsideEventSampleSegue";
+
 
 // Request user permission strings
 
 static NSString *PermissionDeniedAlertTitle = @"Location Authorization Needed";
 static NSString *PermissionDeniedAlertBody = @"This app needs location authorization to work properly. Please go to settings and enable it.";
 static NSString *PermissionDeniedOk = @"Ok";
-
-// Segues static strings
-static NSString *LocationAndRealTimeOnMapSampleSegue = @"LocationAndRealTimeOnTopOfMapSampleSegue";
-
-static NSString *RouteAndIndicationsOnMapSampleSegue = @"RouteAndIndicationsOnMapSampleSegue";
-
-static NSString *UserInsideEventSampleSegue = @"UserInsideEventSampleSegue";
-
-static NSString *PositioningSampleSegue = @"PositioningSampleSegue";
-
 
 
 @interface ViewController () <UITableViewDataSource, UITableViewDelegate>
@@ -52,10 +51,11 @@ static NSString *PositioningSampleSegue = @"PositioningSampleSegue";
 
 -(void)initSamples{
     SGSSampleSegueData *positioningSegue = [[SGSSampleSegueData alloc] initWithSampleName:PositioningSample segueId:PositioningSampleSegue];
+    SGSSampleSegueData *drawBuildingSegue = [[SGSSampleSegueData alloc] initWithSampleName:DrawBuildingSample segueId:DrawBuildingSampleSegue];
     SGSSampleSegueData *locationSegue = [[SGSSampleSegueData alloc] initWithSampleName:LocationAndRealTimeOnMapSample segueId:LocationAndRealTimeOnMapSampleSegue];
     SGSSampleSegueData *routeSegue = [[SGSSampleSegueData alloc] initWithSampleName:RouteAndIndicationsOnMapSample segueId:RouteAndIndicationsOnMapSampleSegue];
     SGSSampleSegueData *eventSegue = [[SGSSampleSegueData alloc] initWithSampleName:UserInsideEventSample segueId:UserInsideEventSampleSegue];
-    self.samples=@[positioningSegue, locationSegue, routeSegue, eventSegue];
+    self.samples=@[positioningSegue, drawBuildingSegue, locationSegue, routeSegue, eventSegue];
 }
 
 -(void)viewDidAppear:(BOOL)animated{

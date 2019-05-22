@@ -53,6 +53,7 @@
                         <segue destination="YM2-p5-07W" kind="show" identifier="RouteAndIndicationsOnMapSampleSegue" id="PEh-6u-U2M"/>
                         <segue destination="YM2-p5-07W" kind="show" identifier="LocationAndRealTimeOnTopOfMapSampleSegue" id="wa4-RW-wjx"/>
                         <segue destination="YM2-p5-07W" kind="show" identifier="PositioningSampleSegue" id="UQc-v7-mK5"/>
+                        <segue destination="YM2-p5-07W" kind="show" identifier="DrawBuildingSampleSegue" id="8ad-05-Ca7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -276,7 +277,46 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ptk-EO-pdE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2971" y="-1170"/>
+            <point key="canvasLocation" x="3001" y="-1953"/>
+        </scene>
+        <!--Draw BuildingVC-->
+        <scene sceneID="bkM-IV-dhV">
+            <objects>
+                <viewController id="Tqw-ZP-f2Q" customClass="SGSDrawBuildingVC" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="9Mn-bC-8HC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z5o-Ya-80k">
+                                <rect key="frame" x="140" y="72" width="95" height="30"/>
+                                <state key="normal" title="Draw Building"/>
+                                <connections>
+                                    <action selector="drawBuilding:" destination="Tqw-ZP-f2Q" eventType="touchUpInside" id="Wew-WX-Xp5"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mIj-FF-C8M" customClass="GMSMapView">
+                                <rect key="frame" x="0.0" y="110" width="375" height="557"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="O9j-pT-gTJ" firstAttribute="bottom" secondItem="mIj-FF-C8M" secondAttribute="bottom" id="0jn-vP-gDj"/>
+                            <constraint firstItem="O9j-pT-gTJ" firstAttribute="trailing" secondItem="mIj-FF-C8M" secondAttribute="trailing" id="4N1-0m-zr3"/>
+                            <constraint firstItem="Z5o-Ya-80k" firstAttribute="top" secondItem="O9j-pT-gTJ" secondAttribute="top" constant="8" id="Sse-M0-CZt"/>
+                            <constraint firstItem="Z5o-Ya-80k" firstAttribute="centerX" secondItem="9Mn-bC-8HC" secondAttribute="centerX" id="cM7-xX-Htp"/>
+                            <constraint firstItem="mIj-FF-C8M" firstAttribute="top" secondItem="Z5o-Ya-80k" secondAttribute="bottom" constant="8" id="r3r-G4-nEO"/>
+                            <constraint firstItem="mIj-FF-C8M" firstAttribute="leading" secondItem="O9j-pT-gTJ" secondAttribute="leading" id="rQ0-gY-bHb"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="O9j-pT-gTJ"/>
+                    </view>
+                    <connections>
+                        <outlet property="mapView" destination="mIj-FF-C8M" id="5fj-ub-nSs"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="czc-ps-p97" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3001" y="-1250"/>
         </scene>
         <!--Location And RealtimeVC-->
         <scene sceneID="srC-m2-ZhO">
@@ -387,6 +427,7 @@
                         <segue destination="g4t-rH-auo" kind="show" identifier="LocationAndRealTimeOnTopOfMapSampleSegue" id="U41-uZ-A8m"/>
                         <segue destination="RVQ-E6-35z" kind="show" identifier="RouteAndIndicationsOnMapSampleSegue" id="zoS-Do-qXk"/>
                         <segue destination="xq6-OH-pR1" kind="show" identifier="PositioningSampleSegue" id="HqW-Q8-m0R"/>
+                        <segue destination="Tqw-ZP-f2Q" kind="show" identifier="DrawBuildingSampleSegue" id="Xzr-dR-HVU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vyN-Tj-Cmc" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -413,6 +454,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="UQc-v7-mK5"/>
+        <segue reference="8ad-05-Ca7"/>
     </inferredMetricsTieBreakers>
 </document>
