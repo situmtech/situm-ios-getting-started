@@ -7,7 +7,7 @@ As a required step, you will need to complete the steps in the [Setup Google Map
 
 -  Add the map to your view. You can find more information in the section [Getting Started](https://developers.google.com/maps/documentation/ios-sdk/start) of Google Maps documentation. If, as in the example app, you want to show the map in a subview of your controller, make sure to set your view class as `GMSMapView` in the storyboard and that you assign the map to your view as done in our sample code.
 
-- Move the camera to the coordinates where your building is located.
+- Animate the camera to the coordinates where your building is located.
 
 - Fetch the floor image you want to draw from Situm servers.
 

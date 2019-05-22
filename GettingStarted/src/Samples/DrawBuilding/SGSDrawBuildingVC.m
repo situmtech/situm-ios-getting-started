@@ -48,7 +48,7 @@ static NSString *NoFloorsInBuildingOk = @"Ok";
     
     //Move camera to building coordinates and set the desired zoom
     GMSCameraPosition *cameraPosition = [GMSCameraPosition cameraWithTarget:self.selectedBuildingInfo.building.center zoom:19];
-    [(GMSMapView *)self.mapView setCamera:cameraPosition];
+    [(GMSMapView *)self.mapView animateToCameraPosition:cameraPosition];
     
     //Select the floor to draw
        SITFloor *selectedFloor = self.selectedBuildingInfo.floors[0];
