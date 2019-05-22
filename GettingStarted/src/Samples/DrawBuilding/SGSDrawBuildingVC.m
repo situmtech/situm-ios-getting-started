@@ -40,12 +40,6 @@ static NSString *NoFloorsInBuildingOk = @"Ok";
 
 #pragma mark - Draw Building in Map
 - (IBAction)drawBuilding:(id)sender {
-    //Check if the building has any floor to show
-    if (self.selectedBuildingInfo.floors.count == 0) {
-        [self showNoFloorsInBuildingAlert];
-        return;
-    }
-    
     //Move camera to building coordinates and set the desired zoom
     GMSCameraPosition *cameraPosition = [GMSCameraPosition cameraWithTarget:self.selectedBuildingInfo.building.center zoom:19];
     [(GMSMapView *)self.mapView animateToCameraPosition:cameraPosition];
@@ -71,20 +65,6 @@ static NSString *NoFloorsInBuildingOk = @"Ok";
     GMSGroundOverlay *mapOverlay = [GMSGroundOverlay groundOverlayWithBounds:coordinateBounds icon:[UIImage imageWithData:imageData]];
     mapOverlay.bearing = bearing;
     return mapOverlay;
-}
-
--(void)showNoFloorsInBuildingAlert{
-    UIAlertController * alert = [UIAlertController
-                                 alertControllerWithTitle:NoFloorsInBuildingAlertTitle
-                                 message:NoFloorsInBuildingAlertBody
-                                 preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction* okButton = [UIAlertAction
-                               actionWithTitle:NoFloorsInBuildingOk
-                               style:UIAlertActionStyleDefault
-                               handler:^(UIAlertAction * action) {
-                               }];
-    [alert addAction:okButton];
-    [self presentViewController:alert animated:YES completion:nil];
 }
 
 @end
