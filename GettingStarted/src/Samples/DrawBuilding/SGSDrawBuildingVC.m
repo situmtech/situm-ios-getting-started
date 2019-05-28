@@ -66,6 +66,4 @@ static NSString *DrawBuildingButtonText = @"Draw Building";
     return mapOverlay;
 }
 
-
-
 @end
