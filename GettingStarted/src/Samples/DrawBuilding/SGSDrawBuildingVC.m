@@ -17,14 +17,14 @@ static NSString *NoFloorsInBuildingAlertTitle = @"No Floors";
 static NSString *NoFloorsInBuildingAlertBody = @"At least one floor is needed to draw the building.";
 static NSString *NoFloorsInBuildingOk = @"Ok";
 
-static NSString *DrawBuildingButtonText = @"Draw Building";
+static NSString *ShowBuildingButtonText = @"Show Building";
 
 @implementation SGSDrawBuildingVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self drawGoogleMap];
-    [self addDrawBuildingButton];
+    [self addShowBuildingButton];
 }
 
 #pragma mark - Draw Google Map in Proper View
@@ -34,19 +34,27 @@ static NSString *DrawBuildingButtonText = @"Draw Building";
     self.view=self.googleMapView;
 }
 
--(void)addDrawBuildingButton{
-    UIBarButtonItem *drawBuildingButton = [[UIBarButtonItem alloc] initWithTitle:DrawBuildingButtonText style:UIBarButtonItemStylePlain target:self
-                                                                          action:@selector(drawBuilding)];
-    self.navigationItem.rightBarButtonItem=drawBuildingButton;
+-(void)addShowBuildingButton{
+    UIBarButtonItem *showBuildingButton = [[UIBarButtonItem alloc] initWithTitle:ShowBuildingButtonText style:UIBarButtonItemStylePlain target:self
+                                                                          action:@selector(showBuilding)];
+    self.navigationItem.rightBarButtonItem=showBuildingButton;
 }
 
 #pragma mark - Draw Building in Map
-- (void)drawBuilding{
+- (void)showBuilding{
+    [self moveCameraToBuildingPosition];
+    [self drawBuilding];
+}
+
+-(void)moveCameraToBuildingPosition{
     //Move camera to building coordinates and set the desired zoom
     GMSCameraPosition *cameraPosition = [GMSCameraPosition cameraWithTarget:self.selectedBuildingInfo.building.center zoom:19];
     [self.googleMapView animateToCameraPosition:cameraPosition];
+}
+
+-(void)drawBuilding{
     //Select the floor to draw
-       SITFloor *selectedFloor = self.selectedBuildingInfo.floors[0];
+    SITFloor *selectedFloor = self.selectedBuildingInfo.floors[0];
     //Get the floor image
     [[SITCommunicationManager sharedManager] fetchMapFromFloor:selectedFloor
                                                 withCompletion:^(NSData *imageData) {
@@ -55,7 +63,6 @@ static NSString *DrawBuildingButtonText = @"Draw Building";
                                                     //Assign our map as the overly map
                                                     overlay.map=self.googleMapView;
                                                 }];
-    
 }
 
 #pragma mark - Create Google Maps overly from Situm data
