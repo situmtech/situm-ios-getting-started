@@ -28,40 +28,12 @@ static NSString *ShowUserPositionButtonText = @"Show User Position";
     [super viewDidLoad];
     [self drawGoogleMap];
     [self addShowUserPositionButton];
+    [self initLocationManager];
 }
 
--(void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
-    //Has to be done after the view has appeared otherwise the alert wont last enough
-    [self requestLocationAuthorization];
-}
-
-#pragma mark -- Request Location Authorization
--(void)requestLocationAuthorization{
-    switch ([CLLocationManager authorizationStatus]) {
-        case kCLAuthorizationStatusNotDetermined:{
-            [self.locationManager requestWhenInUseAuthorization];
-            break;
-        }
-        case kCLAuthorizationStatusDenied:{
-            //If the user has denied location authorization for this app,
-            //[self.locationManager requestWhenInUseAuthorization] wouldnt
-            //request authorization again
-            UIAlertController * alert = [UIAlertController
-                                         alertControllerWithTitle:PermissionDeniedAlertTitle
-                                         message:PermissionDeniedAlertBody
-                                         preferredStyle:UIAlertControllerStyleAlert];
-            UIAlertAction* okButton = [UIAlertAction
-                                       actionWithTitle:PermissionDeniedOk
-                                       style:UIAlertActionStyleDefault
-                                       handler:^(UIAlertAction * action) {
-                                       }];
-            [alert addAction:okButton];
-            [self presentViewController:alert animated:YES completion:nil];
-        }
-        default:
-            break;
-    }
+-(void)initLocationManager{
+    self.locationManager = [[CLLocationManager alloc] init];
+    self.locationManager.delegate =self;
 }
 
 #pragma mark - Draw Google Map
@@ -79,21 +51,15 @@ static NSString *ShowUserPositionButtonText = @"Show User Position";
 }
 
 -(void)showUserPosition{
-    //Allow Google Maps to show user position
+    //Allow Google Maps to show user position, it will ask for location permission so we dont have to manage it
     self.googleMapView.myLocationEnabled = YES;
-    [self observeChangesOnGoogleMapMyLocation];
+    [self.locationManager startUpdatingLocation];
 }
 
 #pragma mark - Move camera to synced with user location changes
--(void)observeChangesOnGoogleMapMyLocation{
-    //Add observer on myLocation property of googleMapView to detect user movements and sync camera
-    [self.googleMapView addObserver:self forKeyPath:@"myLocation" options:(NSKeyValueObservingOptionNew) context:nil];
-}
-
--(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{
-    CLLocation *location = change[NSKeyValueChangeNewKey];
-    //Make camera follor user
-    GMSCameraPosition *camera = [GMSCameraPosition cameraWithTarget:location.coordinate zoom:16];
+-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations{
+    CLLocation *location = [locations lastObject];
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:location.coordinate.latitude longitude:location.coordinate.longitude  zoom:16];
     [self.googleMapView animateToCameraPosition:camera];
 }
 
