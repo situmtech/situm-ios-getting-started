@@ -7,11 +7,9 @@
 //
 
 #import "SGSDrawPositionVC.h"
-@import CoreLocation;
 @import GoogleMaps;
 
 @interface SGSDrawPositionVC ()<CLLocationManagerDelegate>
-@property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic,strong) GMSMapView *googleMapView;
 @end
 
@@ -28,40 +26,6 @@ static NSString *ShowUserPositionButtonText = @"Show User Position";
     [super viewDidLoad];
     [self drawGoogleMap];
     [self addShowUserPositionButton];
-}
-
--(void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
-    //Has to be done after the view has appeared otherwise the alert wont last enough
-    [self requestLocationAuthorization];
-}
-
-#pragma mark -- Request Location Authorization
--(void)requestLocationAuthorization{
-    switch ([CLLocationManager authorizationStatus]) {
-        case kCLAuthorizationStatusNotDetermined:{
-            [self.locationManager requestWhenInUseAuthorization];
-            break;
-        }
-        case kCLAuthorizationStatusDenied:{
-            //If the user has denied location authorization for this app,
-            //[self.locationManager requestWhenInUseAuthorization] wouldnt
-            //request authorization again
-            UIAlertController * alert = [UIAlertController
-                                         alertControllerWithTitle:PermissionDeniedAlertTitle
-                                         message:PermissionDeniedAlertBody
-                                         preferredStyle:UIAlertControllerStyleAlert];
-            UIAlertAction* okButton = [UIAlertAction
-                                       actionWithTitle:PermissionDeniedOk
-                                       style:UIAlertActionStyleDefault
-                                       handler:^(UIAlertAction * action) {
-                                       }];
-            [alert addAction:okButton];
-            [self presentViewController:alert animated:YES completion:nil];
-        }
-        default:
-            break;
-    }
 }
 
 #pragma mark - Draw Google Map
