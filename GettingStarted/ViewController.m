@@ -15,6 +15,7 @@ static NSString *SampleCellIdentifier = @"SampleCell";
 // Samples static strings
 static NSString *PositioningSample = @"Positioning";
 static NSString *DrawBuildingSample = @"Draw Building";
+static NSString *DrawPositionSample = @"Draw Position";
 static NSString *LocationAndRealTimeOnMapSample = @"Location and real time";
 static NSString *RouteAndIndicationsOnMapSample = @"Route on map";
 static NSString *UserInsideEventSample = @"Calculate if the user is inside an event";
@@ -22,6 +23,7 @@ static NSString *UserInsideEventSample = @"Calculate if the user is inside an ev
 // Segues static strings
 static NSString *PositioningSampleSegue = @"PositioningSampleSegue";
 static NSString *DrawBuildingSampleSegue = @"DrawBuildingSampleSegue";
+static NSString *DrawPositionSampleSegue = @"DrawPositionSampleSegue";
 static NSString *LocationAndRealTimeOnMapSampleSegue = @"LocationAndRealTimeOnTopOfMapSampleSegue";
 static NSString *RouteAndIndicationsOnMapSampleSegue = @"RouteAndIndicationsOnMapSampleSegue";
 static NSString *UserInsideEventSampleSegue = @"UserInsideEventSampleSegue";
@@ -52,10 +54,11 @@ static NSString *PermissionDeniedOk = @"Ok";
 -(void)initSamples{
     SGSSampleSegueData *positioningSegue = [[SGSSampleSegueData alloc] initWithSampleName:PositioningSample segueId:PositioningSampleSegue];
     SGSSampleSegueData *drawBuildingSegue = [[SGSSampleSegueData alloc] initWithSampleName:DrawBuildingSample segueId:DrawBuildingSampleSegue];
+    SGSSampleSegueData *drawPositionSegue = [[SGSSampleSegueData alloc] initWithSampleName:DrawPositionSample segueId:DrawPositionSampleSegue];
     SGSSampleSegueData *locationSegue = [[SGSSampleSegueData alloc] initWithSampleName:LocationAndRealTimeOnMapSample segueId:LocationAndRealTimeOnMapSampleSegue];
     SGSSampleSegueData *routeSegue = [[SGSSampleSegueData alloc] initWithSampleName:RouteAndIndicationsOnMapSample segueId:RouteAndIndicationsOnMapSampleSegue];
     SGSSampleSegueData *eventSegue = [[SGSSampleSegueData alloc] initWithSampleName:UserInsideEventSample segueId:UserInsideEventSampleSegue];
-    self.samples=@[positioningSegue, drawBuildingSegue, locationSegue, routeSegue, eventSegue];
+    self.samples=@[positioningSegue, drawBuildingSegue, drawPositionSegue, locationSegue, routeSegue, eventSegue];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
