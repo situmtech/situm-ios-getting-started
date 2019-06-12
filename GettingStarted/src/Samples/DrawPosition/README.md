@@ -17,6 +17,3 @@ There are 4 steps your app has to follow in order to draw the user position on a
 
 
 In this example it is important to note that we are requesting location uptades from `CLLocationManager`, if you revisit the positioning example you will observe that in that example we requested location updates from `SITLocationManager`. `CLLocationManager` provides updates of user's location on Earth, while `SITLocationManager`, provide updates of user's location inside a given building.
-
-
-
