@@ -53,12 +53,14 @@ static NSString *ShowUserPositionButtonText = @"Show User Position";
 -(void)showUserPosition{
     //Allow Google Maps to show user position, it will ask for location permission so we dont have to manage it
     self.googleMapView.myLocationEnabled = YES;
+    //Ask CLLocationManager to start updating user location
     [self.locationManager startUpdatingLocation];
 }
 
 #pragma mark - Move camera to synced with user location changes
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations{
     CLLocation *location = [locations lastObject];
+    //Animate camera to user location when a change is detected
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:location.coordinate.latitude longitude:location.coordinate.longitude  zoom:16];
     [self.googleMapView animateToCameraPosition:camera];
 }
