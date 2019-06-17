@@ -47,8 +47,8 @@
 }
 
 #pragma mark - SITLocationDelegate methods
-
-- (void)locationManager:(nonnull id<SITLocationInterface>)locationManager didFailWithError:(NSError * _Nullable)error {
+    
+- (void)locationManager:(id<SITLocationInterface>)locationManager didFailWithError:(NSError *)error{
     NSLog(@"%@", error);
 }
 
