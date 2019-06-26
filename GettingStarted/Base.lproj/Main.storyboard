@@ -54,6 +54,7 @@
                         <segue destination="YM2-p5-07W" kind="show" identifier="LocationAndRealTimeOnTopOfMapSampleSegue" id="wa4-RW-wjx"/>
                         <segue destination="YM2-p5-07W" kind="show" identifier="PositioningSampleSegue" id="UQc-v7-mK5"/>
                         <segue destination="YM2-p5-07W" kind="show" identifier="DrawBuildingSampleSegue" id="8ad-05-Ca7"/>
+                        <segue destination="6ad-x7-Euf" kind="show" identifier="DrawPositionSampleSegue" id="CUL-RY-Zc5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -277,7 +278,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ptk-EO-pdE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3001" y="-1953"/>
+            <point key="canvasLocation" x="3001" y="-2764"/>
         </scene>
         <!--Draw BuildingVC-->
         <scene sceneID="bkM-IV-dhV">
@@ -292,7 +293,22 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="czc-ps-p97" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3001" y="-1250"/>
+            <point key="canvasLocation" x="3001" y="-2081"/>
+        </scene>
+        <!--Draw PositionVC-->
+        <scene sceneID="Qyo-lV-0GN">
+            <objects>
+                <viewController id="6ad-x7-Euf" customClass="SGSDrawPositionVC" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Wmp-z3-JuJ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="yOf-Lb-c9M"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Pgp-D8-xsH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3001" y="-1404"/>
         </scene>
         <!--Location And RealtimeVC-->
         <scene sceneID="srC-m2-ZhO">
@@ -430,6 +446,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="8ad-05-Ca7"/>
+        <segue reference="wa4-RW-wjx"/>
     </inferredMetricsTieBreakers>
 </document>

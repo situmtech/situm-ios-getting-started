@@ -25,6 +25,7 @@
 		23340DEC2249C3E1007EBD35 /* SGSSamplesBaseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 23340DEB2249C3E1007EBD35 /* SGSSamplesBaseVC.m */; };
 		2388FE37226DEA58009DD973 /* SGSSampleSegueData.m in Sources */ = {isa = PBXBuildFile; fileRef = 2388FE36226DEA58009DD973 /* SGSSampleSegueData.m */; };
 		23B243B8224C54C300975D47 /* SGSPositioningVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 23B243B7224C54C300975D47 /* SGSPositioningVC.m */; };
+		23D109E722A47207005BC7AE /* SGSDrawPositionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 23D109E622A47207005BC7AE /* SGSDrawPositionVC.m */; };
 		29DCDDCF68ACD5908003CCD5 /* Pods_GettingStarted.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 874B54F56611ADE8710D3F2D /* Pods_GettingStarted.framework */; };
 		953C83102150D48700037B97 /* SGSUserInsideEventVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 953C830F2150D48700037B97 /* SGSUserInsideEventVC.m */; };
 		95E4388A2147AA6D00E27862 /* SGSBuildingsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95E438892147AA6D00E27862 /* SGSBuildingsListViewController.m */; };
@@ -80,6 +81,8 @@
 		2388FE36226DEA58009DD973 /* SGSSampleSegueData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SGSSampleSegueData.m; sourceTree = "<group>"; };
 		23B243B6224C54C300975D47 /* SGSPositioningVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGSPositioningVC.h; sourceTree = "<group>"; };
 		23B243B7224C54C300975D47 /* SGSPositioningVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SGSPositioningVC.m; sourceTree = "<group>"; };
+		23D109E522A47207005BC7AE /* SGSDrawPositionVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGSDrawPositionVC.h; sourceTree = "<group>"; };
+		23D109E622A47207005BC7AE /* SGSDrawPositionVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SGSDrawPositionVC.m; sourceTree = "<group>"; };
 		874B54F56611ADE8710D3F2D /* Pods_GettingStarted.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GettingStarted.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		953C830E2150D48700037B97 /* SGSUserInsideEventVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGSUserInsideEventVC.h; sourceTree = "<group>"; };
 		953C830F2150D48700037B97 /* SGSUserInsideEventVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGSUserInsideEventVC.m; sourceTree = "<group>"; };
@@ -199,6 +202,7 @@
 			children = (
 				23B243B5224C548400975D47 /* Positioning */,
 				231059442294CF450027A875 /* DrawBuilding */,
+				23D109E422A46718005BC7AE /* DrawPosition */,
 				953C830D2150D41500037B97 /* UserInsideEvent */,
 				201F5EE01F7405F50098473F /* RouteAndDirections */,
 				201F5EDF1F7405ED0098473F /* LocationAndRealTime */,
@@ -250,6 +254,15 @@
 				23B243B7224C54C300975D47 /* SGSPositioningVC.m */,
 			);
 			path = Positioning;
+			sourceTree = "<group>";
+		};
+		23D109E422A46718005BC7AE /* DrawPosition */ = {
+			isa = PBXGroup;
+			children = (
+				23D109E522A47207005BC7AE /* SGSDrawPositionVC.h */,
+				23D109E622A47207005BC7AE /* SGSDrawPositionVC.m */,
+			);
+			path = DrawPosition;
 			sourceTree = "<group>";
 		};
 		7987541F4947881B06746D61 /* Pods */ = {
@@ -434,7 +447,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-GettingStarted/Pods-GettingStarted-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-GettingStarted/Pods-GettingStarted-resources.sh",
 				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
 				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
 			);
@@ -445,7 +458,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GettingStarted/Pods-GettingStarted-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GettingStarted/Pods-GettingStarted-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		92900A77D2903EA2AF684DAE /* [CP] Check Pods Manifest.lock */ = {
@@ -476,6 +489,7 @@
 				95E4388A2147AA6D00E27862 /* SGSBuildingsListViewController.m in Sources */,
 				201F5EA61F73FC410098473F /* ViewController.m in Sources */,
 				23B243B8224C54C300975D47 /* SGSPositioningVC.m in Sources */,
+				23D109E722A47207005BC7AE /* SGSDrawPositionVC.m in Sources */,
 				231059472294D0BF0027A875 /* SGSDrawBuildingVC.m in Sources */,
 				2388FE37226DEA58009DD973 /* SGSSampleSegueData.m in Sources */,
 				201F5EA31F73FC410098473F /* AppDelegate.m in Sources */,
