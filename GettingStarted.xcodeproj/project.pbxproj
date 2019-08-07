@@ -331,7 +331,6 @@
 				201F5E981F73FC410098473F /* Frameworks */,
 				201F5E991F73FC410098473F /* Resources */,
 				1BEF354E7E78E28E18AF5155 /* [CP] Copy Pods Resources */,
-				5E26246F66E6FDD5C410E54D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -473,28 +472,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GettingStarted/Pods-GettingStarted-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		5E26246F66E6FDD5C410E54D /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-GettingStarted/Pods-GettingStarted-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GettingStarted/Pods-GettingStarted-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		92900A77D2903EA2AF684DAE /* [CP] Check Pods Manifest.lock */ = {
