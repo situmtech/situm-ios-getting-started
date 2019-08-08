@@ -19,7 +19,7 @@ static NSString *DrawPositionSample = @"Draw Position";
 static NSString *LocationAndRealTimeOnMapSample = @"Location and real time";
 static NSString *RouteAndIndicationsOnMapSample = @"Route on map";
 static NSString *UserInsideEventSample = @"Calculate if the user is inside an event";
-static NSString *GeofencingSample = @"Fetch geofences from a building";
+static NSString *GeofencingSample = @"Draw geofences and calculate intersection";
 
 // Segues static strings
 static NSString *PositioningSampleSegue = @"PositioningSampleSegue";
