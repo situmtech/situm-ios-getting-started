@@ -19,6 +19,7 @@ static NSString *DrawPositionSample = @"Draw Position";
 static NSString *LocationAndRealTimeOnMapSample = @"Location and real time";
 static NSString *RouteAndIndicationsOnMapSample = @"Route on map";
 static NSString *UserInsideEventSample = @"Calculate if the user is inside an event";
+static NSString *GeofencingSample = @"Draw geofences and calculate intersection";
 
 // Segues static strings
 static NSString *PositioningSampleSegue = @"PositioningSampleSegue";
@@ -27,10 +28,9 @@ static NSString *DrawPositionSampleSegue = @"DrawPositionSampleSegue";
 static NSString *LocationAndRealTimeOnMapSampleSegue = @"LocationAndRealTimeOnTopOfMapSampleSegue";
 static NSString *RouteAndIndicationsOnMapSampleSegue = @"RouteAndIndicationsOnMapSampleSegue";
 static NSString *UserInsideEventSampleSegue = @"UserInsideEventSampleSegue";
-
+static NSString *GeofencingSampleSegue = @"GeofencingSampleSegue";
 
 // Request user permission strings
-
 static NSString *PermissionDeniedAlertTitle = @"Location Authorization Needed";
 static NSString *PermissionDeniedAlertBody = @"This app needs location authorization to work properly. Please go to settings and enable it.";
 static NSString *PermissionDeniedOk = @"Ok";
@@ -58,7 +58,8 @@ static NSString *PermissionDeniedOk = @"Ok";
     SGSSampleSegueData *locationSegue = [[SGSSampleSegueData alloc] initWithSampleName:LocationAndRealTimeOnMapSample segueId:LocationAndRealTimeOnMapSampleSegue];
     SGSSampleSegueData *routeSegue = [[SGSSampleSegueData alloc] initWithSampleName:RouteAndIndicationsOnMapSample segueId:RouteAndIndicationsOnMapSampleSegue];
     SGSSampleSegueData *eventSegue = [[SGSSampleSegueData alloc] initWithSampleName:UserInsideEventSample segueId:UserInsideEventSampleSegue];
-    self.samples=@[positioningSegue, drawBuildingSegue, drawPositionSegue, locationSegue, routeSegue, eventSegue];
+    SGSSampleSegueData *geofencingSegue = [[SGSSampleSegueData alloc] initWithSampleName: GeofencingSample segueId: GeofencingSampleSegue];
+    self.samples=@[positioningSegue, drawBuildingSegue, drawPositionSegue, locationSegue, routeSegue, eventSegue, geofencingSegue];
 }
 
 -(void)viewDidAppear:(BOOL)animated{

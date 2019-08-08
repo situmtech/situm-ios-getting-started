@@ -55,6 +55,7 @@
                         <segue destination="YM2-p5-07W" kind="show" identifier="PositioningSampleSegue" id="UQc-v7-mK5"/>
                         <segue destination="YM2-p5-07W" kind="show" identifier="DrawBuildingSampleSegue" id="8ad-05-Ca7"/>
                         <segue destination="6ad-x7-Euf" kind="show" identifier="DrawPositionSampleSegue" id="CUL-RY-Zc5"/>
+                        <segue destination="YM2-p5-07W" kind="show" identifier="GeofencingSampleSegue" id="5Np-p3-ZuA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -420,6 +421,7 @@
                         <segue destination="RVQ-E6-35z" kind="show" identifier="RouteAndIndicationsOnMapSampleSegue" id="zoS-Do-qXk"/>
                         <segue destination="xq6-OH-pR1" kind="show" identifier="PositioningSampleSegue" id="HqW-Q8-m0R"/>
                         <segue destination="Tqw-ZP-f2Q" kind="show" identifier="DrawBuildingSampleSegue" id="Xzr-dR-HVU"/>
+                        <segue destination="G0r-Op-Esu" kind="show" identifier="GeofencingSampleSegue" id="S8c-Gk-3tY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vyN-Tj-Cmc" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -444,8 +446,41 @@
             </objects>
             <point key="canvasLocation" x="132" y="156.97151424287858"/>
         </scene>
+        <!--GeofencingVC-->
+        <scene sceneID="GTh-Kb-vzY">
+            <objects>
+                <viewController id="G0r-Op-Esu" customClass="SGSGeofencingVC" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="9BB-xb-Eur">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j0O-et-Ecl" customClass="GMSMapView">
+                                <rect key="frame" x="0.0" y="123" width="375" height="544"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tap any point to check if it's inside a geofence" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ose-5j-JZq" userLabel="TopLabel">
+                                <rect key="frame" x="16" y="77" width="343" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="mrr-nq-QWT"/>
+                    </view>
+                    <connections>
+                        <outlet property="mapView" destination="j0O-et-Ecl" id="icl-Pu-GVQ"/>
+                        <outlet property="topLabel" destination="ose-5j-JZq" id="2EP-3m-kdg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ARS-or-hBb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2952.8000000000002" y="1628.6356821589206"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="wa4-RW-wjx"/>
+        <segue reference="UQc-v7-mK5"/>
     </inferredMetricsTieBreakers>
 </document>
