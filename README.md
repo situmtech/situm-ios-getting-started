@@ -35,6 +35,7 @@ This is a sample Objective-C application built using the Situm SDK. With this sa
 9. [Get realtime updates](#realtime)
 10. [List Building Events](#buildingevents)
 11. [Calculate if the user is inside en event](#positionevents)
+12. [Show geofences and calculate intersection with a point](#geofencing)
 
 
 [More information](#moreinfo)
@@ -445,6 +446,35 @@ This can be done by following the next example (Please note that minimun iOS SDK
     }
     return [location.position distanceToPoint:event.trigger.center] < [event.trigger.radius floatValue];
 }
+```
+
+### <a name="geofencing"></a> Show geofences and calculate intersection with a point
+
+This functionality will allow your app to display geofences (previously configured in the [dashboard](http://dashboard.situm.es/)) over
+your floorplans and calculate if an user's position is entering or leaving any of that areas.
+This is done by obtaining the geofences information and constructing a polygon from them, which can be used to represent in a map.
+
+```objc
+[[SITCommunicationManager sharedManager] fetchGeofencesFromBuilding: self.selectedBuildingInfo.building
+                                                            withOptions: nil
+                                                         withCompletion:^(id  result, NSError * error) {
+
+                                                            NSArray<SITGeofence*>* fences = result;
+                                                            GMSMutablePath* path = [GMSMutablePath new];
+                                                            for(SITPoint* point in fences[0].polygonPoints) {
+                                                                [path addCoordinate: point.coordinate];
+                                                            }
+
+                                                            // Create polygon
+                                                            GMSPolygon* polygon = [GMSPolygon new];
+                                                            polygon.strokeColor = UIColor.blackColor;
+                                                            polygon.strokeWidth = 3;
+                                                            polygon.fillColor = UIColor.yellowColor;
+                                                            polygon.path = path;
+
+                                                            // Show polygon
+                                                            polygon.map = mapView;
+                                                         }];
 ```
 
 ## <a name="moreinfo"></a> More information
