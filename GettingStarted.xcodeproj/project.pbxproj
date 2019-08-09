@@ -203,13 +203,13 @@
 		201F5EDE1F7405D30098473F /* Samples */ = {
 			isa = PBXGroup;
 			children = (
-				3A2A018622F9B0D300B422CA /* Geofencing */,
 				23B243B5224C548400975D47 /* Positioning */,
 				231059442294CF450027A875 /* DrawBuilding */,
 				23D109E422A46718005BC7AE /* DrawPosition */,
 				953C830D2150D41500037B97 /* UserInsideEvent */,
 				201F5EE01F7405F50098473F /* RouteAndDirections */,
 				201F5EDF1F7405ED0098473F /* LocationAndRealTime */,
+				3A2A018622F9B0D300B422CA /* Geofencing */,
 			);
 			path = Samples;
 			sourceTree = "<group>";
