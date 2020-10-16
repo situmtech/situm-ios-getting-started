@@ -188,7 +188,7 @@ these states.
 
 In `didFailWithError` you will receive updates only if an error has occurred. In this case, the positioning will stop. 
 
-In order to be able to calculate where a user is, it is mandatory to request authoritation to use location services from the user. If your app only needs to locate the user when the app is in use, you can follow the steps documented by Apple [here](https://developer.apple.com/documentation/corelocation/choosing_the_authorization_level_for_location_services/requesting_when-in-use_authorization?language=objc). Otherwise, if your app needs to locate the user also in background, you can follow the steps documented by Apple [here](https://developer.apple.com/documentation/corelocation/choosing_the_authorization_level_for_location_services/requesting_always_authorization?language=objc).
+In order to be able to calculate where a user is, it is mandatory to request authoritation to use location services from the user. If your app only needs to locate the user when the app is in use, you can follow the steps documented by Apple [here](https://developer.apple.com/documentation/corelocation/requesting_authorization_for_location_services?language=objc). Otherwise, if your app needs to locate the user also in background, you can follow the steps documented by Apple [here](hhttps://developer.apple.com/documentation/corelocation/getting_the_user_s_location/handling_location_events_in_the_background).
 
 In brief, you will need to add the proper keys to your app's Info.plist file and manage the different authorization status. You can check the method `requestLocationAuthorization` [here](https://github.com/situmtech/situm-ios-getting-started/blob/master/GettingStarted/ViewController.m) as an example.
 

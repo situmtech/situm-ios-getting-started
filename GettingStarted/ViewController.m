@@ -35,6 +35,10 @@ static NSString *PermissionDeniedAlertTitle = @"Location Authorization Needed";
 static NSString *PermissionDeniedAlertBody = @"This app needs location authorization to work properly. Please go to settings and enable it.";
 static NSString *PermissionDeniedOk = @"Ok";
 
+static NSString *PermissionReducedAccuracyAlertTitle = @"Location Full Accuracy Needed";
+static NSString *PermissionReducedAccuracyAlertBody = @"This app needs full accuracy location authorization to work properly. Please go to settings and enable it.";
+static NSString *PermissionReducedAccuracyOk = @"Ok";
+
 
 @interface ViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -88,9 +92,29 @@ static NSString *PermissionDeniedOk = @"Ok";
                                        }];
             [alert addAction:okButton];
             [self presentViewController:alert animated:YES completion:nil];
+            return;
         }
         default:
             break;
+    }
+    if ([self.locationManager respondsToSelector:@selector(accuracyAuthorization)]){
+        switch(self.locationManager.accuracyAuthorization){
+            case CLAccuracyAuthorizationReducedAccuracy:{
+                UIAlertController * alert = [UIAlertController
+                                             alertControllerWithTitle:PermissionReducedAccuracyAlertTitle
+                                             message:PermissionReducedAccuracyAlertBody
+                                             preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction* okButton = [UIAlertAction
+                                           actionWithTitle:PermissionReducedAccuracyOk
+                                           style:UIAlertActionStyleDefault
+                                           handler:^(UIAlertAction * action) {
+                                           }];
+                [alert addAction:okButton];
+                [self presentViewController:alert animated:YES completion:nil];
+            }
+            default:
+                break;
+        }
     }
 }
 
