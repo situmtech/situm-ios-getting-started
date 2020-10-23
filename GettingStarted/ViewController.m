@@ -33,10 +33,22 @@ static NSString *GeofencingSampleSegue = @"GeofencingSampleSegue";
 // Request user permission strings
 static NSString *PermissionDeniedAlertTitle = @"Location Authorization Needed";
 static NSString *PermissionDeniedAlertBody = @"This app needs location authorization to work properly. Please go to settings and enable it.";
-static NSString *PermissionDeniedOk = @"Ok";
 
+static NSString *PermissionRestrictedAlertTitle = @"Location Authorization Needed";
+static NSString *PermissionRestrictedAlertBody = @"This app needs location authorization to work properly. You have restricted authorization so it wont work properly on your device";
 
-@interface ViewController () <UITableViewDataSource, UITableViewDelegate>
+static NSString *UnknonwLocationAuthorizationAlertTitle = @"Location Authorization Needed";
+static NSString *UnknonwLocationAuthorizationAlertBody = @"There has been an unknown error when checking your location authorization. Please go to settings and enable it.";
+
+static NSString *PermissionReducedAccuracyAlertTitle = @"Location Full Accuracy Needed";
+static NSString *PermissionReducedAccuracyAlertBody = @"This app needs full accuracy location authorization to work properly. Please go to settings and enable it.";
+
+static NSString *UnknonwLocationAccuracyAuthorizationAlertTitle = @"Location Full Accuracy Needed";
+static NSString *UnknonwLocationAccuracyAuthorizationAlertBody = @"There has been an unknown error when checking your location accuracy authorization. Please go to settings and enable it.";
+
+static NSString *okButtonText = @"Ok";
+
+@interface ViewController () <UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSArray<SGSSampleSegueData *> *samples;
@@ -49,6 +61,7 @@ static NSString *PermissionDeniedOk = @"Ok";
     [super viewDidLoad];
     [self initSamples];
     self.locationManager = [[CLLocationManager alloc] init];
+    self.locationManager.delegate =self;
 }
 
 -(void)initSamples{
@@ -64,34 +77,85 @@ static NSString *PermissionDeniedOk = @"Ok";
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    [self requestLocationAuthorization];
+    [self.locationManager requestWhenInUseAuthorization];
 }
 
--(void)requestLocationAuthorization{
-    switch ([CLLocationManager authorizationStatus]) {
-        case kCLAuthorizationStatusNotDetermined:{
-            [self.locationManager requestWhenInUseAuthorization];
-            break;
-        }
-        case kCLAuthorizationStatusDenied:{
-            //If the user has denied location authorization for this app,
-            //[self.locationManager requestWhenInUseAuthorization] wouldnt
-            //request authorization again
-            UIAlertController * alert = [UIAlertController
-                                         alertControllerWithTitle:PermissionDeniedAlertTitle
-                                         message:PermissionDeniedAlertBody
-                                         preferredStyle:UIAlertControllerStyleAlert];
-            UIAlertAction* okButton = [UIAlertAction
-                                       actionWithTitle:PermissionDeniedOk
-                                       style:UIAlertActionStyleDefault
-                                       handler:^(UIAlertAction * action) {
-                                       }];
-            [alert addAction:okButton];
-            [self presentViewController:alert animated:YES completion:nil];
-        }
-        default:
-            break;
+#pragma mark -- CLocationManager delegates
+- (void)locationManagerDidChangeAuthorization:(CLLocationManager *)manager{
+    [self alertUserIfIncorrectCoreLocationAuthorization:manager];
+}
+
+- (void) locationManager: (CLLocationManager*) manager
+didChangeAuthorizationStatus: (CLAuthorizationStatus) status {
+   if ([manager respondsToSelector:@selector(accuracyAuthorization)]) {
+        //In iOS14 this method was deprecated and now locationManagerDidChangeAuthorization:(CLLocationManager *)manager would be called too
+    }else{
+        [self alertUserIfIncorrectCoreLocationAuthorization:manager];
     }
+}
+
+-(void)alertUserIfIncorrectCoreLocationAuthorization:(CLLocationManager *)manager{
+    BOOL properAuthStatus = [self alertUserIfIncorrectLocationAuthorizationStatus:manager];
+    if (properAuthStatus){
+        [self alertUserIfIncorrectLocationAccuracyAuthorizationStatus:manager];
+    }
+}
+
+-(BOOL)alertUserIfIncorrectLocationAuthorizationStatus:(CLLocationManager *)manager{
+    CLAuthorizationStatus authStatus;
+        if ([manager respondsToSelector:@selector(authorizationStatus)]) {
+            //If iOS 14
+            authStatus = manager.authorizationStatus;
+        } else {
+            //If iOS <14
+            authStatus = [CLLocationManager authorizationStatus];
+        }
+    switch (authStatus) {
+        case kCLAuthorizationStatusDenied:
+            [self showAlertWithTitle:PermissionDeniedAlertTitle message:PermissionDeniedAlertBody];
+            return NO;
+        case kCLAuthorizationStatusRestricted:
+            [self showAlertWithTitle:PermissionRestrictedAlertTitle message:PermissionRestrictedAlertBody];
+            return NO;
+        case kCLAuthorizationStatusNotDetermined:
+        case kCLAuthorizationStatusAuthorizedAlways:
+        case kCLAuthorizationStatusAuthorizedWhenInUse:
+            return YES;
+        default:
+            [self showAlertWithTitle:UnknonwLocationAuthorizationAlertTitle message:UnknonwLocationAuthorizationAlertBody];
+            return NO;
+    }
+}
+
+-(BOOL)alertUserIfIncorrectLocationAccuracyAuthorizationStatus:(CLLocationManager *)manager{
+    if ([manager respondsToSelector:@selector(accuracyAuthorization)]){
+        //Only in iOS 14
+        switch (manager.accuracyAuthorization) {
+            case CLAccuracyAuthorizationReducedAccuracy:
+                [self showAlertWithTitle:PermissionReducedAccuracyAlertTitle message:PermissionReducedAccuracyAlertBody];
+                return NO;
+        case CLAccuracyAuthorizationFullAccuracy:
+                return YES;
+        default:
+                [self showAlertWithTitle:UnknonwLocationAccuracyAuthorizationAlertTitle message:UnknonwLocationAccuracyAuthorizationAlertBody];
+                return NO;
+            }
+    }
+    return YES;
+}
+
+-(void)showAlertWithTitle:(NSString *)title message:(NSString *)message{
+    UIAlertController * alert = [UIAlertController
+                                 alertControllerWithTitle:title
+                                 message:message
+                                 preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction* okButton = [UIAlertAction
+                               actionWithTitle:okButtonText
+                               style:UIAlertActionStyleDefault
+                               handler:^(UIAlertAction * action) {
+                               }];
+    [alert addAction:okButton];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning {

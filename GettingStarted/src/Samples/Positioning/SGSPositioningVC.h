@@ -11,7 +11,7 @@
 #import "SGSSamplesBaseVC.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SGSPositioningVC : SGSSamplesBaseVC
+@interface SGSPositioningVC : SGSSamplesBaseVC<CLLocationManagerDelegate>
 @property(nonatomic,strong) SITBuildingInfo *selectedBuildingInfo;
 @end
 
