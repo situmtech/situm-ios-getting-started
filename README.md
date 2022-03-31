@@ -12,6 +12,11 @@ This is a sample Objective-C application built using the Situm SDK. With this sa
 3. Calculate if the user is inside an event
     * In this example, you will see how to calculate if the user's position is inside the trigger area of an event. In order to do this, first, we are going to fetch the list of buildings and retrieve the detailed information of one of them. Then, we will start the positioning on that building, and intersect every location computed with the list of events. If the user happens to be inside an event, a dialog will be shown. In order to be able to properly execute this example, you will need to create at least one event on our dashboard.
 
+## Submitting Contributions
+
+You will need to sign a Contributor License Agreement (CLA) before making a submission. 
+[Learn more here.](https://situm.com/contributions/)
+
 ## Table of contents
 
 [Introduction](#introduction)
