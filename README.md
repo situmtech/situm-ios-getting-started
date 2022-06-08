@@ -60,18 +60,12 @@ Perfect! You can now test all the examples in this apps.
 ---
 ## Examples
 
-1. [Fetch buildings](#fetchBuildings)
-2. [Fetch information from a particular building](#fetchBuildingInfo)
-3. [Start the positioning](#positioning)
-4. [Show a building in Google Maps](#drawbuilding)
-5. [Show and animate the current position in Google Maps](#drawposition)
-6. [Show POIs in Google Maps](#drawpois)
-7. [Compute a route](#directions)
-8. [Show routes between POIs in Google Maps](#drawroute)
-9. [Get realtime updates](#realtime)
-10. [List Building Events](#buildingevents)
-11. [Calculate if the user is inside en event](#positionevents)
-12. [Show geofences and calculate intersection with a point](#geofencing)
+1. [Positioning](https://github.com/situmtech/situm-ios-getting-started/tree/master/GettingStarted/src/Samples/Positioning)
+2. [Draw building in Google Maps](https://github.com/situmtech/situm-ios-getting-started/tree/master/GettingStarted/src/Samples/DrawBuilding)
+3. [Draw position in Google Maps](https://github.com/situmtech/situm-ios-getting-started/tree/master/GettingStarted/src/Samples/DrawPosition)
+4. [Get other devices locations on realtime](https://github.com/situmtech/situm-ios-getting-started/tree/master/GettingStarted/src/Samples/LocationAndRealTime)
+5. [Show routes between two points in Google Maps](https://github.com/situmtech/situm-ios-getting-started/tree/master/GettingStarted/src/Samples/RouteAndDirections)
+6. [Show geofences and calculate intersection with a point](https://github.com/situmtech/situm-ios-getting-started/tree/master/GettingStarted/src/Samples/Geofencing)
 
 ---
 ## Versioning
