@@ -1,9 +1,8 @@
-Show a Building in Google Maps
-==============================
+## <a name="drawposition"><a/> Show the current position in Google Maps
 
-This functionality will allow you to represent the current position of your device using Google Maps. However, you can also use another GIS provider, such as Carto, Arcgis, Mapbox, etc. 
+This functionality will allow you to represent the current position of your device using Google Maps. However, you can also use another GIS provider, such as Carto, Arcgis, Mapbox, etc.
 
-Note: From the steps documented by Apple for requesting locations permissions [here](https://developer.apple.com/documentation/corelocation/choosing_the_authorization_level_for_location_services/requesting_when-in-use_authorization?language=objc) or [here](https://developer.apple.com/documentation/corelocation/choosing_the_authorization_level_for_location_services/requesting_always_authorization?language=objc) you will only need to add `NSLocationWhenInUseUsageDescription` key or `NSLocationAlwaysAndWhenInUseUsageDescription` key to your `Information Property List file`. The other steps are managed by Google Maps.
+Note: In order to be able to calculate where a user is, it is mandatory to request authoritation to use location services from the user. If your app only needs to locate the user when the app is in use, you can follow the steps documented by Apple [here](https://developer.apple.com/documentation/corelocation/requesting_authorization_for_location_services?language=objc).
 
 There are 4 steps your app has to follow in order to draw the user position on a GoogleMaps map.
 
