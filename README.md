@@ -62,8 +62,8 @@ Perfect! You can now test all the examples in this apps.
 
 1. [Positioning](https://github.com/situmtech/situm-ios-getting-started/tree/master/GettingStarted/src/Samples/Positioning)
 2. [Draw building in Google Maps](https://github.com/situmtech/situm-ios-getting-started/tree/master/GettingStarted/src/Samples/DrawBuilding)
-3. [Draw position in Google Maps](https://github.com/situmtech/situm-ios-getting-started/tree/master/GettingStarted/src/Samples/DrawPosition)
-4. [Get other devices locations on realtime](https://github.com/situmtech/situm-ios-getting-started/tree/master/GettingStarted/src/Samples/LocationAndRealTime)
+3. [Draw on Earth user position in Google Maps](https://github.com/situmtech/situm-ios-getting-started/tree/master/GettingStarted/src/Samples/DrawPosition)
+4. [Draw in building user position and realtime](https://github.com/situmtech/situm-ios-getting-started/tree/master/GettingStarted/src/Samples/LocationAndRealTime)
 5. [Show routes between two points in Google Maps](https://github.com/situmtech/situm-ios-getting-started/tree/master/GettingStarted/src/Samples/RouteAndDirections)
 6. [Show geofences and calculate intersection with a point](https://github.com/situmtech/situm-ios-getting-started/tree/master/GettingStarted/src/Samples/Geofencing)
 

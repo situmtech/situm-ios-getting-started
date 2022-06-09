@@ -1,4 +1,4 @@
-## <a name="drawposition"><a/> Show the current position in Google Maps
+## <a name="drawposition"><a/> Show the current on Earth user position in Google Maps
 
 This functionality will allow you to represent the current position of your device using Google Maps. However, you can also use another GIS provider, such as Carto, Arcgis, Mapbox, etc.
 
