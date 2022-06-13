@@ -2,6 +2,11 @@
 
 Another interesting functionality is to show a geofence on top of a building plan and detect if a tap on the map is inside the geofence.
 
+<p align="center">
+    <img src="/img/geofencing.gif" />
+</p>
+
+
 - To check how the floor plan is draw you can refer to the example on how to [draw a building](https://github.com/situmtech/situm-ios-getting-started/tree/master/GettingStarted/src/Samples/DrawBuilding)
 
 - To draw a geofence you first need to download the building geofences with the `fetchGeofencesFromBuilding` method from `SITCommunicationManager`. Next you need to create a `GMSMutablePath` with its points and finally create a `GMSPolygon` using the previous `GMSMutablePath`.
