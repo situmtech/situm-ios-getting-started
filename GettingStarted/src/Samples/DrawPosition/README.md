@@ -2,10 +2,6 @@
 
 This functionality will allow you to represent the current position of your device using Google Maps. However, you can also use another GIS provider, such as Carto, Arcgis, Mapbox, etc.
 
-<p align="center">
-    <img src="/img/userPosition.gif" />
-</p>
-
 Note: It is mandatory to request location services authorization in order to be able to calculate where the user is located. You can follow the steps documented by Apple [here](https://developer.apple.com/documentation/corelocation/requesting_authorization_for_location_services?language=objc).
 
 There are 4 steps your app has to follow in order to draw the user position on a GoogleMaps map.

@@ -37,7 +37,7 @@ In order to get this examples working you must follow this steps:
     $ pod install
 ```    
 
-If you dont have Cocoapods installed you can check how to do so on the [Cocoapods Documentation](https://guides.cocoapods.org/using/getting-started.html#getting-started).
+If you don't have Cocoapods installed you can check how to do so on the [Cocoapods Documentation](https://guides.cocoapods.org/using/getting-started.html#getting-started).
 
 3. Set your credentials in the app. Open the `AppDelegate` file and in the  `-application:didFinishLaunchingWithOptions:` method include your own credentials.
 
@@ -54,8 +54,7 @@ If you dont have Cocoapods installed you can check how to do so on the [Cocoapod
 ```        
 
 
-Perfect! You can now test all the examples in this apps.
-
+Perfect! You can now test all the examples in this app.
 
 ---
 ## Examples

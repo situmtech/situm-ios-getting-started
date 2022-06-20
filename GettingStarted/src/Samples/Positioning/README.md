@@ -33,7 +33,7 @@ the building identifier, level identifier, cartesian coordinates, geographic coo
 accuracy, among other location information of the smartphone where the app is running.
 
 In `locationManager:didUpdateState:` the app will receive changes in the status of the system:  `kSITLocationStopped`, `kSITLocationCalculating`, `kSITLocationUserNotInBuilding` or `kSITLocationStarted`.  Please refer to our
-[appledoc](http://developers.situm.es/sdk_documentation/ios/documentation/html/Constants/SITLocationState.html) for a full explanation of 
+[appledoc](https://developers.situm.com/sdk_documentation/ios/documentation/enums/sitlocationstate) for a full explanation of 
 these states.
 
 In `locationManager:didFailWithError:` you will receive updates only if an error has occurred. In this case, the positioning will stop. 

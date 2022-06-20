@@ -2,10 +2,6 @@
 
 Another interesting functionality is to show the floorplan of a building on top of your favorite GIS provider. In this example, we will show you how to do it by using Google Maps, but you might use any other of your choosing, such as Carto, Arcgis, Mapbox, etc.
 
-<p align="center">
-    <img src="/img/drawBuilding.gif" />
-</p>
-
 As a required step, you will need to complete the steps in the [Setup Google Maps section](https://github.com/situmtech/situm-ios-getting-started#mapsapikey). Once this is done, there are 5 steps your app has to follow in order to draw a floorplan image on a GoogleMaps map.
 
 1.  Add the map to your view. You can find more information in the section [Getting Started](https://developers.google.com/maps/documentation/ios-sdk/start) of Google Maps documentation.
@@ -16,5 +12,8 @@ As a required step, you will need to complete the steps in the [Setup Google Map
 
 4. Create a `GMSGroundOverlay` using the floor image you have just retrieved and the data provided by `SITBuildingInfo`. 
 
-5. Once you have the `GMSGroundOverlay`, to show it in the map, set its maps property, to your map view.
+5. Finally, once you have the `GMSGroundOverlay`, you will need to set its maps property to your map view. 
 
+<p align="center">
+    <img src="/img/drawBuilding.gif" />
+</p>
