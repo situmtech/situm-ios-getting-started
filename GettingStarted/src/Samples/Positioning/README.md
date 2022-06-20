@@ -1,11 +1,11 @@
 ## <a name="communicationmanager"></a> Get buildings' information
 
-Now that you have correctly configured your Android project, you can start writing your application's code.
+Now that you have correctly configured your iOS project, you can start writing your application's code.
 
 In order to access the buildings' info, first of all you need to get an instance of the `SITCommunicationManager` with `[SITCommunicationManager sharedManager]`.
-This object allows you to fetch your buildings data (list of buildings, floorplans, points of interest, etc.):
+This object allows you to fetch your buildings data (list of buildings, floorplans, points of interest, ...).
 
-To get the buildings you need to call the method `fetchBuildings`
+To get the buildings, you need to call the method `fetchBuildings`.
 
 ## <a name="positioning"></a> Start the positioning
 
@@ -26,7 +26,7 @@ SITBuilding *building = ...;
 SITLocationRequest *request = [[[SITLocationRequest alloc]initWithBuildingId:self.buildingInfo.building.identifier];
 ```
 
-Now implement SITLocationDelegate methods where you’ll receive location updates, error notifications and state changes.
+Now you can implement SITLocationDelegate methods where you’ll receive location updates, error notifications and state changes.
 
 In `locationManager:didUpdateLocation:` your application will receive the location updates. This `SITLocation` object contains
 the building identifier, level identifier, cartesian coordinates, geographic coordinates, orientation,

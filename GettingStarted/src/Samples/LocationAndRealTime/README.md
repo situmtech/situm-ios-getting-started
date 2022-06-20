@@ -5,10 +5,6 @@ This example covers two functionalities:
 * How to obtain and show the user location inside a `SITBuilding` over Google Maps. 
 * How to get other devices locations on real-time and draw them inside a `SITBuilding` over Google Maps.
 
-<p align="center">
-    <img src="/img/location.gif" />
-</p>
-
 First of all, you will need to retrieve the information of the desired `SITBuilding` and draw it on Google Maps. In this example, we will just get the first `SITBuilding` returned. The example [Draw building in Google Maps](https://github.com/situmtech/situm-ios-getting-started/tree/master/GettingStarted/src/Samples/DrawBuilding) covers this topic in detail.
 
 After displaying the building in the map, we need to get updates about the user location inside the building. The example [Positioning](https://github.com/situmtech/situm-ios-getting-started/tree/master/GettingStarted/src/Samples/Positioning) cover this topic in detail.
@@ -22,4 +18,6 @@ Finally obtain the real-time location updates of all the smartphones inside the 
 
 In the following example, we are also going to draw markers in the locations of other users in the building.
 
-
+<p align="center">
+    <img src="/img/location.gif" />
+</p>

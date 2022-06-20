@@ -8,13 +8,13 @@ Another interesting functionality is to show the floorplan of a building on top 
 
 As a required step, you will need to complete the steps in the [Setup Google Maps section](https://github.com/situmtech/situm-ios-getting-started#mapsapikey). Once this is done, there are 5 steps your app has to follow in order to draw a floorplan image on a GoogleMaps map.
 
--  Add the map to your view. You can find more information in the section [Getting Started](https://developers.google.com/maps/documentation/ios-sdk/start) of Google Maps documentation.
+1.  Add the map to your view. You can find more information in the section [Getting Started](https://developers.google.com/maps/documentation/ios-sdk/start) of Google Maps documentation.
 
-- Animate the camera to the coordinates where your building is located.
+2. Animate the camera to the coordinates where your building is located.
 
-- Fetch the floor image you want to draw from Situm servers with the method `fetchMapFromFloor` from `SITCommunicationManager`.
+3. Fetch the floor image you want to draw from Situm servers with the method `fetchMapFromFloor` from `SITCommunicationManager`.
 
-- Create a `GMSGroundOverlay` using the floor image you have just retrieved and the data provided by `SITBuildingInfo`. 
+4. Create a `GMSGroundOverlay` using the floor image you have just retrieved and the data provided by `SITBuildingInfo`. 
 
-- Once you have the `GMSGroundOverlay`, to show it in the map, set its maps property, to your map view.
+5. Once you have the `GMSGroundOverlay`, to show it in the map, set its maps property, to your map view.
 
