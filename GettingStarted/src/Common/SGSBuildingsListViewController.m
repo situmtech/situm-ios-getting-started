@@ -9,7 +9,6 @@
 #import "SGSBuildingsListViewController.h"
 
 #import <SitumSDK/SitumSDK.h>
-#import "SGSUserInsideEventVC.h"
 #import "SGSLocationAndRealtimeVC.h"
 #import "SGSRouteAndDirectionsVC.h"
 
