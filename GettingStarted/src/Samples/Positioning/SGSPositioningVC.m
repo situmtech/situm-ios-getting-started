@@ -191,7 +191,7 @@ didChangeAuthorizationStatus: (CLAuthorizationStatus) status {
 {
     NSLog(@"New location update available: :%@", location);
     self.statusLabel.text = @"";
-    self.positionLabel.text = [NSString stringWithFormat:@" building: %@\n floor: %@\n x:%f\n y:%f\n yaw:%@ radians\n accuracy:%f\n", location.position.buildingIdentifier, location.position.floorIdentifier,location.position.cartesianCoordinate.x, location.position.cartesianCoordinate.y,location.bearing, location.accuracy];
+    self.positionLabel.text = [NSString stringWithFormat:@" building: %@\n floor: %@\n x:%f\n y:%f\n latitude:%f\n longitude:%f\n yaw:%@ radians\n accuracy:%f\n", location.position.buildingIdentifier, location.position.floorIdentifier,location.position.cartesianCoordinate.x, location.position.cartesianCoordinate.y, location.position.coordinate.latitude,location.position.coordinate.longitude,location.bearing, location.accuracy];
 }
 
 #pragma mark -- is positioning setter / Screen state customization

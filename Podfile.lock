@@ -6,16 +6,16 @@ PODS:
     - GoogleMaps/Base
   - GooglePlaces (3.0.0):
     - GoogleMaps/Base (= 3.0.0)
-  - Protobuf (3.19.1)
-  - SitumSDK (2.51.5):
+  - Protobuf (3.21.1)
+  - SitumSDK (2.52.3):
     - Protobuf (~> 3.7)
     - SSZipArchive (~> 2.4)
-  - SSZipArchive (2.4.2)
+  - SSZipArchive (2.4.3)
 
 DEPENDENCIES:
   - GoogleMaps (= 3.0.0)
   - GooglePlaces (= 3.0.0)
-  - SitumSDK (= 2.51.5)
+  - SitumSDK (= 2.52.3)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
@@ -28,10 +28,10 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   GoogleMaps: 0b9ff63b04417713d2927b19529a04bd561a1a6c
   GooglePlaces: f311f3b72c2943f8e5480965d71541a0778a081e
-  Protobuf: 3724efa50cb2846d7ccebc8691c574e85fd74471
-  SitumSDK: cd7bc5724e05db76ecbc7cd3162db66753168d4e
-  SSZipArchive: e7b4f3d9e780c2acc1764cd88fbf2de28f26e5b2
+  Protobuf: 9e88c1e667d75aa2491d211f26ccddde4e8ad4cf
+  SitumSDK: 78e97b2391ba1ec135e2a69c864a10354ec3f98b
+  SSZipArchive: fe6a26b2a54d5a0890f2567b5cc6de5caa600aef
 
-PODFILE CHECKSUM: e3c878a6fae9e5e608a38f6e06bc8953bcd99d51
+PODFILE CHECKSUM: b6bc0694ec0e3464f16b6e7564e192054ab6982d
 
-COCOAPODS: 1.10.2
+COCOAPODS: 1.11.3
