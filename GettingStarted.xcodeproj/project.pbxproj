@@ -23,6 +23,7 @@
 		201F5EE31F7406310098473F /* SGSLocationAndRealtimeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 201F5EE21F7406310098473F /* SGSLocationAndRealtimeVC.m */; };
 		231059472294D0BF0027A875 /* SGSDrawBuildingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 231059462294D0BF0027A875 /* SGSDrawBuildingVC.m */; };
 		23340DEC2249C3E1007EBD35 /* SGSSamplesBaseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 23340DEB2249C3E1007EBD35 /* SGSSamplesBaseVC.m */; };
+		233AA2F42A741A1C00F7E1CC /* SGSMapViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 233AA2F32A741A1C00F7E1CC /* SGSMapViewVC.m */; };
 		2388FE37226DEA58009DD973 /* SGSSampleSegueData.m in Sources */ = {isa = PBXBuildFile; fileRef = 2388FE36226DEA58009DD973 /* SGSSampleSegueData.m */; };
 		23B243B8224C54C300975D47 /* SGSPositioningVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 23B243B7224C54C300975D47 /* SGSPositioningVC.m */; };
 		23D109E722A47207005BC7AE /* SGSDrawPositionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 23D109E622A47207005BC7AE /* SGSDrawPositionVC.m */; };
@@ -77,6 +78,8 @@
 		231059462294D0BF0027A875 /* SGSDrawBuildingVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SGSDrawBuildingVC.m; sourceTree = "<group>"; };
 		23340DEA2249C3E1007EBD35 /* SGSSamplesBaseVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGSSamplesBaseVC.h; sourceTree = "<group>"; };
 		23340DEB2249C3E1007EBD35 /* SGSSamplesBaseVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SGSSamplesBaseVC.m; sourceTree = "<group>"; };
+		233AA2F22A741A1C00F7E1CC /* SGSMapViewVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGSMapViewVC.h; sourceTree = "<group>"; };
+		233AA2F32A741A1C00F7E1CC /* SGSMapViewVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SGSMapViewVC.m; sourceTree = "<group>"; };
 		2388FE35226DEA58009DD973 /* SGSSampleSegueData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGSSampleSegueData.h; sourceTree = "<group>"; };
 		2388FE36226DEA58009DD973 /* SGSSampleSegueData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SGSSampleSegueData.m; sourceTree = "<group>"; };
 		23B243B6224C54C300975D47 /* SGSPositioningVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGSPositioningVC.h; sourceTree = "<group>"; };
@@ -200,6 +203,7 @@
 		201F5EDE1F7405D30098473F /* Samples */ = {
 			isa = PBXGroup;
 			children = (
+				233AA2EE2A74199900F7E1CC /* MapView */,
 				23B243B5224C548400975D47 /* Positioning */,
 				231059442294CF450027A875 /* DrawBuilding */,
 				23D109E422A46718005BC7AE /* DrawPosition */,
@@ -235,6 +239,15 @@
 				231059462294D0BF0027A875 /* SGSDrawBuildingVC.m */,
 			);
 			path = DrawBuilding;
+			sourceTree = "<group>";
+		};
+		233AA2EE2A74199900F7E1CC /* MapView */ = {
+			isa = PBXGroup;
+			children = (
+				233AA2F22A741A1C00F7E1CC /* SGSMapViewVC.h */,
+				233AA2F32A741A1C00F7E1CC /* SGSMapViewVC.m */,
+			);
+			path = MapView;
 			sourceTree = "<group>";
 		};
 		2388FE34226DEA3F009DD973 /* Model */ = {
@@ -521,6 +534,7 @@
 				201531611F7A3FA800A3143A /* SGSRouteAndDirectionsVC.m in Sources */,
 				201F5EE31F7406310098473F /* SGSLocationAndRealtimeVC.m in Sources */,
 				23340DEC2249C3E1007EBD35 /* SGSSamplesBaseVC.m in Sources */,
+				233AA2F42A741A1C00F7E1CC /* SGSMapViewVC.m in Sources */,
 				3A2A018922F9B0FF00B422CA /* SGSGeofencingVC.m in Sources */,
 				201F5EA01F73FC410098473F /* main.m in Sources */,
 			);

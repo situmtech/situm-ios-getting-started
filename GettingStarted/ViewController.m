@@ -19,6 +19,7 @@ static NSString *DrawPositionSample = @"Draw Position";
 static NSString *LocationAndRealTimeOnMapSample = @"Location and real time";
 static NSString *RouteAndIndicationsOnMapSample = @"Route on map";
 static NSString *GeofencingSample = @"Draw geofences and calculate intersection";
+static NSString *MapViewSample = @"Load Mapview";
 
 // Segues static strings
 static NSString *PositioningSampleSegue = @"PositioningSampleSegue";
@@ -27,6 +28,7 @@ static NSString *DrawPositionSampleSegue = @"DrawPositionSampleSegue";
 static NSString *LocationAndRealTimeOnMapSampleSegue = @"LocationAndRealTimeOnTopOfMapSampleSegue";
 static NSString *RouteAndIndicationsOnMapSampleSegue = @"RouteAndIndicationsOnMapSampleSegue";
 static NSString *GeofencingSampleSegue = @"GeofencingSampleSegue";
+static NSString *MapViewSampleSegue = @"MapViewSampleSegue";
 
 // Request user permission strings
 static NSString *PermissionDeniedAlertTitle = @"Location Authorization Needed";
@@ -69,7 +71,8 @@ static NSString *okButtonText = @"Ok";
     SGSSampleSegueData *locationSegue = [[SGSSampleSegueData alloc] initWithSampleName:LocationAndRealTimeOnMapSample segueId:LocationAndRealTimeOnMapSampleSegue];
     SGSSampleSegueData *routeSegue = [[SGSSampleSegueData alloc] initWithSampleName:RouteAndIndicationsOnMapSample segueId:RouteAndIndicationsOnMapSampleSegue];
     SGSSampleSegueData *geofencingSegue = [[SGSSampleSegueData alloc] initWithSampleName: GeofencingSample segueId: GeofencingSampleSegue];
-    self.samples=@[positioningSegue, drawBuildingSegue, drawPositionSegue, locationSegue, routeSegue, geofencingSegue];
+    SGSSampleSegueData *mapViewSegue = [[SGSSampleSegueData alloc] initWithSampleName: MapViewSample segueId: MapViewSampleSegue];
+    self.samples=@[positioningSegue, drawBuildingSegue, drawPositionSegue, locationSegue, routeSegue, geofencingSegue, mapViewSegue];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
