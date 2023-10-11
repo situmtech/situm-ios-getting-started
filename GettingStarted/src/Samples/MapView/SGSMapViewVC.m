@@ -15,7 +15,8 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     SITMapViewConfiguration * mapViewConfiguration = [[SITMapViewConfiguration alloc] initWithBuildingIdentifier:self.selectedBuildingInfo.building.identifier floorIdentifier:self.selectedBuildingInfo.floors[0].identifier];
-    [self.mapView loadWithConfiguration:mapViewConfiguration];
+    [self.mapView loadWithConfiguration:mapViewConfiguration withCompletion:^(SITMapViewController * _Nullable mapViewController, NSError * _Nullable error) {
+    }];
     [super viewWillAppear:animated];
 }
 
